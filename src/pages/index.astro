@@ -1,0 +1,1497 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SigInteractions from "../components/SigInteractions.astro";
+
+const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
+const description =
+  "Signature No. 01, 26-27 September 2026 at Château Laffitte Carcasset, Saint-Estèphe. An evening where architecture, light, sound, gastronomy, conversation and performance are conceived as one.";
+---
+
+<Layout lang="en" title={title} description={description}>
+
+  <SigInteractions />
+
+  <!-- ===== PASSCODE GATE ===== -->
+  <div id="sigGate" class="sig-gate" data-code="carcasset" aria-hidden="false">
+    <div class="sig-gate__bg sig-gate__bg--video">
+      <video autoplay muted loop playsinline preload="auto" poster="/videos/signature/seal-poster.jpg">
+        <source src="/videos/signature/seal.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="sig-gate__inner">
+      <p class="sig-gate__brand">SIGNATURE</p>
+      <p class="sig-gate__sub">No. 01 &nbsp;·&nbsp; By invitation only</p>
+      <form class="sig-gate__form" id="sigGateForm">
+        <input type="text" id="sigGateInput" autocomplete="off" placeholder="Access&nbsp;code" aria-label="Access code" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <button type="submit">Enter</button>
+      </form>
+      <p class="sig-gate__err" id="sigGateErr" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- ===== POST-UNLOCK CEREMONY ===== -->
+  <div id="sigCeremony" class="sig-ceremony" aria-hidden="true"></div>
+
+  <!-- ===== FULLSCREEN TABBED EXPERIENCE — NO SCROLL ===== -->
+  <main class="sigt" id="sigMain" hidden>
+
+    <!-- Tab bar -->
+    <header class="sigt__bar">
+      <span class="sigt__brand">SIGNATURE&nbsp;<em>No.&nbsp;01</em></span>
+      <nav class="sigt__tabs" role="tablist" aria-label="Signature">
+        <button class="sigt__tab is-active" role="tab" data-tab="invitation" aria-selected="true">Invitation</button>
+        <button class="sigt__tab" role="tab" data-tab="manifesto" aria-selected="false">Manifesto</button>
+        <button class="sigt__tab" role="tab" data-tab="programme" aria-selected="false">Programme</button>
+        <button class="sigt__tab" role="tab" data-tab="menu" aria-selected="false">Menu</button>
+        <button class="sigt__tab" role="tab" data-tab="creators" aria-selected="false">Creators</button>
+        <button class="sigt__tab" role="tab" data-tab="contact" aria-selected="false">Logistics</button>
+      </nav>
+    </header>
+
+    <!-- ============ TAB · INVITATION ============ -->
+    <section class="sigt-panel is-active" data-panel="invitation" role="tabpanel">
+      <div class="sigt-panel__bg sigt-panel__bg--video">
+        <video autoplay muted loop playsinline preload="auto" poster="/videos/signature/reveal-poster.jpg">
+          <source src="/videos/signature/reveal.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="sigt-panel__veil sigt-panel__veil--cover"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--cover">
+        <div class="sigt-cover__bottom">
+          <p class="sigt-cover__venue" data-reveal>Château Laffitte Carcasset &nbsp;·&nbsp; Saint-Estèphe</p>
+          <p class="sigt-cover__date" data-reveal style="--reveal-delay:0.15s">26&nbsp;–&nbsp;27&nbsp;September&nbsp;2026</p>
+
+          <div class="sigt-cover__row" data-noadvance>
+            <div class="sigt-cover__cards" data-reveal style="--reveal-delay:0.3s">
+              <a class="sigt-cover__card" href="/signature.ics" download>
+                <p class="cc-eyebrow">Save the date</p>
+                <p class="cc-title">Add to calendar</p>
+                <p class="cc-sub">26 – 27 September 2026, from 6&nbsp;PM.</p>
+                <span class="cc-cta">Download →</span>
+              </a>
+              <a class="sigt-cover__card" href="https://checkout.revolut.com/pay/ede332d8-5e0e-43a9-8c2d-0cc13e60114c" target="_blank" rel="noopener">
+                <p class="cc-eyebrow">Presale · Until 12 August</p>
+                <p class="cc-title">Become Part of Edition No.01</p>
+                <p class="cc-sub">Limited seats available.</p>
+              </a>
+            </div>
+
+            <button class="sigt-cover__enter" type="button" data-goto="programme" data-reveal style="--reveal-delay:0.42s">
+              Enter the evening →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB · MENU ============ -->
+    <section class="sigt-panel" data-panel="menu" role="tabpanel">
+      <div class="sigt-panel__bg sigt-panel__bg--video">
+        <video autoplay muted loop playsinline preload="auto" poster="/videos/signature/menu-poster.jpg">
+          <source src="/videos/signature/menu.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="sigt-panel__veil sigt-panel__veil--deep"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--scrollable">
+
+        <header class="sigt-head" data-reveal>
+          <p class="sigt-head__kicker">An evening · By invitation</p>
+          <h2 class="sigt-head__title">The&nbsp;Menu</h2>
+          <p class="sigt-head__sub"><em>A Médoc Composition</em></p>
+        </header>
+
+        <div class="sigt-menu" data-reveal style="--reveal-delay:0.15s">
+          <div class="sigt-course">
+            <p class="c-label">Apéritif · Standing Welcome</p>
+            <p class="c-wine"><em>Paired with Crémant de Bordeaux</em></p>
+            <p class="c-dish">Bayonne ham croquettes, Ossau-Iraty béchamel</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Canapé I</p>
+            <p class="c-wine"><em>Paired with Crémant de Bordeaux</em></p>
+            <p class="c-dish">Savoury canelé with South-West confit duck, Ente plum compote</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Canapé II</p>
+            <p class="c-dish">Arcachon Bay oyster, mignonette of the estate's red wine, Graves white wine espuma</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Canapé III · In the Chai</p>
+            <p class="c-dish">Granita of the estate's partially-fermented grape must, ribot milk, botrytised Sauternes jelly, fresh Périgord walnuts</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Breads &amp; Butter · At the Table</p>
+            <p class="c-dish">Artisan breads from the South-West, house-churned seaweed butter, olive oil</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Starter</p>
+            <p class="c-wine"><em>Paired with Pessac-Léognan blanc</em></p>
+            <p class="c-dish">Meagre from the Gironde estuary, gravlax with lemon verbena and wild fennel, warm Graves beurre blanc, garden pickles, watercress</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Main Course</p>
+            <p class="c-wine"><em>Paired with Château Laffitte Carcasset, young vintage</em></p>
+            <p class="c-dish">Bazas beef cheek braised six hours in the house wine, crushed potato with duck fat, glazed carrots, Médoc cèpes confit</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Dessert · Estate Honey</p>
+            <p class="c-wine"><em>Paired with Sauternes</em></p>
+            <p class="c-dish">Basque farm-yoghurt siphon with honey and rosemary, flowing black fig gel, caramelised buckwheat tuile, edible flowers</p>
+          </div>
+          <div class="sigt-course">
+            <p class="c-label">Mignardises with Coffee</p>
+            <p class="c-dish">Pâte de fruit of the house wine</p>
+          </div>
+          <div class="sigt-course sigt-course--signature">
+            <p class="c-label">Signature</p>
+            <p class="c-dish">Tartlet of single-origin dark chocolate, Gironde caviar, fleur de sel</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TAB · PROGRAMME ============ -->
+    <section class="sigt-panel" data-panel="programme" role="tabpanel">
+      <div class="sigt-panel__bg" style="background-image: url('/images/signature/manifesto.jpg');"></div>
+      <div class="sigt-panel__veil"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--scrollable">
+
+        <header class="sigt-head" data-reveal>
+          <p class="sigt-head__kicker">The Timeline</p>
+          <h2 class="sigt-head__title">24&nbsp;Hours</h2>
+          <p class="sigt-head__sub"><em>26 – 27 September 2026</em></p>
+        </header>
+
+        <div class="sigt-actflow" data-reveal style="--reveal-delay:0.15s">
+          <div class="sigt-actblock">
+            <p class="ab-kicker">Act I &nbsp;·&nbsp; 18:00</p>
+            <p class="ab-title">Arrival</p>
+            <p class="ab-line"><em>The gates open, and the evening begins, welcome drink in hand.</em></p>
+          </div>
+          <div class="sigt-actblock">
+            <p class="ab-kicker">Act II &nbsp;·&nbsp; 19:00</p>
+            <p class="ab-title">Golden Hour</p>
+            <p class="ab-line"><em>Canapés begin as light fades gently over the estate.</em></p>
+          </div>
+          <div class="sigt-actblock">
+            <p class="ab-kicker">Act III &nbsp;·&nbsp; 20:30</p>
+            <p class="ab-title">Dinner</p>
+            <p class="ab-line"><em>A seasonal gathering, course by course, wine by wine, chosen by Pierre Maussire.</em></p>
+          </div>
+          <div class="sigt-actblock">
+            <p class="ab-kicker">Act IV &nbsp;·&nbsp; From 22:00</p>
+            <p class="ab-title">The Night</p>
+            <p class="ab-line"><em>The soundtrack arrives, and the night finds its own rhythm.</em></p>
+            <p class="ab-times">22:00 Ambience &nbsp;·&nbsp; 23:00 Rave &nbsp;·&nbsp; 03:00 After glow</p>
+          </div>
+          <div class="sigt-actblock">
+            <p class="ab-kicker">Act V &nbsp;·&nbsp; The Next Day</p>
+            <p class="ab-title">No rush, no schedule</p>
+            <p class="ab-line"><em>The day finds its own pace. Nothing is rushed. Nothing is imposed.</em></p>
+            <p class="ab-times">12:00 Brunch &nbsp;·&nbsp; 13:30 Poolside Lounge &nbsp;·&nbsp; 17:00 Curtain Close</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TAB · CREATORS ============ -->
+    <section class="sigt-panel" data-panel="creators" role="tabpanel">
+      <div class="sigt-panel__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
+      <div class="sigt-panel__veil sigt-panel__veil--deep"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--scrollable">
+
+        <header class="sigt-head" data-reveal>
+          <p class="sigt-head__kicker">Meet the creators</p>
+          <h2 class="sigt-head__title">Creators</h2>
+          <p class="sigt-head__sub"><em>The hands behind Signature</em></p>
+        </header>
+
+        <div class="sigt-creators sigt-creators--two">
+          <article class="sigt-creator" data-reveal style="--reveal-delay:0.15s">
+            <div class="cr-photo"><img src="/images/signature/eugenie-portrait.webp" alt="Eugénie Colleville" loading="lazy"></div>
+            <p class="cr-label">The Chef</p>
+            <p class="cr-name"><em>Eugénie Colleville</em></p>
+            <p class="cr-body">French chef, whose cuisine combines French culinary heritage with a contemporary, ingredient-led approach. The dinner is composed course by course, wine by wine. A table written for one evening.</p>
+          </article>
+          <article class="sigt-creator" data-reveal style="--reveal-delay:0.3s">
+            <div class="cr-photo"><img src="/images/signature/tanguy-portrait.webp" alt="Tanguy Accard" loading="lazy"></div>
+            <p class="cr-label">Creative Direction</p>
+            <p class="cr-name"><em>Tanguy Accard</em></p>
+            <p class="cr-body">A vision shaped by years of experience in corporate, electronic music, hospitality and creative direction. Every detail is considered to create an atmosphere that feels natural, timeless and deeply human.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TAB · MANIFESTO ============ -->
+    <section class="sigt-panel" data-panel="manifesto" role="tabpanel">
+      <div class="sigt-panel__bg sigt-panel__bg--video">
+        <video autoplay muted loop playsinline preload="auto" poster="/videos/signature/manifesto-poster.jpg">
+          <source src="/videos/signature/manifesto.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="sigt-panel__veil"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--scrollable sigt-panel__inner--manifesto">
+
+        <header class="sigt-head" data-reveal>
+          <p class="sigt-head__kicker">A Vision</p>
+          <h2 class="sigt-head__title">About Signature</h2>
+          <p class="sigt-head__sub"><em>Deeply human, and never manufactured</em></p>
+        </header>
+
+        <div class="sigt-mani">
+          <p class="sigt-mani__lead" data-reveal style="--reveal-delay:0.1s">
+            We don't celebrate status.<br>
+            We shape atmosphere.
+          </p>
+          <div class="sigt-mani__body" data-reveal style="--reveal-delay:0.15s">
+            <p>SIGNATURE brings together architecture, gastronomy, electronic music and hospitality, creating space for meaningful encounters.</p>
+            <p>Thoughtful people. A remarkable setting. An atmosphere that feels effortless from the moment you arrive until long after you leave.</p>
+          </div>
+          <p class="sigt-mani__close" data-reveal style="--reveal-delay:0.3s">
+            <em>The difference has never been luxury.<br>It's always been human connection.</em>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TAB · CONTACT ============ -->
+    <section class="sigt-panel" data-panel="contact" role="tabpanel">
+      <div class="sigt-panel__bg" style="background-image: url('/images/signature/cover.jpg');"></div>
+      <div class="sigt-panel__veil sigt-panel__veil--deep"></div>
+      <div class="sigt-panel__inner sigt-panel__inner--scrollable">
+
+        <header class="sigt-head" data-reveal>
+          <p class="sigt-head__kicker">Your stay</p>
+          <h2 class="sigt-head__title">Take your place</h2>
+          <p class="sigt-head__sub"><em>Everything you need</em></p>
+        </header>
+
+        <div class="sigt-contact">
+          <div class="sigt-tile" data-reveal style="--reveal-delay:0.1s">
+            <p class="tl-eyebrow">The venue</p>
+            <p class="tl-title">Château Laffitte Carcasset</p>
+            <p class="tl-sub">33180 Saint-Estèphe, Bordeaux.</p>
+            <a class="tl-cta" href="https://laffittecarcasset.com/" target="_blank" rel="noopener">Visit the château →</a>
+          </div>
+
+          <div class="sigt-tile" data-reveal style="--reveal-delay:0.2s">
+            <p class="tl-eyebrow">On site</p>
+            <p class="tl-title">Six rooms, on request</p>
+            <p class="tl-sub">The château itself offers six rooms for guests wishing to stay the night. Available on request, subject to availability.</p>
+            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Room%20request&body=Hello%2C%0A%0AI%20would%20like%20to%20request%20a%20room%20at%20the%20ch%C3%A2teau%20for%20the%20night(s)%20of%2026-27%20September%202026.%0A%0AName%3A%20%0APhone%3A%20%0A%0AThank%20you.">Request a room →</a>
+          </div>
+
+          <div class="sigt-tile" data-reveal style="--reveal-delay:0.3s">
+            <p class="tl-eyebrow">Getting there</p>
+            <p class="tl-title">Taxis &amp; transfers</p>
+            <p class="tl-sub">Saint-Estèphe sits within easy reach of Bordeaux. We are glad to arrange a taxi or private transfer to and from the château. Simply let us know your arrival details.</p>
+            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Transport&body=Hello%2C%0A%0AI%20would%20like%20information%20about%20taxis%2Ftransfers%20for%20Signature%20No.%2001.%0A%0AArrival%20details%3A%20%0A%0AThank%20you.">Ask about transport →</a>
+          </div>
+
+          <div class="sigt-tile" data-reveal style="--reveal-delay:0.4s">
+            <p class="tl-eyebrow">Nearby</p>
+            <p class="tl-title">Accommodation</p>
+            <p class="tl-sub">For guests preferring to stay off-site, a number of hotels and maisons d'hôtes can be found in and around Saint-Estèphe and Pauillac. Write to us for our recommendations.</p>
+            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20send%20me%20accommodation%20recommendations%20near%20the%20ch%C3%A2teau%3F%0A%0AThank%20you.">Ask for recommendations →</a>
+          </div>
+
+          <div class="sigt-tile sigt-tile--form" data-reveal style="--reveal-delay:0.5s">
+            <p class="tl-eyebrow">Newsletter</p>
+            <p class="tl-title">Stay close</p>
+            <form class="sigt-news" id="sigNews">
+              <input type="email" name="email" required placeholder="your@email.com" aria-label="Your email" autocomplete="email">
+              <button type="submit">Subscribe</button>
+            </form>
+            <p class="sigt-news__ok" id="sigNewsOk" hidden>Thank you. An email opened. Just press send.</p>
+          </div>
+        </div>
+
+        <a class="sigt-insta" data-reveal style="--reveal-delay:0.55s" href="https://www.instagram.com/signature.acte/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="17.8" cy="6.2" r="1.2" fill="currentColor" stroke="none"/>
+          </svg>
+          Follow&nbsp;·&nbsp;@signature.acte
+        </a>
+
+        <p class="sigt-colophon" data-reveal style="--reveal-delay:0.6s">
+          SIGNATURE &nbsp;·&nbsp; No. 01 &nbsp;·&nbsp; <a href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001">For invitations &amp; conversation →</a>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Prev / Next arrows -->
+    <button class="sigt-arrow sigt-arrow--prev" type="button" data-deck-prev aria-label="Previous">←</button>
+    <button class="sigt-arrow sigt-arrow--next" type="button" data-deck-next aria-label="Next">→</button>
+
+  </main>
+</Layout>
+
+<style is:global>
+  :root {
+    --sig-ink: #0a0707;
+    --sig-cream: #f0e9dd;
+    --sig-accent: #7a6b54;
+  }
+
+  html, body { background: var(--sig-ink); }
+  /* No page scroll — the experience is fullscreen tabs */
+  body:has(.sigt) { overflow: hidden; height: 100dvh; }
+
+  .sigt {
+    position: fixed;
+    inset: 0;
+    color: var(--sig-cream);
+    font-family: var(--font-body);
+    overflow: hidden;
+  }
+
+  /* ============ TAB BAR ============ */
+  .sigt__bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(1rem, 2.2vh, 1.5rem) clamp(1.25rem, 3.5vw, 3rem);
+    background: linear-gradient(180deg, rgba(6, 4, 3, 0.75) 0%, rgba(6, 4, 3, 0.35) 70%, transparent 100%);
+  }
+  .sigt__brand {
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    letter-spacing: 0.32em;
+    color: var(--sig-cream);
+    white-space: nowrap;
+  }
+  .sigt__brand em {
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: rgba(240, 233, 221, 0.75);
+  }
+  .sigt__tabs {
+    display: flex;
+    gap: clamp(0.9rem, 2.2vw, 2rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sigt__tabs::-webkit-scrollbar { display: none; }
+  .sigt__tab {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0.4rem 0;
+    font-family: var(--font-body);
+    font-size: clamp(0.56rem, 0.8vw, 0.66rem);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    cursor: pointer;
+    transition: color 0.35s ease;
+    white-space: nowrap;
+  }
+  .sigt__tab::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--sig-cream);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sigt__tab:hover { color: rgba(240, 233, 221, 0.9); }
+  .sigt__tab.is-active { color: var(--sig-cream); }
+  .sigt__tab.is-active::after { transform: scaleX(1); }
+
+  /* ============ PANELS ============ */
+  .sigt-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.015);
+    transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+  }
+  .sigt-panel.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    z-index: 1;
+  }
+
+  .sigt-panel__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    filter: saturate(1.05) contrast(1.04);
+  }
+  .sigt-panel__bg--video video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .sigt-panel__veil {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg,
+        rgba(8, 4, 4, 0.6) 0%,
+        rgba(8, 4, 4, 0.3) 35%,
+        rgba(8, 4, 4, 0.35) 70%,
+        rgba(8, 4, 4, 0.65) 100%);
+  }
+  .sigt-panel__veil--deep {
+    background:
+      radial-gradient(ellipse at top, rgba(8, 4, 4, 0.18) 0%, rgba(8, 4, 4, 0.38) 70%),
+      linear-gradient(180deg, rgba(8, 4, 4, 0.3) 0%, rgba(8, 4, 4, 0.35) 100%);
+  }
+  .sigt-panel__inner--scrollable .sigt-head__kicker,
+  .sigt-panel__inner--scrollable .sigt-head__title,
+  .sigt-panel__inner--scrollable .sigt-head__sub,
+  .sigt-course .c-label,
+  .sigt-course .c-wine,
+  .sigt-course .c-dish,
+  .sigt-day__list li .t,
+  .sigt-day__list li .e,
+  .sigt-day__list li .s,
+  .sigt-day__note,
+  .sigt-colophon {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
+  }
+  .sigt-panel__veil--cover {
+    background:
+      linear-gradient(180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0) 25%,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  .sigt-panel__inner {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(5rem, 11vh, 7.5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2rem, 5vh, 3.5rem);
+    max-width: 90rem;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 0;
+  }
+  /* Tall content stays usable on small screens without page scroll */
+  .sigt-panel__inner--scrollable {
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .sigt-panel__inner--scrollable::-webkit-scrollbar { display: none; }
+
+  /* ============ COVER TAB ============ */
+  .sigt-panel__inner--cover {
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+  }
+  .sigt-cover__bottom { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
+  .sigt-cover__venue {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    letter-spacing: 0.05em;
+    color: rgba(240, 233, 221, 0.95);
+    margin: 0;
+  }
+  .sigt-cover__date {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.62rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.75);
+    padding-left: 0.42em;
+    margin: 0;
+  }
+  .sigt-cover__row {
+    margin-top: 1.6rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .sigt-cover__cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(15rem, 17rem));
+    gap: 1rem;
+  }
+  .sigt-cover__card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1.35rem 1.5rem;
+    background: rgba(6, 4, 3, 0.45);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(240, 233, 221, 0.22);
+    text-decoration: none;
+    color: var(--sig-cream);
+    transition: border-color 0.4s ease, background 0.4s ease, transform 0.5s ease;
+  }
+  .sigt-cover__card:hover {
+    border-color: rgba(240, 233, 221, 0.6);
+    background: rgba(6, 4, 3, 0.6);
+    transform: translateY(-3px);
+  }
+  .sigt-cover__card .cc-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.54rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0 0 0.5rem;
+  }
+  .sigt-cover__card .cc-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    color: var(--sig-cream);
+    margin: 0 0 0.35rem;
+  }
+  .sigt-cover__card .cc-sub {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: rgba(240, 233, 221, 0.72);
+    margin: 0 0 0.9rem;
+  }
+  .sigt-cover__card .cc-cta {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.9);
+    padding-top: 0.45rem;
+    border-top: 1px solid rgba(240, 233, 221, 0.25);
+    transition: letter-spacing 0.5s ease;
+  }
+  .sigt-cover__card:hover .cc-cta { letter-spacing: 0.4em; }
+
+  .sigt-cover__enter {
+    flex-shrink: 0;
+    align-self: flex-end;
+    margin-right: calc(1rem - clamp(1.5rem, 5vw, 4.5rem));
+    display: inline-block;
+    background: none;
+    border: 1px solid rgba(240, 233, 221, 0.4);
+    color: var(--sig-cream);
+    padding: 0.95rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.35s ease, background 0.35s ease, letter-spacing 0.5s ease;
+  }
+  .sigt-cover__enter:hover {
+    border-color: rgba(240, 233, 221, 0.9);
+    background: rgba(240, 233, 221, 0.07);
+    letter-spacing: 0.42em;
+  }
+
+  /* ============ SHARED PANEL HEAD ============ */
+  .sigt-head {
+    text-align: center;
+    margin-bottom: clamp(1.75rem, 4vh, 3rem);
+    flex-shrink: 0;
+  }
+  .sigt-head__kicker {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0 0 1rem;
+    padding-left: 0.4em;
+  }
+  .sigt-head__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    line-height: 1;
+    color: var(--sig-cream);
+    margin: 0 0 0.5rem;
+  }
+  .sigt-head__sub {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0;
+  }
+  .sigt-head__sub em { font-style: italic; }
+
+  /* ============ MANIFESTO TAB ============ */
+  .sigt-panel__inner--split {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+  .sigt-mani { max-width: 42rem; margin: auto; text-align: center; }
+  .sigt-mani__lead {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+    line-height: 1.25;
+    color: var(--sig-cream);
+    margin: 0 0 1.5rem;
+  }
+  .sigt-mani__body p {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+    line-height: 1.65;
+    color: rgba(240, 233, 221, 0.88);
+    margin: 0 auto 2.6rem;
+    max-width: 34rem;
+  }
+  .sigt-mani__body p:last-child { margin-bottom: 0; }
+  .sigt-mani__close {
+    margin: 1.4rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1.55;
+    color: rgba(240, 233, 221, 0.75);
+  }
+  .sigt-mani__close em { font-style: italic; }
+
+  .sigt-acts { flex: 1; min-width: 0; }
+  .sigt-acts--programme { max-width: 46rem; margin: 2.5rem auto 0; width: 100%; }
+  .sigt-acts__kicker {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0 0 1.5rem;
+    padding-left: 0.4em;
+  }
+  .sigt-acts__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sigt-acts__list li {
+    display: flex;
+    gap: 1.1rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(240, 233, 221, 0.1);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sigt-acts__list li:first-child { border-top: none; padding-top: 0; }
+  .sigt-acts__list li:hover { transform: translateX(6px); }
+  .sigt-acts__list .n {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    color: rgba(240, 233, 221, 0.65);
+    white-space: nowrap;
+  }
+  .sigt-acts__list .l {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    line-height: 1.5;
+    color: var(--sig-cream);
+  }
+
+  /* ============ MENU TAB ============ */
+  .sigt-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 42rem;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+  .sigt-course {
+    padding: 1.3rem 0;
+    border-top: 1px solid rgba(240, 233, 221, 0.09);
+    position: relative;
+    transition: opacity 0.4s ease;
+  }
+  .sigt-course:first-child { border-top: none; padding-top: 0; }
+  .sigt-course .c-label {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--sig-cream);
+    margin: 0 0 0.45rem;
+    padding-left: 0.3em;
+  }
+  .sigt-course .c-wine {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    color: rgba(240, 233, 221, 0.85);
+    margin: 0 0 0.4rem;
+  }
+  .sigt-course .c-wine em { font-style: italic; }
+  .sigt-course .c-dish {
+    font-family: var(--font-display);
+    font-size: clamp(0.9rem, 1.05vw, 1rem);
+    line-height: 1.45;
+    color: var(--sig-cream);
+    margin: 0;
+  }
+  .sigt-course--signature {
+    margin-top: 0.7rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid rgba(240, 233, 221, 0.3);
+  }
+  .sigt-course--signature .c-label {
+    color: var(--sig-cream);
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+  }
+  .sigt-course--signature .c-dish {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  }
+
+  /* ============ PROGRAMME TAB ============ */
+  .sigt-actflow {
+    display: flex;
+    flex-direction: column;
+    max-width: 44rem;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+  .sigt-panel[data-panel="programme"] .sigt-head { margin-bottom: clamp(1rem, 2.5vh, 1.75rem); }
+  .sigt-actblock {
+    padding: clamp(0.75rem, 1.6vh, 1.15rem) 0;
+    border-top: 1px solid rgba(240, 233, 221, 0.14);
+  }
+  .sigt-actblock:first-child { border-top: none; padding-top: 0; }
+  .sigt-actblock .ab-kicker {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.75);
+    margin: 0 0 0.35rem;
+    padding-left: 0.38em;
+  }
+  .sigt-actblock .ab-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    line-height: 1.15;
+    color: var(--sig-cream);
+    margin: 0 0 0.3rem;
+  }
+  .sigt-actblock .ab-line {
+    font-family: var(--font-display);
+    font-size: clamp(0.88rem, 1vw, 0.95rem);
+    line-height: 1.45;
+    color: rgba(240, 233, 221, 0.85);
+    margin: 0;
+  }
+  .sigt-actblock .ab-line em { font-style: italic; }
+  .sigt-actblock .ab-times {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.65);
+    margin: 0.4rem 0 0;
+    padding-left: 0.26em;
+  }
+  .sigt-actblock .ab-kicker,
+  .sigt-actblock .ab-title,
+  .sigt-actblock .ab-line,
+  .sigt-actblock .ab-times {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
+  }
+  .sigt-days {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    max-width: 64rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .sigt-day__label {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.62);
+    margin: 0 0 1.2rem;
+    padding-left: 0.4em;
+  }
+  .sigt-day__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sigt-day__list li {
+    display: grid;
+    grid-template-columns: 3.6rem 1fr;
+    grid-template-areas: "time entry" ". sub";
+    padding: 0.7rem 0;
+    border-top: 1px solid rgba(240, 233, 221, 0.09);
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sigt-day__list li:first-child { border-top: none; padding-top: 0; }
+  .sigt-day__list li:hover { transform: translateX(6px); }
+  .sigt-day__list li .t {
+    grid-area: time;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    color: rgba(240, 233, 221, 0.72);
+    padding-top: 0.15rem;
+  }
+  .sigt-day__list li .e {
+    grid-area: entry;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+    color: var(--sig-cream);
+  }
+  .sigt-day__list li .s {
+    grid-area: sub;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    color: rgba(240, 233, 221, 0.58);
+    margin-top: 0.1rem;
+  }
+  .sigt-day__list li .s em { font-style: italic; }
+  .sigt-day__list li.act {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 1.3rem 0 0.45rem;
+    border-top: none;
+  }
+  .sigt-day__list li.act:hover { transform: none; }
+  .sigt-day__list li.act .an {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.65);
+    white-space: nowrap;
+  }
+  .sigt-day__list li.act .al {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    line-height: 1.5;
+    color: var(--sig-cream);
+  }
+  .sigt-day__list li.act .al em { font-style: normal; }
+  .sigt-day__list li.act + li { border-top: none; }
+  .sigt-day__note {
+    margin: 1.4rem 0 0;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(240, 233, 221, 0.62);
+  }
+  .sigt-day__note em { font-style: italic; }
+
+  /* ============ CREATORS TAB ============ */
+  .sigt-creators {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    max-width: 74rem;
+    margin: 0 auto;
+    width: 100%;
+    align-items: start;
+  }
+  .sigt-creator {
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+    border: 1px solid rgba(240, 233, 221, 0.12);
+    background: rgba(6, 4, 3, 0.35);
+    overflow: hidden;
+    transition: border-color 0.4s ease, transform 0.5s ease, background 0.4s ease;
+  }
+  .sigt-creator:hover {
+    border-color: rgba(240, 233, 221, 0.45);
+    background: rgba(6, 4, 3, 0.55);
+    transform: translateY(-3px);
+  }
+  .sigt-creator .cr-photo {
+    margin: clamp(-2.25rem, -2.5vw, -1.5rem) clamp(-2.25rem, -2.5vw, -1.5rem) 1.25rem;
+    aspect-ratio: 4 / 3;
+  }
+  .sigt-creator .cr-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.04);
+  }
+  .sigt-creator .cr-label {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0 0 0.8rem;
+    padding-left: 0.4em;
+  }
+  .sigt-creator .cr-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+    line-height: 1.1;
+    color: var(--sig-cream);
+    margin: 0 0 0.8rem;
+  }
+  .sigt-creator .cr-name em { font-style: italic; }
+  .sigt-creator .cr-body {
+    font-family: var(--font-display);
+    font-size: clamp(0.9rem, 1.05vw, 0.98rem);
+    line-height: 1.6;
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0;
+  }
+
+  /* ============ CONTACT TAB ============ */
+  .sigt-evening__lead {
+    max-width: 46rem;
+    margin: 0 auto clamp(1.5rem, 3.5vh, 2.5rem);
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    line-height: 1.75;
+    color: rgba(240, 233, 221, 0.85);
+  }
+  .sigt-contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+    max-width: 78rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .sigt-insta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1.5rem auto 0;
+    padding: 0.85rem 1.6rem;
+    border: 1px solid rgba(240, 233, 221, 0.4);
+    color: var(--sig-cream);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    transition: border-color 0.35s ease, background 0.35s ease, letter-spacing 0.5s ease;
+  }
+  .sigt-insta svg { flex-shrink: 0; }
+  .sigt-insta:hover {
+    border-color: rgba(240, 233, 221, 0.9);
+    background: rgba(240, 233, 221, 0.08);
+    letter-spacing: 0.38em;
+  }
+  .sigt-tile {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.2rem, 2vw, 1.7rem);
+    background: rgba(6, 4, 3, 0.4);
+    border: 1px solid rgba(240, 233, 221, 0.14);
+    text-decoration: none;
+    color: var(--sig-cream);
+    transition: border-color 0.4s ease, background 0.4s ease, transform 0.5s ease;
+  }
+  .sigt-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at var(--mx, 50%) var(--my, 50%), rgba(240, 233, 221, 0.13) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  a.sigt-tile:hover::before { opacity: 1; }
+  a.sigt-tile:hover {
+    border-color: rgba(240, 233, 221, 0.55);
+    transform: translateY(-3px);
+  }
+  .sigt-tile .tl-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 0.55rem;
+    padding-left: 0.4em;
+  }
+  .sigt-tile .tl-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.15;
+    color: var(--sig-cream);
+    margin: 0 0 0.5rem;
+  }
+  .sigt-tile .tl-sub {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.72);
+    margin: 0 0 1.2rem;
+    flex: 1;
+  }
+  .sigt-tile .tl-cta {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.85);
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(240, 233, 221, 0.25);
+    align-self: flex-start;
+    transition: letter-spacing 0.5s ease;
+  }
+  a.sigt-tile:hover .tl-cta { letter-spacing: 0.42em; }
+
+  .sigt-news { display: flex; flex-direction: column; gap: 0.5rem; }
+  .sigt-news input {
+    background: rgba(240, 233, 221, 0.07);
+    border: 1px solid rgba(240, 233, 221, 0.25);
+    color: var(--sig-cream);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    padding: 0.7rem 0.85rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .sigt-news input::placeholder { color: rgba(240, 233, 221, 0.4); }
+  .sigt-news input:focus { border-color: rgba(240, 233, 221, 0.7); }
+  .sigt-news button {
+    background: var(--sig-cream);
+    color: var(--sig-ink);
+    border: none;
+    padding: 0.75rem 1.1rem;
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .sigt-news button:hover { opacity: 0.85; }
+  .sigt-news__ok {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: rgba(240, 233, 221, 0.78);
+    margin: 0.6rem 0 0;
+  }
+
+  .sigt-colophon {
+    margin: clamp(1.75rem, 4vh, 3rem) auto 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
+    flex-shrink: 0;
+  }
+  .sigt-colophon a {
+    color: rgba(240, 233, 221, 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.3);
+    padding-bottom: 1px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .sigt-colophon a:hover { color: #fff; border-color: rgba(240, 233, 221, 0.8); }
+
+  /* ============ ARROWS ============ */
+  .sigt-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    background: none;
+    border: 1px solid rgba(240, 233, 221, 0.25);
+    color: rgba(240, 233, 221, 0.75);
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease, opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sigt-arrow:hover {
+    border-color: rgba(240, 233, 221, 0.85);
+    color: var(--sig-cream);
+    background: rgba(240, 233, 221, 0.07);
+  }
+  .sigt-arrow--prev { left: clamp(0.8rem, 2vw, 2rem); }
+  .sigt-arrow--next { right: clamp(0.8rem, 2vw, 2rem); }
+  .sigt-arrow[disabled] { opacity: 0; pointer-events: none; }
+
+  /* ============ GATE + CEREMONY (unchanged look) ============ */
+  .sig-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sig-ink);
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+  }
+  .sig-gate[aria-hidden="true"] { opacity: 0; pointer-events: none; }
+  .sig-gate__bg {
+    position: absolute;
+    inset: 0;
+    filter: blur(2px) brightness(0.45);
+    z-index: 0;
+    overflow: hidden;
+  }
+  .sig-gate__bg--video video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+  }
+  .sig-gate__bg--video::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.75) 80%);
+    pointer-events: none;
+  }
+  .sig-gate__inner {
+    position: relative; z-index: 1;
+    text-align: center;
+    color: var(--sig-cream);
+    padding: 2rem;
+    max-width: 28rem;
+  }
+  .sig-gate__brand {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    margin: 0 0 0.75rem;
+  }
+  .sig-gate__sub {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.7);
+    margin: 0 0 2.5rem;
+  }
+  .sig-gate__form { display: flex; gap: 0.5rem; justify-content: center; }
+  .sig-gate__form input {
+    background: rgba(240, 233, 221, 0.08);
+    border: 1px solid rgba(240, 233, 221, 0.35);
+    color: var(--sig-cream);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1rem;
+    width: 14rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .sig-gate__form input::placeholder { color: rgba(240, 233, 221, 0.4); }
+  .sig-gate__form input:focus { border-color: rgba(240, 233, 221, 0.85); }
+  .sig-gate__form button {
+    background: var(--sig-cream);
+    color: var(--sig-ink);
+    border: none;
+    padding: 0.85rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .sig-gate__form button:hover { opacity: 0.85; }
+  .sig-gate__err {
+    min-height: 1.2em;
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: rgba(240, 233, 221, 0.7);
+  }
+
+  .sig-ceremony {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .sig-ceremony[aria-hidden="false"] { animation: sigCeremony 1.4s ease-out forwards; }
+  .sig-ceremony::before {
+    content: "SIGNATURE";
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    color: var(--sig-cream);
+    opacity: 0;
+    text-transform: uppercase;
+  }
+  .sig-ceremony[aria-hidden="false"]::before { animation: sigCeremonyText 1.4s ease-out forwards; }
+  @keyframes sigCeremony {
+    0% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes sigCeremonyText {
+    0% { opacity: 0; letter-spacing: 0.8em; text-indent: 0.8em; }
+    30% { opacity: 1; letter-spacing: 0.5em; text-indent: 0.5em; }
+    75% { opacity: 1; letter-spacing: 0.5em; text-indent: 0.5em; }
+    100% { opacity: 0; letter-spacing: 0.4em; text-indent: 0.4em; }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .sigt__bar { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .sigt__tabs { width: 100%; }
+    .sigt-panel__inner { padding-top: clamp(6.5rem, 15vh, 8rem); }
+    .sigt-panel__inner--split { flex-direction: column; align-items: stretch; gap: 2rem; overflow-y: auto; scrollbar-width: none; }
+    .sigt-panel__inner--split::-webkit-scrollbar { display: none; }
+    .sigt-menu { grid-template-columns: 1fr; gap: 0.5rem; }
+    .sigt-days { grid-template-columns: 1fr; gap: 2rem; }
+    .sigt-creators { grid-template-columns: 1fr; gap: 1rem; }
+    .sigt-contact { grid-template-columns: 1fr; gap: 1rem; }
+    .sigt-cover__row { flex-direction: column; align-items: stretch; }
+    .sigt-arrow { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .sig-gate__form { flex-direction: column; }
+    .sig-gate__form input { width: 100%; }
+  }
+</style>
+
+<script>
+  // ===== Passcode gate =====
+  const gate = document.getElementById("sigGate") as HTMLElement | null;
+  const main = document.getElementById("sigMain") as HTMLElement | null;
+  const form = document.getElementById("sigGateForm") as HTMLFormElement | null;
+  const input = document.getElementById("sigGateInput") as HTMLInputElement | null;
+  const err = document.getElementById("sigGateErr") as HTMLElement | null;
+  const ceremony = document.getElementById("sigCeremony") as HTMLElement | null;
+
+  const unlock = (withCeremony = true) => {
+    if (!gate || !main) return;
+    main.hidden = false;
+    gate.setAttribute("aria-hidden", "true");
+    setTimeout(() => gate.remove(), 700);
+    try { sessionStorage.setItem("sigUnlocked", "1"); } catch {}
+    if (withCeremony && ceremony) {
+      ceremony.setAttribute("aria-hidden", "false");
+      setTimeout(() => ceremony.remove(), 1500);
+    } else if (ceremony) {
+      ceremony.remove();
+    }
+    // Reveal cover content
+    activate("invitation", true);
+  };
+
+  // ===== Tabs engine — fullscreen panels, no scroll =====
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".sigt__tab"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>(".sigt-panel"));
+  const order = tabs.map((t) => t.dataset.tab!);
+  let current = "invitation";
+  let switching = false;
+
+  // Auto-scroll the Menu so guests see every course, ending on the Signature tartlet
+  let menuScrollRAF = 0;
+  function autoScrollMenu(p: HTMLElement) {
+    const scroller = p.querySelector<HTMLElement>(".sigt-panel__inner--scrollable");
+    if (!scroller) return;
+    cancelAnimationFrame(menuScrollRAF);
+    const startAt = performance.now() + 2200;
+    const cancel = () => cancelAnimationFrame(menuScrollRAF);
+    scroller.addEventListener("wheel", cancel, { once: true, passive: true });
+    scroller.addEventListener("touchstart", cancel, { once: true, passive: true });
+    const stepScroll = (now: number) => {
+      const dist = scroller.scrollHeight - scroller.clientHeight;
+      if (now >= startAt) {
+        const y = Math.min(dist, ((now - startAt) / 1000) * 34);
+        scroller.scrollTop = y;
+        if (y >= dist) return;
+      }
+      menuScrollRAF = requestAnimationFrame(stepScroll);
+    };
+    menuScrollRAF = requestAnimationFrame(stepScroll);
+  }
+
+  function activate(name: string, force = false) {
+    if (!force && (switching || name === current)) return;
+    if (!order.includes(name)) return;
+    switching = true;
+    current = name;
+
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === name;
+      t.classList.toggle("is-active", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    panels.forEach((p) => {
+      const on = p.dataset.panel === name;
+      p.classList.toggle("is-active", on);
+      // Retrigger the reveals inside the newly-active panel
+      if (on) {
+        p.querySelectorAll("[data-reveal]").forEach((el) => el.classList.remove("is-visible"));
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            p.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-visible"));
+          }, 120);
+        });
+        // Reset internal scroll of the panel
+        const scroller = p.querySelector<HTMLElement>(".sigt-panel__inner--scrollable, .sigt-panel__inner--split");
+        if (scroller) scroller.scrollTop = 0;
+        if (name === "menu") autoScrollMenu(p);
+        else cancelAnimationFrame(menuScrollRAF);
+      } else {
+        p.querySelectorAll("[data-reveal]").forEach((el) => el.classList.remove("is-visible"));
+      }
+    });
+
+    // Progress bar mirrors the tab position
+    const bar = document.querySelector<HTMLElement>(".sig-progress > span");
+    if (bar) bar.style.width = `${((order.indexOf(name) + 1) / order.length) * 100}%`;
+
+    // Arrows enable/disable at the ends
+    const prev = document.querySelector<HTMLButtonElement>("[data-deck-prev]");
+    const next = document.querySelector<HTMLButtonElement>("[data-deck-next]");
+    const i = order.indexOf(name);
+    if (prev) prev.toggleAttribute("disabled", i === 0);
+    if (next) next.toggleAttribute("disabled", i === order.length - 1);
+
+    setTimeout(() => { switching = false; }, 650);
+  }
+
+  function step(delta: number) {
+    const i = order.indexOf(current) + delta;
+    if (i >= 0 && i < order.length) activate(order[i]);
+  }
+
+  // Tab clicks
+  tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.tab!)));
+
+  // Goto buttons (e.g. "Enter the evening")
+  document.querySelectorAll<HTMLElement>("[data-goto]").forEach((el) =>
+    el.addEventListener("click", () => activate(el.dataset.goto!)),
+  );
+
+  // Arrows
+  document.querySelector("[data-deck-prev]")?.addEventListener("click", () => step(-1));
+  document.querySelector("[data-deck-next]")?.addEventListener("click", () => step(1));
+
+  // Click anywhere on the active panel -> advance to next (except on interactive elements)
+  const noAdvance = 'a, button, input, textarea, select, label, [role="tab"], [data-goto], [data-noadvance], .sigt__bar, .sigt-arrow';
+  panels.forEach((p) => {
+    p.addEventListener("click", (e) => {
+      if (p.dataset.panel !== current) return;
+      const t = e.target as HTMLElement;
+      if (t.closest(noAdvance)) return;         // let links/buttons/forms work
+      if (window.getSelection()?.toString()) return; // don't hijack text selection
+      if (order.indexOf(current) < order.length - 1) step(1);
+    });
+  });
+
+  // Keyboard
+  window.addEventListener("keydown", (e) => {
+    if (gate && document.body.contains(gate)) return; // locked
+    if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); step(1); }
+    if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); step(-1); }
+  });
+
+  // Horizontal swipe (mobile)
+  let touchX = 0, touchY = 0;
+  window.addEventListener("touchstart", (e) => {
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      step(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  // ===== Gate wiring =====
+  if (gate && main && form && input) {
+    try {
+      if (sessionStorage.getItem("sigUnlocked") === "1") unlock(false);
+      else setTimeout(() => input.focus(), 300);
+    } catch {}
+
+    const expected = (gate.dataset.code || "").trim().toLowerCase();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = input.value.trim().toLowerCase();
+      if (v === expected) unlock();
+      else if (err) { err.textContent = "Code not recognised."; input.select(); }
+    });
+  }
+
+  // ===== Newsletter -> prefilled email =====
+  const news = document.getElementById("sigNews") as HTMLFormElement | null;
+  const newsOk = document.getElementById("sigNewsOk") as HTMLElement | null;
+  if (news) {
+    news.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = (news.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
+      if (!email) return;
+      const subject = encodeURIComponent("Signature Newsletter");
+      const body = encodeURIComponent(`Hello,\n\nPlease add me to the Signature newsletter.\n\nEmail: ${email}\n\nThank you.`);
+      window.location.href = `mailto:eugeniecolleville.paris@gmail.com?subject=${subject}&body=${body}`;
+      if (newsOk) newsOk.hidden = false;
+    });
+  }
+</script>

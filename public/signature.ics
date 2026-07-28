@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eugenie Colleville Paris//Signature No.01//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:signature-no01-2026@eugeniecollevilleparis.com
+DTSTAMP:20260628T120000Z
+DTSTART:20260926T163000Z
+DTEND:20260927T150000Z
+SUMMARY:Signature — No. 01
+DESCRIPTION:An evening where architecture, light, sound, gastronomy, conversation and performance are conceived as one.\n\nChâteau Laffitte Carcasset · Saint-Estèphe · Bordeaux\n6 PM until midnight\n\nMore: https://eugeniecollevilleparis.com/signature
+LOCATION:Château Laffitte Carcasset, Saint-Estèphe, Bordeaux, France
+URL:https://eugeniecollevilleparis.com/signature
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Signature — No. 01 tomorrow at Château Laffitte Carcasset
+END:VALARM
+END:VEVENT
+END:VCALENDAR

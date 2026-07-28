@@ -1,0 +1,160 @@
+---
+// Global interaction layer for the SIGNATURE pages:
+// - custom cursor (pointer-capable devices only)
+// - scroll progress bar at the top of the viewport
+// - reveal-on-scroll IntersectionObserver (Layout.astro already provides one,
+//   but we re-run it here to include any elements added late)
+---
+
+<div class="sig-progress" aria-hidden="true"><span></span></div>
+<div class="sig-cursor" aria-hidden="true"><span class="sig-cursor__dot"></span></div>
+
+<style is:global>
+  /* ============ SCROLL PROGRESS BAR ============ */
+  .sig-progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 10000;
+    background: rgba(240, 233, 221, 0.08);
+    pointer-events: none;
+  }
+  .sig-progress > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, rgba(240, 233, 221, 0.35), rgba(240, 233, 221, 0.9));
+    transition: width 0.15s linear;
+  }
+
+  /* ============ CUSTOM CURSOR (only shows on fine pointer devices) ============ */
+  .sig-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 10000;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .sig-cursor { display: block; }
+  }
+  .sig-cursor__dot {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(240, 233, 221, 0.75);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.28s ease,
+                border-color 0.28s ease;
+    transform: scale(0.3);
+  }
+  .sig-cursor.is-ready { transform: translate3d(-50%, -50%, 0) scale(1); }
+  .sig-cursor.is-hover .sig-cursor__dot { transform: scale(1); background: rgba(240, 233, 221, 0.12); border-color: rgba(240, 233, 221, 1); }
+  .sig-cursor.is-tap .sig-cursor__dot { transform: scale(0.7); }
+
+  /* Hide cursor when the native input is focused (typing) */
+  .sig-cursor.is-hidden { opacity: 0; }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .sig-cursor { display: none !important; }
+    .sig-progress > span { transition: none; }
+  }
+</style>
+
+<script>
+  // ===== Scroll progress bar =====
+  const progress = document.querySelector<HTMLElement>(".sig-progress > span");
+  if (progress) {
+    const updateProgress = () => {
+      const scrolled = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = height > 0 ? (scrolled / height) * 100 : 0;
+      progress.style.width = `${pct}%`;
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+  }
+
+  // ===== Custom cursor =====
+  const cursor = document.querySelector<HTMLElement>(".sig-cursor");
+  if (cursor && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let curX = mouseX;
+    let curY = mouseY;
+
+    // On first move, mark ready (so it fades in from 0)
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!cursor.classList.contains("is-ready")) cursor.classList.add("is-ready");
+    });
+
+    const raf = () => {
+      // Ease-toward with a small damping factor for lag
+      curX += (mouseX - curX) * 0.22;
+      curY += (mouseY - curY) * 0.22;
+      cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) scale(${cursor.classList.contains("is-ready") ? 1 : 0})`;
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    // Expand on interactive hover
+    const hoverSelector = 'a, button, [role="button"], input, textarea, select, .sig-chapter, .sig-course, .pg-course, .pg-creator, .pg-tile, .prg-day__list li';
+    document.addEventListener("mouseover", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(hoverSelector)) cursor.classList.add("is-hover");
+    });
+    document.addEventListener("mouseout", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(hoverSelector)) cursor.classList.remove("is-hover");
+    });
+
+    document.addEventListener("mousedown", () => cursor.classList.add("is-tap"));
+    document.addEventListener("mouseup", () => cursor.classList.remove("is-tap"));
+
+    // Hide on window blur
+    window.addEventListener("blur", () => cursor.classList.add("is-hidden"));
+    window.addEventListener("focus", () => cursor.classList.remove("is-hidden"));
+
+    // Hide when leaving the document
+    document.addEventListener("mouseleave", () => cursor.classList.add("is-hidden"));
+    document.addEventListener("mouseenter", () => cursor.classList.remove("is-hidden"));
+  }
+
+  // ===== Radial-glow mouse follow on tiles (contact + chapters) =====
+  document.querySelectorAll<HTMLElement>(".pg-tile, .sig-chapter").forEach((el) => {
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty("--mx", `${x}%`);
+      el.style.setProperty("--my", `${y}%`);
+    });
+  });
+
+  // ===== Ensure late-added reveal elements are also observed =====
+  // (Layout.astro's observer runs on initial load only)
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        else {
+          const rect = entry.boundingClientRect;
+          const fullyOut = rect.bottom < 0 || rect.top > window.innerHeight;
+          if (fullyOut) entry.target.classList.remove("is-visible");
+        }
+      });
+    },
+    { threshold: [0, 0.12, 1], rootMargin: "0px 0px -8% 0px" },
+  );
+  document.querySelectorAll("[data-reveal]:not(.is-visible)").forEach((el) => observer.observe(el));
+</script>

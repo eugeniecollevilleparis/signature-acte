@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "signature-site",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/eugeniegerard/Downloads/signature-site && npm run dev -- --port 4325 --host 127.0.0.1"],
+      "port": 4325
+    }
+  ]
+}

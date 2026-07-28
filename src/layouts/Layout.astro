@@ -1,0 +1,162 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const {
+  title = "Eugénie Colleville — Private Chef · Paris · London",
+  description = "Bespoke private chef experiences. Trained by Alain Ducasse. Serving private clients, UHNWI families and brands in London, Paris, the French Riviera and internationally.",
+  lang = "en",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#0f0d0c" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Eugénie Colleville" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_GB"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="fr" href="/fr" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Smooth scroll (Lenis) -->
+    <script>
+      import Lenis from "lenis";
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+
+      // Expose globally so other components (e.g. back-to-top) can use it
+      (window as any).__lenis = lenis;
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Anchor links — use Lenis for smooth scroll to anchors
+      document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
+        if (!anchor) return;
+        const id = anchor.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 });
+      });
+    </script>
+
+    <!-- Reveal-on-scroll (re-triggers every time element enters/leaves viewport) -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            } else {
+              // Only reset if the element has fully left the viewport (top is below screen
+              // or bottom is above screen) so that elements scrolled slightly out and back
+              // do not flicker.
+              const rect = entry.boundingClientRect;
+              const fullyOut = rect.bottom < 0 || rect.top > window.innerHeight;
+              if (fullyOut) {
+                entry.target.classList.remove("is-visible");
+              }
+            }
+          });
+        },
+        { threshold: [0, 0.12, 1], rootMargin: "0px 0px -8% 0px" },
+      );
+
+      document
+        .querySelectorAll("[data-reveal], [data-reveal-image]")
+        .forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- Header scroll behavior -->
+    <script>
+      let lastY = 0;
+      const header = document.querySelector("[data-nav]") as HTMLElement | null;
+      if (header) {
+        window.addEventListener(
+          "scroll",
+          () => {
+            const y = window.scrollY;
+            if (y > 80) header.classList.add("is-scrolled");
+            else header.classList.remove("is-scrolled");
+            if (y > lastY && y > 200) header.classList.add("is-hidden");
+            else header.classList.remove("is-hidden");
+            lastY = y;
+          },
+          { passive: true },
+        );
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+</style>
