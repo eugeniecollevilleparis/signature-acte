@@ -76,7 +76,7 @@ const {
       // Expose globally so other components (e.g. back-to-top) can use it
       (window as any).__lenis = lenis;
 
-      function raf(time) {
+      function raf(time: number) {
         lenis.raf(time);
         requestAnimationFrame(raf);
       }

@@ -69,11 +69,12 @@ const description =
                 <p class="cc-sub">26 – 27 September 2026, from 6&nbsp;PM.</p>
                 <span class="cc-cta">Download →</span>
               </a>
-              <a class="sigt-cover__card" href="https://checkout.revolut.com/pay/ede332d8-5e0e-43a9-8c2d-0cc13e60114c" target="_blank" rel="noopener">
+              <button class="sigt-cover__card" type="button" data-open-booking>
                 <p class="cc-eyebrow">Presale · Until 12 August</p>
                 <p class="cc-title">Become Part of Edition No.&nbsp;01</p>
                 <p class="cc-sub">Limited seats available.</p>
-              </a>
+                <span class="cc-cta">Reserve →</span>
+              </button>
             </div>
 
             <button class="sigt-cover__enter" type="button" data-goto="programme" data-reveal style="--reveal-delay:0.42s">
@@ -283,21 +284,21 @@ const description =
             <p class="tl-eyebrow">On site</p>
             <p class="tl-title">Six rooms, on request</p>
             <p class="tl-sub">The château itself offers six rooms for guests wishing to stay the night. Available on request, subject to availability.</p>
-            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Room%20request&body=Hello%2C%0A%0AI%20would%20like%20to%20request%20a%20room%20at%20the%20ch%C3%A2teau%20for%20the%20night(s)%20of%2026-27%20September%202026.%0A%0AName%3A%20%0APhone%3A%20%0A%0AThank%20you.">Request a room →</a>
+            <a class="tl-cta" href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Room%20request&body=Hello%2C%0A%0AI%20would%20like%20to%20request%20a%20room%20at%20the%20ch%C3%A2teau%20for%20the%20night(s)%20of%2026-27%20September%202026.%0A%0AName%3A%20%0APhone%3A%20%0A%0AThank%20you.">Request a room →</a>
           </div>
 
           <div class="sigt-tile" data-reveal style="--reveal-delay:0.3s">
             <p class="tl-eyebrow">Getting there</p>
             <p class="tl-title">Taxis &amp; transfers</p>
             <p class="tl-sub">Saint-Estèphe sits within easy reach of Bordeaux. We are glad to arrange a taxi or private transfer to and from the château. Simply let us know your arrival details.</p>
-            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Transport&body=Hello%2C%0A%0AI%20would%20like%20information%20about%20taxis%2Ftransfers%20for%20Signature%20No.%2001.%0A%0AArrival%20details%3A%20%0A%0AThank%20you.">Ask about transport →</a>
+            <a class="tl-cta" href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Transport&body=Hello%2C%0A%0AI%20would%20like%20information%20about%20taxis%2Ftransfers%20for%20Signature%20No.%2001.%0A%0AArrival%20details%3A%20%0A%0AThank%20you.">Ask about transport →</a>
           </div>
 
           <div class="sigt-tile" data-reveal style="--reveal-delay:0.4s">
             <p class="tl-eyebrow">Nearby</p>
             <p class="tl-title">Accommodation</p>
             <p class="tl-sub">For guests preferring to stay off-site, a number of hotels and maisons d'hôtes can be found in and around Saint-Estèphe and Pauillac. Write to us for our recommendations.</p>
-            <a class="tl-cta" href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20send%20me%20accommodation%20recommendations%20near%20the%20ch%C3%A2teau%3F%0A%0AThank%20you.">Ask for recommendations →</a>
+            <a class="tl-cta" href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20send%20me%20accommodation%20recommendations%20near%20the%20ch%C3%A2teau%3F%0A%0AThank%20you.">Ask for recommendations →</a>
           </div>
 
           <div class="sigt-tile sigt-tile--form" data-reveal style="--reveal-delay:0.5s">
@@ -321,7 +322,8 @@ const description =
         </a>
 
         <p class="sigt-colophon" data-reveal style="--reveal-delay:0.6s">
-          SIGNATURE &nbsp;·&nbsp; No. 01 &nbsp;·&nbsp; <a href="mailto:eugeniecolleville.paris@gmail.com?subject=SIGNATURE%20No.%2001">For invitations &amp; conversation →</a>
+          SIGNATURE &nbsp;·&nbsp; No. 01 &nbsp;·&nbsp; <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001">For invitations &amp; conversation →</a>
+          &nbsp;·&nbsp; <a href="/conditions-generales">Terms of sale</a>
         </p>
 
       </div>
@@ -332,6 +334,82 @@ const description =
     <button class="sigt-arrow sigt-arrow--next" type="button" data-deck-next aria-label="Next">→</button>
 
   </main>
+
+  <!-- ===== BOOKING DIALOG ===== -->
+  <!-- Outside .sigt: that container is fixed with overflow:hidden and would clip it. -->
+  <div class="sigb" id="sigBooking" hidden>
+    <div class="sigb__scrim" data-close-booking></div>
+
+    <div class="sigb__panel" role="dialog" aria-modal="true" aria-labelledby="sigbTitle">
+      <button class="sigb__close" type="button" data-close-booking aria-label="Close">×</button>
+
+      <div class="sigb__view" data-view="form">
+        <p class="sigb__kicker">Presale · Until 12 August</p>
+        <h2 class="sigb__title" id="sigbTitle">Reserve your place</h2>
+        <p class="sigb__lead">
+          26 – 27 September 2026 · Château Laffitte Carcasset.<br>
+          Tell us who you are, then complete your payment.
+        </p>
+
+        <form class="sigb__form" id="sigbForm" novalidate>
+          <div class="sigb__row">
+            <label class="sigb__field">
+              <span>First name</span>
+              <input type="text" name="firstName" autocomplete="given-name" required>
+              <em class="sigb__err" data-err="firstName"></em>
+            </label>
+            <label class="sigb__field">
+              <span>Last name</span>
+              <input type="text" name="lastName" autocomplete="family-name" required>
+              <em class="sigb__err" data-err="lastName"></em>
+            </label>
+          </div>
+
+          <label class="sigb__field">
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" required>
+            <em class="sigb__err" data-err="email"></em>
+          </label>
+
+          <label class="sigb__field">
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required>
+            <em class="sigb__err" data-err="phone"></em>
+          </label>
+
+          <!-- Honeypot: hidden from people, irresistible to bots. -->
+          <div class="sigb__pot" aria-hidden="true">
+            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <label class="sigb__check">
+            <input type="checkbox" name="terms" required>
+            <span>I have read and accept the <a href="/conditions-generales" target="_blank" rel="noopener">terms of sale</a>.</span>
+            <em class="sigb__err" data-err="terms"></em>
+          </label>
+
+          <p class="sigb__note" data-err="form"></p>
+
+          <button class="sigb__submit" type="submit">
+            <span data-submit-label>Continue to payment →</span>
+          </button>
+          <p class="sigb__fine">You will be redirected to Revolut to complete your payment. Your ticket and QR code follow by email once it is confirmed.</p>
+        </form>
+      </div>
+
+      <div class="sigb__view" data-view="done" hidden>
+        <p class="sigb__kicker">Reservation received</p>
+        <h2 class="sigb__title">Thank you<span data-done-name></span>.</h2>
+        <p class="sigb__lead">
+          Your reference is <strong data-done-ref></strong>. We have emailed you a confirmation.
+        </p>
+        <p class="sigb__lead">Completing your payment now — one moment.</p>
+        <p class="sigb__fine">
+          Not redirected? <a data-done-link href="#" rel="noopener">Open the payment page →</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </Layout>
 
 <style is:global>
@@ -1299,6 +1377,179 @@ const description =
     100% { opacity: 0; letter-spacing: 0.4em; text-indent: 0.4em; }
   }
 
+  /* ============ BOOKING DIALOG ============ */
+  .sigb {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vh, 2.5rem) clamp(1rem, 4vw, 2rem);
+  }
+  .sigb[hidden] { display: none; }
+  .sigb__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 3, 3, 0.86);
+    backdrop-filter: blur(7px);
+    animation: sigbFade 0.4s ease both;
+  }
+  .sigb__panel {
+    position: relative;
+    width: 100%;
+    max-width: 30rem;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    background: #12100e;
+    border: 1px solid rgba(240, 233, 221, 0.22);
+    color: var(--sig-cream);
+    animation: sigbRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .sigb__panel::-webkit-scrollbar { display: none; }
+  @keyframes sigbFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sigbRise {
+    from { opacity: 0; transform: translateY(1.25rem) scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+  .sigb__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.65rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: rgba(240, 233, 221, 0.55);
+    transition: color 0.3s ease;
+  }
+  .sigb__close:hover { color: var(--sig-cream); }
+  .sigb__kicker {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 0.75rem;
+  }
+  .sigb__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+  }
+  .sigb__lead {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: rgba(240, 233, 221, 0.75);
+    margin: 0 0 1.5rem;
+  }
+  .sigb__lead strong { color: var(--sig-cream); font-weight: 500; letter-spacing: 0.06em; }
+
+  .sigb__form { display: flex; flex-direction: column; gap: 0.9rem; }
+  .sigb__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .sigb__field { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+  .sigb__field > span {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+  }
+  .sigb__field input {
+    width: 100%;
+    background: rgba(240, 233, 221, 0.06);
+    border: 1px solid rgba(240, 233, 221, 0.22);
+    color: var(--sig-cream);
+    font-family: var(--font-display);
+    /* 16px: below that iOS zooms the page when the field takes focus. */
+    font-size: 16px;
+    padding: 0.75rem 0.85rem;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .sigb__field input:focus {
+    border-color: rgba(240, 233, 221, 0.7);
+    background: rgba(240, 233, 221, 0.09);
+  }
+  .sigb__field input.is-invalid { border-color: rgba(214, 122, 96, 0.85); }
+
+  /* Off-screen rather than display:none — bots skip fields that are not rendered. */
+  .sigb__pot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .sigb__check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.6rem;
+    align-items: start;
+    margin-top: 0.25rem;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: rgba(240, 233, 221, 0.75);
+  }
+  .sigb__check input {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-top: 0.14rem;
+    accent-color: #f0e9dd;
+    flex-shrink: 0;
+  }
+  .sigb__check a { color: var(--sig-cream); border-bottom: 1px solid rgba(240, 233, 221, 0.4); }
+  .sigb__check .sigb__err { grid-column: 2; }
+
+  .sigb__err {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    color: rgba(224, 145, 120, 0.95);
+  }
+  .sigb__err:empty { display: none; }
+  .sigb__note {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: rgba(224, 145, 120, 0.95);
+  }
+  .sigb__note:empty { display: none; }
+
+  .sigb__submit {
+    margin-top: 0.4rem;
+    padding: 1rem 1.4rem;
+    background: var(--sig-cream);
+    color: var(--sig-ink);
+    border: 1px solid var(--sig-cream);
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.3s ease, letter-spacing 0.5s ease;
+  }
+  .sigb__submit:hover:not(:disabled) { letter-spacing: 0.36em; }
+  .sigb__submit:disabled { opacity: 0.55; cursor: default; }
+
+  .sigb__fine {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    line-height: 1.6;
+    color: rgba(240, 233, 221, 0.5);
+  }
+  .sigb__fine a { color: rgba(240, 233, 221, 0.9); border-bottom: 1px solid rgba(240, 233, 221, 0.4); }
+
   /* ============ RESPONSIVE ============ */
 
   /* ---- Tablet and below: layout ---- */
@@ -1428,6 +1679,13 @@ const description =
     .sigt-news input, .sigt-news button { width: 100%; }
     .sigt-news input { font-size: 16px; padding: 0.85rem 0.9rem; }
     .sigt-news button { padding: 0.9rem 1.1rem; font-size: 0.62rem; letter-spacing: 0.24em; }
+
+    /* Booking dialog */
+    .sigb { padding: 0; align-items: stretch; }
+    .sigb__panel { max-width: none; min-height: 100%; border: none; padding: 3rem 1.35rem calc(2rem + env(safe-area-inset-bottom, 0px)); }
+    .sigb__row { grid-template-columns: 1fr; }
+    .sigb__field > span { font-size: 0.6rem; letter-spacing: 0.22em; }
+    .sigb__check { font-size: 0.95rem; }
 
     /* Gate */
     .sig-gate__inner { padding: 1.5rem; }
@@ -1587,6 +1845,9 @@ const description =
   // Keyboard
   window.addEventListener("keydown", (e) => {
     if (gate && document.body.contains(gate)) return; // locked
+    if (bookingIsOpen()) return;                       // dialog owns the keyboard
+    // Arrow keys belong to the field while someone is typing in it
+    if ((e.target as HTMLElement)?.closest("input, textarea, select")) return;
     if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); step(1); }
     if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); step(-1); }
   });
@@ -1596,11 +1857,11 @@ const description =
   window.addEventListener("touchstart", (e) => {
     touchX = e.touches[0].clientX;
     touchY = e.touches[0].clientY;
-    // Scrolling the tab strip sideways must not also flip the panel
-    touchInTabs = !!(e.target as HTMLElement).closest?.(".sigt__tabs");
+    // Scrolling the tab strip or the booking dialog must not flip the panel
+    touchInTabs = !!(e.target as HTMLElement).closest?.(".sigt__tabs, .sigb");
   }, { passive: true });
   window.addEventListener("touchend", (e) => {
-    if (touchInTabs) return;
+    if (touchInTabs || bookingIsOpen()) return;
     const dx = e.changedTouches[0].clientX - touchX;
     const dy = e.changedTouches[0].clientY - touchY;
     if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
@@ -1624,18 +1885,145 @@ const description =
     });
   }
 
-  // ===== Newsletter -> prefilled email =====
+  // ===== Booking dialog =====
+  const bookingEl = document.getElementById("sigBooking") as HTMLElement | null;
+  const bookingForm = document.getElementById("sigbForm") as HTMLFormElement | null;
+
+  function bookingIsOpen(): boolean {
+    return !!bookingEl && !bookingEl.hidden;
+  }
+
+  function showBookingErrors(errors: Record<string, string>) {
+    bookingEl?.querySelectorAll<HTMLElement>("[data-err]").forEach((el) => {
+      el.textContent = errors[el.dataset.err!] || "";
+    });
+    bookingForm?.querySelectorAll<HTMLInputElement>("input[name]").forEach((input) => {
+      input.classList.toggle("is-invalid", !!errors[input.name]);
+    });
+    // Move focus to the first problem so it is not missed further down the form.
+    const firstBad = bookingForm?.querySelector<HTMLInputElement>("input.is-invalid");
+    firstBad?.focus();
+  }
+
+  function openBooking() {
+    if (!bookingEl) return;
+    bookingEl.hidden = false;
+    bookingEl.querySelectorAll<HTMLElement>("[data-view]").forEach((v) => {
+      v.hidden = v.dataset.view !== "form";
+    });
+    showBookingErrors({});
+    setTimeout(() => bookingForm?.querySelector<HTMLInputElement>('input[name="firstName"]')?.focus(), 60);
+  }
+
+  function closeBooking() {
+    if (bookingEl) bookingEl.hidden = true;
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-open-booking]").forEach((el) =>
+    el.addEventListener("click", openBooking),
+  );
+  document.querySelectorAll<HTMLElement>("[data-close-booking]").forEach((el) =>
+    el.addEventListener("click", closeBooking),
+  );
+
+  if (bookingForm && bookingEl) {
+    bookingForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submit = bookingForm.querySelector<HTMLButtonElement>(".sigb__submit");
+      const labelEl = bookingForm.querySelector<HTMLElement>("[data-submit-label]");
+      const label = labelEl?.textContent || "";
+
+      showBookingErrors({});
+      if (submit) submit.disabled = true;
+      if (labelEl) labelEl.textContent = "Sending…";
+
+      const data = Object.fromEntries(new FormData(bookingForm).entries());
+
+      try {
+        const res = await fetch("/api/book", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const body = await res.json();
+
+        if (!res.ok || !body.ok) {
+          showBookingErrors(body.errors || {});
+          if (body.message) {
+            const note = bookingForm.querySelector<HTMLElement>('[data-err="form"]');
+            if (note) note.textContent = body.message;
+          }
+          return;
+        }
+
+        // Confirmation first, redirect second — so the reference is seen even
+        // if the payment page is slow to load.
+        bookingEl.querySelectorAll<HTMLElement>("[data-view]").forEach((v) => {
+          v.hidden = v.dataset.view !== "done";
+        });
+        const nameEl = bookingEl.querySelector<HTMLElement>("[data-done-name]");
+        if (nameEl) nameEl.textContent = data.firstName ? `, ${data.firstName}` : "";
+        const refEl = bookingEl.querySelector<HTMLElement>("[data-done-ref]");
+        if (refEl) refEl.textContent = body.ref || "";
+        const linkEl = bookingEl.querySelector<HTMLAnchorElement>("[data-done-link]");
+        if (linkEl) linkEl.href = body.checkoutUrl;
+
+        setTimeout(() => { window.location.href = body.checkoutUrl; }, 1800);
+      } catch {
+        const note = bookingForm.querySelector<HTMLElement>('[data-err="form"]');
+        if (note) note.textContent = "Network error. Please check your connection and try again.";
+      } finally {
+        if (submit) submit.disabled = false;
+        if (labelEl) labelEl.textContent = label;
+      }
+    });
+  }
+
+  // Esc closes the dialog before it reaches the deck navigation
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && bookingIsOpen()) {
+      e.stopPropagation();
+      closeBooking();
+    }
+  }, true);
+
+  // ===== Newsletter =====
   const news = document.getElementById("sigNews") as HTMLFormElement | null;
   const newsOk = document.getElementById("sigNewsOk") as HTMLElement | null;
   if (news) {
-    news.addEventListener("submit", (e) => {
+    news.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = (news.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
+      const input = news.querySelector('input[name="email"]') as HTMLInputElement;
+      const button = news.querySelector("button") as HTMLButtonElement | null;
+      const email = input.value.trim();
       if (!email) return;
-      const subject = encodeURIComponent("Signature Newsletter");
-      const body = encodeURIComponent(`Hello,\n\nPlease add me to the Signature newsletter.\n\nEmail: ${email}\n\nThank you.`);
-      window.location.href = `mailto:eugeniecolleville.paris@gmail.com?subject=${subject}&body=${body}`;
-      if (newsOk) newsOk.hidden = false;
+
+      if (button) button.disabled = true;
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        const body = await res.json();
+        if (newsOk) {
+          newsOk.textContent = body.ok
+            ? "Thank you. Check your inbox — a welcome note is on its way."
+            : body.message || "Something went wrong. Please try again.";
+          newsOk.hidden = false;
+        }
+        if (body.ok) {
+          news.reset();
+          if (button) button.textContent = "Subscribed";
+        }
+      } catch {
+        if (newsOk) {
+          newsOk.textContent = "Network error. Please try again.";
+          newsOk.hidden = false;
+        }
+      } finally {
+        if (button && button.textContent !== "Subscribed") button.disabled = false;
+      }
     });
   }
 </script>
