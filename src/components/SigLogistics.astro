@@ -1,0 +1,472 @@
+---
+/**
+ * The two long Logistics lists — drivers, and where to stay.
+ *
+ * They live in dialogs rather than in the Logistics tiles: forty entries would
+ * bury the rest of the panel, and on a phone would turn it into a scroll.
+ *
+ * Every entry links to a Google Maps search rather than a pinned coordinate,
+ * because names and towns are what we have — no latitudes were available.
+ */
+
+interface Place {
+  name: string;
+  town?: string;
+  phone?: string;
+  note?: string;
+  site?: string;
+  /** Travel time from the château, as told to us. */
+  distance?: string;
+}
+
+const mapsUrl = (p: Place) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    [p.name, p.town, "Médoc, France"].filter(Boolean).join(" "),
+  )}`;
+
+const telHref = (phone: string) => `tel:${phone.replace(/[^0-9+]/g, "")}`;
+
+const localTaxis: Place[] = [
+  { name: "Protaxis Plus", town: "Saint-Seurin-de-Cadourne", phone: "+33 6 63 14 56 36", note: "Nearest to the château." },
+  { name: "Taxi La Fayette", town: "Pauillac", phone: "+33 6 87 06 90 67", note: "24 hours." },
+  { name: "Taxi Médoc Fabrice", town: "Saint-Sauveur", phone: "+33 6 37 86 85 17", note: "24 hours. Minivans. English-speaking." },
+  { name: "Les Transports de Fred", town: "Saint-Germain-d'Esteuil", phone: "+33 6 71 65 86 07", note: "Electric vehicle. Experienced with weddings and private events." },
+  { name: "Taxi Costa", town: "Lesparre-Médoc", phone: "+33 5 56 73 74 31" },
+  { name: "La Fleur des Vignes", town: "Saint-Laurent-Médoc", phone: "+33 6 65 95 79 35" },
+  { name: "Taxi Armijo Aquitaine", town: "Saint-Laurent-Médoc", phone: "+33 6 03 68 23 21", note: "24 hours." },
+  { name: "Les Taxis du Pays Médoc", town: "Moulis-en-Médoc", phone: "+33 7 89 02 63 46" },
+  { name: "Taxis Céléna Médoc", town: "Naujac-sur-Mer", phone: "+33 6 75 02 36 93" },
+];
+
+const shuttles: Place[] = [
+  { name: "AC VTC", town: "Castelnau-de-Médoc", phone: "+33 6 25 35 75 19", note: "24 hours. Group shuttles." },
+  { name: "Aquitaine Transport Liberté", town: "Sainte-Eulalie", phone: "+33 6 14 45 70 69", note: "VIP minibuses. English-speaking drivers." },
+  { name: "Médoc Évasion", town: "Le Haillan", phone: "+33 5 56 55 95 73", note: "Coaches." },
+  { name: "LCB Tourisme", town: "Latresne", phone: "+33 6 59 97 03 21", note: "Coaches and minibuses." },
+  { name: "Atout VTC Bordeaux", phone: "+33 6 67 07 03 63", note: "Mercedes van, eight seats." },
+  { name: "VTC Motion Bordeaux", town: "Mérignac", phone: "+33 7 67 20 47 97", note: "English-speaking. Familiar with the Médoc estates." },
+];
+
+const walkingDistance: Place[] = [
+  {
+    name: "La Maison d'Estournel", town: "Saint-Estèphe", phone: "+33 5 56 59 30 25", site: "lamaison-estournel.com",
+    distance: "1.5 km · 3 min",
+    note: "A country house in the middle of the vineyards, with a pool, a garden and a very good kitchen. The natural choice for those who want everything close.",
+  },
+  {
+    name: "Maison Jéroboam", town: "Saint-Estèphe", phone: "+33 5 56 09 68 84", site: "maisonjeroboam.com",
+    distance: "1.5 km · 3 min",
+    note: "A family-run guesthouse set among the vines of Phélan Ségur. Beautifully kept rooms, a pool, and a generous breakfast. Quiet in the truest sense.",
+  },
+];
+
+const northWest: Place[] = [
+  {
+    name: "Au Clocher", town: "Saint-Seurin-de-Cadourne", phone: "+33 6 10 86 06 90", site: "au-clocher-medoc.com",
+    distance: "6 min",
+    note: "A charming village house with a south-facing pool overlooking the vineyards, and hosts who look after you properly.",
+  },
+  {
+    name: "La Cadournaise", town: "Saint-Seurin-de-Cadourne", site: "cadournaise.fr",
+    distance: "9 min",
+    note: "Large, calm rooms, a beautiful garden, and a shared kitchen for those who like to make their own coffee.",
+  },
+  {
+    name: "L'Évidence", town: "Vertheuil", phone: "+33 6 20 81 90 54", site: "levidence-vertheuil.com",
+    distance: "8 min",
+    note: "Beside the abbey. A pool, a summer kitchen, and a house that can be booked in its entirety — ideal for a family or a group travelling together.",
+  },
+];
+
+const pauillac: Place[] = [
+  {
+    name: "COMO Cordeillan-Bages", town: "Pauillac", phone: "+33 5 56 59 24 24", site: "comohotels.com",
+    distance: "15 min",
+    note: "Relais & Châteaux, in the vines beside Lynch-Bages. The most polished address in the appellation.",
+  },
+  {
+    name: "Hôtel des Vignes et des Anges", town: "Pauillac", phone: "+33 5 56 59 01 20", site: "desvignesetdesanges.com",
+    distance: "14 min",
+    note: "Four stars on the quayside, facing the estuary. Well practised at looking after larger parties.",
+  },
+  {
+    name: "Le Cœur des Vignes", town: "Pauillac", phone: "+33 5 56 59 26 37", site: "coeurdesvignes.com",
+    distance: "16 min",
+    note: "A warm, immaculate guesthouse with a pool, within walking distance of several classified growths.",
+  },
+  {
+    name: "La Villa Nady", town: "Pauillac", phone: "+33 6 63 29 42 33", site: "villanady.fr",
+    distance: "14 min",
+    note: "A handsome townhouse in the centre of Pauillac, run with real elegance.",
+  },
+  {
+    name: "Chez Christophe", town: "Pauillac", phone: "+33 6 51 24 83 51",
+    note: "A whole floor to yourself, a pool, and a full kitchen. Good for two couples travelling together.",
+  },
+];
+
+const wholeHouses: Place[] = [
+  {
+    name: "Domaine Segondignac", town: "Saint-Germain-d'Esteuil", site: "domaine-segondignac.fr",
+    distance: "15 min",
+    note: "A private estate with several apartments and reception rooms, available exclusively.",
+  },
+  {
+    name: "Villa Pauill'Art", town: "Pauillac", phone: "+33 7 45 57 14 22",
+    note: "Independent self-catering apartments around a shared courtyard, with a sauna and bicycles.",
+  },
+  {
+    name: "Les Gîtes du Senguinous", town: "Lesparre-Médoc", phone: "+33 5 56 59 75 73",
+    distance: "20 min",
+    note: "Large-capacity cottages with a pool and gardens, close to the Atlantic beaches.",
+  },
+  {
+    name: "La Maison Reverdi", town: "Lamarque", phone: "+33 7 50 98 00 79",
+    note: "A nineteenth-century house with a striking pool, halfway between Margaux and Saint-Estèphe.",
+  },
+];
+
+const CHATEAU_MAP =
+  "https://www.google.com/maps?q=" +
+  encodeURIComponent("Château Laffitte Carcasset, 33180 Saint-Estèphe, France") +
+  "&output=embed";
+---
+
+<!-- ===== GETTING THERE ===== -->
+<div class="sigx" id="sigTransport" hidden>
+  <div class="sigx__panel" role="dialog" aria-modal="true" aria-labelledby="sigxTransportTitle">
+    <button class="sigx__close" type="button" data-close-dialog aria-label="Close">×</button>
+
+    <p class="sigx__kicker">Getting there</p>
+    <h2 class="sigx__title" id="sigxTransportTitle">Taxis &amp; Transfers</h2>
+    <p class="sigx__lead">
+      Saint-Estèphe sits within easy reach of Bordeaux. Below are the drivers and companies we work
+      with. We are glad to arrange any of them on your behalf — simply let us know your arrival
+      details.
+    </p>
+
+    <h3 class="sigx__section">Local taxis — Médoc</h3>
+    <ul class="sigx__list">
+      {localTaxis.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sigx__section">Group shuttles &amp; private cars</h3>
+    <p class="sigx__sub">From Bordeaux-Mérignac Airport and Bordeaux Saint-Jean Station.</p>
+    <ul class="sigx__list">
+      {shuttles.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <p class="sigx__foot">
+      Bordeaux-Mérignac Airport is approximately one hour from the château; Bordeaux Saint-Jean
+      Station, one hour and fifteen minutes.
+    </p>
+
+    <p class="sigx__cta">
+      <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Transport&body=Hello%2C%0A%0AI%20would%20like%20you%20to%20arrange%20a%20transfer%20for%20Signature%20No.%2001.%0A%0AArrival%20details%3A%20%0A%0AThank%20you.">
+        Ask us to arrange it →
+      </a>
+    </p>
+  </div>
+</div>
+
+<!-- ===== WHERE TO STAY ===== -->
+<div class="sigx" id="sigStay" hidden>
+  <div class="sigx__panel" role="dialog" aria-modal="true" aria-labelledby="sigxStayTitle">
+    <button class="sigx__close" type="button" data-close-dialog aria-label="Close">×</button>
+
+    <p class="sigx__kicker">Make it a weekend</p>
+    <h2 class="sigx__title" id="sigxStayTitle">Friday To Monday In The Médoc</h2>
+    <p class="sigx__lead">
+      Signature No. 01 falls on Saturday 26 September. The Médoc is at its best that week — harvest
+      is in full swing, the light is long and low, and the châteaux are alive. Many guests choose to
+      arrive on the Friday and leave on the Monday. Below are the houses we know and trust, all
+      within twenty minutes of the table.
+    </p>
+
+    <div class="sigx__map">
+      <iframe
+        src={CHATEAU_MAP}
+        title="Château Laffitte Carcasset on the map"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p class="sigx__sub">
+      Every house below opens in Maps when you tap its name.
+      <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Château Laffitte Carcasset, 33180 Saint-Estèphe, France")}`} target="_blank" rel="noopener">Open the château in Maps →</a>
+    </p>
+
+    <h3 class="sigx__section">Within walking distance of the vines</h3>
+    <ul class="sigx__list">
+      {walkingDistance.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.distance && <span class="sigx__dist">{p.distance}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.site && <a class="sigx__site" href={`https://${p.site}`} target="_blank" rel="noopener">{p.site}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sigx__section">A few minutes north &amp; west</h3>
+    <ul class="sigx__list">
+      {northWest.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.distance && <span class="sigx__dist">{p.distance}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.site && <a class="sigx__site" href={`https://${p.site}`} target="_blank" rel="noopener">{p.site}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sigx__section">Pauillac — fifteen minutes</h3>
+    <ul class="sigx__list">
+      {pauillac.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.distance && <span class="sigx__dist">{p.distance}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.site && <a class="sigx__site" href={`https://${p.site}`} target="_blank" rel="noopener">{p.site}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sigx__section">For groups taking a whole house</h3>
+    <ul class="sigx__list">
+      {wholeHouses.map((p) => (
+        <li>
+          <a class="sigx__name" href={mapsUrl(p)} target="_blank" rel="noopener">{p.name}</a>
+          {p.town && <span class="sigx__town">{p.town}</span>}
+          {p.distance && <span class="sigx__dist">{p.distance}</span>}
+          {p.phone && <a class="sigx__phone" href={telHref(p.phone)}>{p.phone}</a>}
+          {p.site && <a class="sigx__site" href={`https://${p.site}`} target="_blank" rel="noopener">{p.site}</a>}
+          {p.note && <span class="sigx__note">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sigx__section">A house of your own</h3>
+    <p class="sigx__foot">
+      For a private rental, search Saint-Estèphe, Saint-Seurin-de-Cadourne, Vertheuil, Cissac-Médoc
+      and Pauillac. Vignerons' houses with gardens and pools are plentiful, and September is late
+      enough in the season to find them.
+    </p>
+
+    <p class="sigx__cta">
+      <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20help%20me%20choose%20somewhere%20to%20stay%20for%20Signature%20No.%2001%3F%0A%0ADates%3A%20%0AParty%20size%3A%20%0A%0AThank%20you.">
+        Ask for a recommendation →
+      </a>
+    </p>
+  </div>
+</div>
+
+<style is:global>
+  /* ============ CONTENT DIALOG ============ */
+  .sigx {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    align-items: safe center;
+    justify-content: center;
+    padding: clamp(1rem, 4vh, 2.5rem) clamp(1rem, 4vw, 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: rgba(4, 3, 3, 0.88);
+    backdrop-filter: blur(7px);
+    animation: sigbFade 0.4s ease both;
+  }
+  .sigx[hidden] { display: none; }
+
+  .sigx__panel {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    background: #12100e;
+    border: 1px solid rgba(240, 233, 221, 0.22);
+    color: var(--sig-cream);
+    animation: sigbRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .sigx__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.65rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: rgba(240, 233, 221, 0.55);
+    transition: color 0.3s ease;
+  }
+  .sigx__close:hover { color: var(--sig-cream); }
+
+  .sigx__kicker {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 0.75rem;
+  }
+  .sigx__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.15;
+    margin: 0 0 0.9rem;
+  }
+  .sigx__lead {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0 0 1.75rem;
+  }
+
+  .sigx__section {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 2rem 0 0.35rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.16);
+  }
+  .sigx__sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0.7rem 0 0;
+  }
+  .sigx__sub a {
+    font-style: normal;
+    color: rgba(240, 233, 221, 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.3);
+    white-space: nowrap;
+  }
+
+  .sigx__list { list-style: none; margin: 0; padding: 0; }
+  .sigx__list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.09);
+  }
+  .sigx__list li:last-child { border-bottom: none; }
+
+  .sigx__name {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.08rem;
+    color: var(--sig-cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.3);
+    transition: border-color 0.3s ease;
+  }
+  .sigx__name:hover { border-color: var(--sig-cream); }
+
+  /* Town, distance and phone read as one quiet line under the name. */
+  .sigx__town, .sigx__dist, .sigx__phone, .sigx__site {
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    color: rgba(240, 233, 221, 0.55);
+    margin-right: 0.9rem;
+  }
+  .sigx__town::before, .sigx__dist::before { content: "· "; }
+  .sigx__phone, .sigx__site {
+    color: rgba(240, 233, 221, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.25);
+  }
+  .sigx__phone:hover, .sigx__site:hover { border-color: var(--sig-cream); }
+  .sigx__town, .sigx__dist { white-space: nowrap; }
+
+  .sigx__note {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.72);
+  }
+
+  .sigx__map {
+    margin: 1.5rem 0 0;
+    border: 1px solid rgba(240, 233, 221, 0.18);
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  .sigx__map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    /* Softened, not inverted — inverting would recolour Google's own logo. */
+    filter: saturate(0.8) brightness(0.88) contrast(1.05);
+  }
+
+  .sigx__foot {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(240, 233, 221, 0.68);
+    margin: 1rem 0 0;
+  }
+
+  .sigx__cta { margin: 2rem 0 0; }
+  .sigx__cta a {
+    display: inline-block;
+    padding: 1rem 1.6rem;
+    border: 1px solid rgba(240, 233, 221, 0.45);
+    color: var(--sig-cream);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: border-color 0.35s ease, background 0.35s ease, letter-spacing 0.5s ease;
+  }
+  .sigx__cta a:hover {
+    border-color: rgba(240, 233, 221, 0.9);
+    background: rgba(240, 233, 221, 0.07);
+    letter-spacing: 0.36em;
+  }
+
+  @media (max-width: 600px) {
+    .sigx { padding: 0; align-items: stretch; }
+    .sigx__panel { max-width: none; border: none; padding: 3rem 1.35rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+    .sigx__list li { padding: 0.9rem 0; }
+    .sigx__name { font-size: 1.05rem; }
+    .sigx__note { font-size: 0.95rem; }
+    .sigx__map { aspect-ratio: 4 / 3; }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SigInteractions from "../components/SigInteractions.astro";
+import SigLogistics from "../components/SigLogistics.astro";
 import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
@@ -295,15 +296,15 @@ const description =
           <div class="sigt-tile" data-reveal style="--reveal-delay:0.3s">
             <p class="tl-eyebrow">Getting there</p>
             <p class="tl-title">Taxis &amp; Transfers</p>
-            <p class="tl-sub">Saint-Estèphe sits within easy reach of Bordeaux. We are glad to arrange a taxi or private transfer to and from the château. Simply let us know your arrival details.</p>
-            <a class="tl-cta" href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Transport&body=Hello%2C%0A%0AI%20would%20like%20information%20about%20taxis%2Ftransfers%20for%20Signature%20No.%2001.%0A%0AArrival%20details%3A%20%0A%0AThank%20you.">Ask about transport →</a>
+            <p class="tl-sub">Saint-Estèphe sits within easy reach of Bordeaux. Fifteen drivers and shuttle companies we work with, from local taxis to coaches from the airport.</p>
+            <button class="tl-cta" type="button" data-open-dialog="sigTransport">See the drivers →</button>
           </div>
 
           <div class="sigt-tile" data-reveal style="--reveal-delay:0.4s">
-            <p class="tl-eyebrow">Nearby</p>
-            <p class="tl-title">Accommodation</p>
-            <p class="tl-sub">For guests preferring to stay off-site, a number of hotels and maisons d'hôtes can be found in and around Saint-Estèphe and Pauillac. Write to us for our recommendations.</p>
-            <a class="tl-cta" href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20send%20me%20accommodation%20recommendations%20near%20the%20ch%C3%A2teau%3F%0A%0AThank%20you.">Ask for recommendations →</a>
+            <p class="tl-eyebrow">Make it a weekend</p>
+            <p class="tl-title">Where To Stay</p>
+            <p class="tl-sub">Harvest week in the Médoc. Fourteen houses we know and trust, from the vines next door to whole estates for a group — all within twenty minutes.</p>
+            <button class="tl-cta" type="button" data-open-dialog="sigStay">See where to stay →</button>
           </div>
 
           <div class="sigt-tile sigt-tile--form" data-reveal style="--reveal-delay:0.5s">
@@ -339,6 +340,8 @@ const description =
     <button class="sigt-arrow sigt-arrow--next" type="button" data-deck-next aria-label="Next">→</button>
 
   </main>
+
+  <SigLogistics />
 
   <!-- ===== BOOKING DIALOG ===== -->
   <!-- Outside .sigt: that container is fixed with overflow:hidden and would clip it. -->
@@ -1955,7 +1958,7 @@ const description =
     touchX = e.touches[0].clientX;
     touchY = e.touches[0].clientY;
     // Scrolling the tab strip or the booking dialog must not flip the panel
-    touchInTabs = !!(e.target as HTMLElement).closest?.(".sigt__tabs, .sigb");
+    touchInTabs = !!(e.target as HTMLElement).closest?.(".sigt__tabs, .sigb, .sigx");
   }, { passive: true });
   window.addEventListener("touchend", (e) => {
     if (touchInTabs || bookingIsOpen()) return;
@@ -1987,8 +1990,26 @@ const description =
   const bookingForm = document.getElementById("sigbForm") as HTMLFormElement | null;
 
   function bookingIsOpen(): boolean {
-    return !!bookingEl && !bookingEl.hidden;
+    return !!document.querySelector<HTMLElement>(".sigb:not([hidden]), .sigx:not([hidden])");
   }
+
+  // ===== Content dialogs (drivers, where to stay) =====
+  document.querySelectorAll<HTMLElement>("[data-open-dialog]").forEach((trigger) =>
+    trigger.addEventListener("click", () => {
+      const target = document.getElementById(trigger.dataset.openDialog!);
+      if (!target) return;
+      target.hidden = false;
+      target.scrollTop = 0;
+    }),
+  );
+
+  document.querySelectorAll<HTMLElement>(".sigx").forEach((dialog) => {
+    dialog.addEventListener("click", (e) => {
+      // The veil closes; the panel on it does not.
+      const t = e.target as HTMLElement;
+      if (t === dialog || t.closest("[data-close-dialog]")) dialog.hidden = true;
+    });
+  });
 
   function showBookingErrors(errors: Record<string, string>) {
     bookingEl?.querySelectorAll<HTMLElement>("[data-err]").forEach((el) => {
@@ -2086,6 +2107,7 @@ const description =
     if (e.key === "Escape" && bookingIsOpen()) {
       e.stopPropagation();
       closeBooking();
+      document.querySelectorAll<HTMLElement>(".sigx:not([hidden])").forEach((d) => { d.hidden = true; });
     }
   }, true);
 
