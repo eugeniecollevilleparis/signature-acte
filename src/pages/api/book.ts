@@ -39,15 +39,20 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const confirmUrl = `${siteUrl()}/api/ticket?t=${encodeURIComponent(encodeToken(booking))}`;
 
+    // TICKET_ON_BOOKING trades the payment check for zero manual work: the
+    // ticket goes out on submission, so nobody has to click for each guest.
+    // The ticket email then doubles as the welcome — sending both would just
+    // put two emails in the guest's inbox at once.
+    const immediate = env("TICKET_ON_BOOKING") === "true";
+
     // The alert to signatureacte@gmail.com is the one that must not be lost —
     // it is the only record of the booking. Send it first.
-    await sendAdminNewBooking(booking, confirmUrl);
-    await sendBookingReceived(booking);
+    await sendAdminNewBooking(booking, confirmUrl, immediate);
 
-    // Opt-in escape hatch: issue the ticket without waiting for the payment
-    // to be checked. Off by default — see README.
-    if (env("TICKET_ON_BOOKING") === "true") {
-      await sendTicket(booking);
+    if (immediate) {
+      await sendTicket(booking, true);
+    } else {
+      await sendBookingReceived(booking);
     }
 
     return json({ ok: true, ref: booking.ref, checkoutUrl: CHECKOUT_URL });
