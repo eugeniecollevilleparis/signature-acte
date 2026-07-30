@@ -15,7 +15,7 @@ const {
 
 // WhatsApp, iMessage and LinkedIn all refuse relative image paths in a link
 // preview, so these are resolved against `site` in astro.config.mjs.
-const ogImage = new URL("/og-signature.jpg", Astro.site).href;
+const ogImage = new URL("/og-menu.jpg", Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
@@ -46,7 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Château Laffitte Carcasset at dusk — SIGNATURE No. 01" />
+    <meta property="og:image:alt" content="SIGNATURE No. 01 — Château Laffitte Carcasset, 26-27 September 2026" />
     <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_GB"} />
 
     <!-- Twitter -->
