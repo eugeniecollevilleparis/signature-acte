@@ -106,8 +106,19 @@ diffusion, filtrer les emails dont l'objet commence par `Newsletter —`.
 - **Aucun décompte des places.** Rien n'empêche de vendre au-delà de la
   capacité.
 - **Les CGV comportent des mentions à compléter**, signalées en surbrillance
-  sur `/conditions-generales` : identité juridique de l'organisateur et
-  médiateur de la consommation. Elles n'ont pas été relues par un juriste.
+  sur `/conditions-generales` : nom et adresse professionnelle de
+  l'organisateur (sole trader enregistré auprès de HMRC). Elles n'ont pas été
+  relues par un juriste.
+- **Aucun dispositif de médiation de la consommation n'est désigné.**
+  L'obligation de l'article L.612-1 du Code de la consommation vise les
+  professionnels établis en France ; la position d'un organisateur établi au
+  Royaume-Uni vendant à des consommateurs français est discutable. Adhérer
+  volontairement à un organisme agréé (CM2C, Medicys, CNPM) supprimerait le
+  doute.
+- **La TVA française sur les droits d'accès n'est pas traitée.** Pour un
+  événement se déroulant en France, la TVA est due en France quel que soit le
+  lieu d'établissement de l'organisateur, sans seuil de franchise pour un
+  prestataire non établi (art. 259 A 5° bis du CGI).
 
 ---
 
