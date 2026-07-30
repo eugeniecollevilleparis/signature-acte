@@ -328,7 +328,7 @@ const description =
               <input type="email" name="email" required placeholder="your@email.com" aria-label="Your email" autocomplete="email">
               <button type="submit">Subscribe</button>
             </form>
-            <p class="sigt-news__ok" id="sigNewsOk" hidden>Thank you. An email opened. Just press send.</p>
+            <p class="sigt-news__ok" id="sigNewsOk" hidden>Thank you. Check your inbox — a welcome note is on its way.</p>
           </div>
         </div>
 
@@ -1705,6 +1705,10 @@ const description =
     .sigt-mani { margin: 0 auto auto; }
     .sigt-creators { grid-template-columns: 1fr; gap: 1rem; }
     .sigt-contact { grid-template-columns: 1fr; gap: 1rem; }
+    /* Seven tiles stacked in one column pushed the newsletter roughly three
+       screens below the fold — the Subscribe button was unreachable in
+       practice. On a phone it comes first, right under the heading. */
+    .sigt-tile--form { order: -1; border-color: rgba(240, 233, 221, 0.32); }
     .sigt-arrow { display: none; }
   }
 
