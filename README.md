@@ -142,6 +142,35 @@ diffusion, filtrer les emails dont l'objet commence par `Newsletter —`.
 
 ---
 
+## À finir — repris là où on s'est arrêté
+
+Par ordre d'urgence.
+
+1. **Vérifier que l'argent arrive vraiment.** Le lien de paiement
+   `checkout.revolut.com/pay/...` est un lien de type *Revolut Merchant*, mais
+   le compte Revolut Business correspondant n'est pas confirmé. Un paiement de
+   test n'a pas été reçu. **Ne pas ouvrir la vente tant que ce n'est pas
+   élucidé** — des clients paieraient dans le vide.
+2. **Remplacer le mot de passe d'application Google.** L'actuel a circulé en
+   clair dans une conversation. `myaccount.google.com/apppasswords` → supprimer
+   → recréer → `SMTP_PASS` dans Vercel → redéployer.
+3. **Compléter les CGV.** Deux mentions manquent, surlignées sur
+   `/conditions-generales` : nom complet et adresse professionnelle au
+   Royaume-Uni de l'organisateur (sole trader HMRC).
+4. **Basculer `TICKET_ON_BOOKING` sur `true`** si l'envoi automatique du billet
+   est bien ce qui est voulu (décidé, pas encore appliqué au moment de
+   l'écriture).
+5. **Billet vins à 50 €.** Annoncé sur le site et dans les CGV, mais aucun lien
+   de paiement n'existe. À créer, puis à brancher.
+6. **Webhook Revolut Merchant API.** Seule façon d'envoyer le billet uniquement
+   après encaissement réel. À faire dès qu'une clé API est disponible.
+7. **Majuscules automatiques sur les noms.** Saisis en minuscules, ils
+   s'affichent tels quels sur le billet. Correctif proposé, non appliqué.
+8. **Médiateur de la consommation et TVA française** — voir la section
+   ci-dessous.
+
+---
+
 ## Développement local
 
 ```
