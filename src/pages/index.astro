@@ -13,7 +13,7 @@ const description =
   <SigInteractions />
 
   <!-- ===== PASSCODE GATE ===== -->
-  <div id="sigGate" class="sig-gate" data-code="carcasset" aria-hidden="false">
+  <div id="sigGate" class="sig-gate" data-code="carcasset26" aria-hidden="false">
     <div class="sig-gate__bg sig-gate__bg--video">
       <video autoplay muted loop playsinline preload="auto" poster="/videos/signature/seal-poster.jpg">
         <source src="/videos/signature/seal.mp4" type="video/mp4">
@@ -388,9 +388,11 @@ const description =
             <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
           </div>
 
+          <!-- Naming the no-refund rule inside the consent itself, rather than
+               burying it in the linked terms, is what makes it stick. -->
           <label class="sigb__check">
             <input type="checkbox" name="terms" required>
-            <span>I have read and accept the <a href="/conditions-generales" target="_blank" rel="noopener">terms of sale</a>.</span>
+            <span>I have read and accept the <a href="/conditions-generales" target="_blank" rel="noopener">terms of sale</a>, and I understand that my booking is <strong>final and non-refundable</strong>.</span>
             <em class="sigb__err" data-err="terms"></em>
           </label>
 

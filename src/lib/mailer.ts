@@ -196,6 +196,7 @@ export async function sendAdminNewBooking(booking: Booking, confirmUrl: string):
       ${row("Téléphone", `<a href="tel:${esc(booking.phone.replace(/[^0-9+]/g, ""))}" style="color:#f0e9dd;">${esc(booking.phone)}</a>`)}
       ${row("Référence", esc(booking.ref))}
       ${row("Montant dû", esc(TICKET_PRICE_FR))}
+      ${row("CGV", `Acceptées le ${new Date(booking.createdAt * 1000).toLocaleString("fr-FR", { timeZone: "Europe/Paris" })} — réservation ferme et non remboursable`)}
     </table>
     <p style="${p}">Cette personne a été redirigée vers le paiement Revolut. <strong>Elle n'a pas encore reçu son billet.</strong></p>
     <p style="${p}">Vérifiez que le règlement est bien arrivé sur le compte, puis envoyez le billet :</p>
@@ -211,7 +212,8 @@ export async function sendAdminNewBooking(booking: Booking, confirmUrl: string):
     text:
       `Nouvelle réservation\n\n` +
       `Nom : ${fullName(booking)}\nEmail : ${booking.email}\nTéléphone : ${booking.phone}\n` +
-      `Référence : ${booking.ref}\nMontant dû : ${TICKET_PRICE_FR}\n\n` +
+      `Référence : ${booking.ref}\nMontant dû : ${TICKET_PRICE_FR}\n` +
+      `CGV acceptées (réservation ferme et non remboursable)\n\n` +
       `Le billet n'a PAS encore été envoyé. Après vérification du paiement Revolut :\n${confirmUrl}`,
   });
 }
