@@ -248,7 +248,39 @@ const CHATEAU_MAP =
       ))}
     </ul>
 
-    <h3 class="sigx__section">For groups taking a whole house</h3>
+    <h3 class="sigx__section">Coming as a group?</h3>
+    <p class="sigx__foot">
+      Whole houses and private estates, for those staying several days together, have a panel of
+      their own — <button class="sigx__inline" type="button" data-open-dialog="sigHouses">take a house →</button>
+    </p>
+
+    <p class="sigx__cta">
+      <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20help%20me%20choose%20somewhere%20to%20stay%20for%20Signature%20No.%2001%3F%0A%0ADates%3A%20%0AParty%20size%3A%20%0A%0AThank%20you.">
+        Ask for a recommendation →
+      </a>
+    </p>
+  </div>
+</div>
+
+<!-- ===== TAKE A HOUSE ===== -->
+<div class="sigx" id="sigHouses" hidden>
+  <div class="sigx__panel" role="dialog" aria-modal="true" aria-labelledby="sigxHousesTitle">
+    <button class="sigx__close" type="button" data-close-dialog aria-label="Close">×</button>
+
+    <p class="sigx__kicker">Come together, stay together</p>
+    <h2 class="sigx__title" id="sigxHousesTitle">Take A House For A Few Days</h2>
+    <p class="sigx__lead">
+      The best way to do this weekend is not to leave after dessert. Take a house with the people
+      you are coming with, arrive on the Friday, and let the Médoc do the rest — a long lunch in the
+      vines, an afternoon by the pool, the dinner on Saturday, and nobody driving home at three in
+      the morning.
+    </p>
+    <p class="sigx__lead">
+      The houses below take groups. Several can be booked in their entirety, most have a pool and a
+      kitchen, and all are within twenty minutes of the table.
+    </p>
+
+    <h3 class="sigx__section">Houses and estates for a group</h3>
     <ul class="sigx__list">
       {wholeHouses.map((p) => (
         <li>
@@ -262,16 +294,30 @@ const CHATEAU_MAP =
       ))}
     </ul>
 
-    <h3 class="sigx__section">A house of your own</h3>
+    <h3 class="sigx__section">Bookable in its entirety</h3>
     <p class="sigx__foot">
-      For a private rental, search Saint-Estèphe, Saint-Seurin-de-Cadourne, Vertheuil, Cissac-Médoc
-      and Pauillac. Vignerons' houses with gardens and pools are plentiful, and September is late
-      enough in the season to find them.
+      <a class="sigx__name" href={mapsUrl(northWest[2])} target="_blank" rel="noopener">L'Évidence</a>
+      at Vertheuil, eight minutes away, also takes a whole party — a pool, a summer kitchen, and the
+      abbey next door.
+    </p>
+
+    <h3 class="sigx__section">While you are here</h3>
+    <p class="sigx__foot">
+      A tasting of the estate's wines can be arranged for your group during the weekend, separately
+      from the dinner. Tell us how many you are and when suits, and we will set it up.
+    </p>
+
+    <h3 class="sigx__section">Finding your own</h3>
+    <p class="sigx__foot">
+      For a private rental, search <strong>Saint-Estèphe</strong>,
+      <strong>Saint-Seurin-de-Cadourne</strong>, <strong>Vertheuil</strong>,
+      <strong>Cissac-Médoc</strong> and <strong>Pauillac</strong>. Vignerons' houses with gardens and
+      pools are plentiful, and September is late enough in the season to find them.
     </p>
 
     <p class="sigx__cta">
-      <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20Accommodation&body=Hello%2C%0A%0ACould%20you%20help%20me%20choose%20somewhere%20to%20stay%20for%20Signature%20No.%2001%3F%0A%0ADates%3A%20%0AParty%20size%3A%20%0A%0AThank%20you.">
-        Ask for a recommendation →
+      <a href="mailto:signatureacte@gmail.com?subject=SIGNATURE%20No.%2001%20%E2%80%94%20A%20house%20for%20our%20group&body=Hello%2C%0A%0AWe%20are%20a%20group%20coming%20to%20Signature%20No.%2001.%0A%0AWe%20are%20interested%20in%3A%20%20(a%20house%20%2F%20a%20wine%20tasting%20%2F%20both)%0ANumber%20of%20guests%3A%20%0ANights%3A%20%0A%0AThank%20you.">
+        Ask about a house or a tasting →
       </a>
     </p>
   </div>
@@ -436,6 +482,19 @@ const CHATEAU_MAP =
     color: rgba(240, 233, 221, 0.68);
     margin: 1rem 0 0;
   }
+
+  .sigx__inline {
+    font-family: var(--font-display);
+    font-size: inherit;
+    color: var(--sig-cream);
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.4);
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  .sigx__inline:hover { border-color: var(--sig-cream); }
 
   .sigx__cta { margin: 2rem 0 0; }
   .sigx__cta a {
