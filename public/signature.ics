@@ -3,13 +3,30 @@ VERSION:2.0
 PRODID:-//SIGNATURE//No.01//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Europe/Paris
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
 UID:signature-no01-2026@signatureacte.com
-DTSTAMP:20260730T200000Z
-DTSTART:20260926T160000Z
-DTEND:20260927T130000Z
+DTSTAMP:20260730T213000Z
+DTSTART;TZID=Europe/Paris:20260926T180000
+DTEND;TZID=Europe/Paris:20260927T150000
 SUMMARY:SIGNATURE — No. 01
-DESCRIPTION:An evening where architecture\, light\, sound\, gastronomy\, conversation and performance are conceived as one.\n\nChâteau Laffitte Carcasset · Saint-Estèphe · Bordeaux\n\nSaturday from 6 PM — arrival\, canapés\, dinner\, then the night.\nSunday — brunch from noon\, poolside lounge\, curtain close at 3 PM.\n\nMore: https://signatureacte.com
+DESCRIPTION:An evening where architecture\, light\, sound\, gastronomy\, conversation and performance are conceived as one.\n\nChâteau Laffitte Carcasset · Saint-Estèphe · Bordeaux\n\nAll times are Paris time (CEST).\nSaturday from 6 PM — arrival\, canapés\, dinner\, then the night.\nSunday — brunch from noon\, poolside lounge\, curtain close at 3 PM.\n\nMore: https://signatureacte.com
 LOCATION:Château Laffitte Carcasset, 33180 Saint-Estèphe, France
 URL:https://signatureacte.com
 STATUS:CONFIRMED
