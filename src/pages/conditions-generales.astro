@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TICKET_PRICE_FR } from "../lib/event";
+import { TICKET_PRICE_FR, WINE_PRICE_FR } from "../lib/event";
 
 const title = "Conditions générales de vente · SIGNATURE No. 01";
 const description =
@@ -47,13 +47,13 @@ const updated = "30 juillet 2026";
         <p>
           <em>SIGNATURE No. 01</em> se tient les 26 et 27 septembre 2026, à partir de 18h00, au
           Château Laffitte Carcasset, 33180 Saint-Estèphe. L'Événement comprend l'accueil, une
-          séquence de canapés, un dîner assis avec accords mets et vins, une programmation musicale
-          nocturne et des performances artistiques.
+          séquence de canapés, un dîner assis sous forme de menu dégustation, une programmation
+          musicale nocturne et des performances artistiques.
         </p>
         <p>
-          Les séquences du lendemain présentées sur le site, ainsi que la dégustation des vins du
-          domaine, ne sont pas comprises dans le billet et font l'objet d'une billetterie distincte,
-          dans les conditions de l'article 5.
+          Les accords mets et vins présentés sur le site, ainsi que les séquences du lendemain, ne
+          sont pas compris dans le billet d'entrée et font l'objet d'une billetterie distincte, dans
+          les conditions de l'article 5.
         </p>
         <p>
           Le déroulé, les horaires, le menu, les vins et les intervenants sont donnés à titre
@@ -84,15 +84,24 @@ const updated = "30 juillet 2026";
       <section>
         <h2>5. Prix et paiement</h2>
         <p>
-          Le prix de la place est de <strong>{TICKET_PRICE_FR}</strong>. Il comprend, pour une
-          personne : l'entrée, le dîner sous forme de menu dégustation ainsi que les accords mets et
-          vins qui l'accompagnent, la programmation musicale et les performances artistiques de la
-          soirée.
+          Le prix du billet d'entrée est de <strong>{TICKET_PRICE_FR}</strong>. Il comprend, pour une
+          personne : l'entrée, le dîner sous forme de menu dégustation, la programmation musicale et
+          les performances artistiques de la soirée.
         </p>
         <p>
-          <strong>Ne sont pas compris dans ce prix</strong> : les consommations au bar après le
-          dîner, la dégustation des vins du domaine, et le brunch du lendemain. Ces deux dernières
-          prestations font l'objet d'une billetterie distincte, communiquée par newsletter.
+          <strong>Ne sont pas compris dans ce prix</strong> :
+        </p>
+        <p>
+          — les <strong>accords mets et vins</strong> du domaine, qui font l'objet d'un billet
+          distinct au prix de <strong>{WINE_PRICE_FR}</strong> ;<br>
+          — le <strong>brunch</strong> du lendemain, qui fait également l'objet d'un billet
+          distinct ;<br>
+          — les <strong>consommations au bar</strong> après le dîner.
+        </p>
+        <p>
+          Les billets distincts mentionnés ci-dessus sont proposés ultérieurement par newsletter, sous
+          réserve de disponibilité. Les vins et cépages annoncés sur le site le sont à titre indicatif
+          et peuvent être remplacés par des vins équivalents.
         </p>
         <p>
           Le prix applicable est celui affiché au moment de la réservation, exprimé en euros, toutes

@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 import { fullName, qrPayload, type Booking } from "./booking";
 import { env } from "./env";
-import { TICKET_PRICE, TICKET_PRICE_FR } from "./event";
+import { TICKET_PRICE, TICKET_PRICE_FR, WINE_PRICE } from "./event";
 
 // Guest-facing copy is English, like the site. Only the emails to Eugénie and
 // Tanguy — and the terms of sale, a French legal document — are in French.
@@ -142,6 +142,7 @@ export async function sendTicket(booking: Booking): Promise<void> {
     <p style="${label}">Where</p>
     <p style="margin:0 0 22px;font-family:Georgia,serif;font-size:16px;color:rgba(240,233,221,0.86);">${esc(EVENT_VENUE)}</p>
     <p style="${p}">This ticket is personal. It admits one guest and may only be passed on after letting us know.</p>
+    <p style="${p}">It covers admission, the tasting menu, the DJ set and the performances. The estate wine pairing (${esc(WINE_PRICE)}) and the brunch are separate tickets — we will write to you about both.</p>
     <p style="${p}">By reserving, you accepted our <a href="${siteUrl()}/conditions-generales" style="color:#f0e9dd;">terms of sale</a>. Do read them again before you travel — they set out the cancellation terms.</p>`);
 
   await transport().sendMail({
@@ -154,6 +155,7 @@ export async function sendTicket(booking: Booking): Promise<void> {
       `Ticket ${booking.ref} in the name of ${fullName(booking)}.\n` +
       `${EVENT_DATES}, from 6 PM\n${EVENT_VENUE}\n\n` +
       `The QR code is in the HTML version of this email.\n\n` +
+      `Covers admission, the tasting menu, the DJ set and the performances. The estate wine pairing (${WINE_PRICE}) and the brunch are separate tickets.\n\n` +
       `Terms of sale: ${siteUrl()}/conditions-generales`,
     attachments: [{ filename: `ticket-${booking.ref}.png`, content: png, cid: "ticket-qr" }],
   });

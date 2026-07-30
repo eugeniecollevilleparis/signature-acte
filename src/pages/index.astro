@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SigInteractions from "../components/SigInteractions.astro";
-import { TICKET_PRICE } from "../lib/event";
+import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
 const description =
@@ -100,6 +100,7 @@ const description =
           <p class="sigt-head__kicker">An evening · By invitation</p>
           <h2 class="sigt-head__title">The&nbsp;Menu</h2>
           <p class="sigt-head__sub"><em>A Médoc Composition</em></p>
+          <p class="sigt-head__note">The pairings below are a separate ticket — {WINE_PRICE}, offered by newsletter.</p>
         </header>
 
         <div class="sigt-menu" data-reveal style="--reveal-delay:0.15s">
@@ -180,6 +181,7 @@ const description =
             <p class="ab-kicker">Act III &nbsp;·&nbsp; 20:30</p>
             <p class="ab-title">Dinner</p>
             <p class="ab-line"><em>A seasonal gathering, course by course, wine by wine, chosen by Pierre Maussire.</em></p>
+            <p class="ab-note">The wine pairing is a separate ticket — {WINE_PRICE}, offered by newsletter.</p>
           </div>
           <div class="sigt-actblock">
             <p class="ab-kicker">Act IV &nbsp;·&nbsp; From 22:00</p>
@@ -361,9 +363,13 @@ const description =
 
         <dl class="sigb__incl">
           <dt>Included</dt>
-          <dd>Admission, the tasting menu with its wine pairings, the DJ set and the performances.</dd>
+          <dd>Admission, the tasting menu, the DJ set and the performances.</dd>
           <dt>Not included</dt>
-          <dd>Drinks at the bar after dinner. The estate wine tasting and the brunch are ticketed separately — details follow by newsletter.</dd>
+          <dd>
+            The estate wine pairing, a separate ticket at {WINE_PRICE}. The brunch is also ticketed
+            separately. Both are offered by newsletter. Drinks at the bar after dinner are not
+            included.
+          </dd>
         </dl>
 
         <form class="sigb__form" id="sigbForm" novalidate>
@@ -752,6 +758,15 @@ const description =
     margin: 0;
   }
   .sigt-head__sub em { font-style: italic; }
+  .sigt-head__note {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: rgba(240, 233, 221, 0.62);
+    margin: 0.6rem 0 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
+  }
 
   /* ============ MANIFESTO TAB ============ */
   .sigt-panel__inner--split {
