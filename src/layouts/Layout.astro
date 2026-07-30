@@ -67,33 +67,44 @@ const {
     <script>
       import Lenis from "lenis";
 
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
+      // The tabbed experience locks the page (body overflow:hidden) and scrolls
+      // inside its own panels and dialog. Lenis would swallow every wheel event
+      // to drive a page scroll that cannot move, leaving those inner areas
+      // unscrollable by mouse. Only run it on pages that actually scroll.
+      const isLockedPage = !!document.querySelector(".sigt");
+
+      const lenis = isLockedPage
+        ? null
+        : new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+          });
 
       // Expose globally so other components (e.g. back-to-top) can use it
       (window as any).__lenis = lenis;
 
-      function raf(time: number) {
-        lenis.raf(time);
+      if (lenis) {
+        const smooth = lenis;
+        const raf = (time: number) => {
+          smooth.raf(time);
+          requestAnimationFrame(raf);
+        };
         requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
 
-      // Anchor links — use Lenis for smooth scroll to anchors
-      document.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement;
-        const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
-        if (!anchor) return;
-        const id = anchor.getAttribute("href");
-        if (!id || id === "#") return;
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 });
-      });
+        // Anchor links — use Lenis for smooth scroll to anchors
+        document.addEventListener("click", (e) => {
+          const target = e.target as HTMLElement;
+          const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
+          if (!anchor) return;
+          const id = anchor.getAttribute("href");
+          if (!id || id === "#") return;
+          const el = document.querySelector(id);
+          if (!el) return;
+          e.preventDefault();
+          smooth.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 });
+        });
+      }
     </script>
 
     <!-- Reveal-on-scroll (re-triggers every time element enters/leaves viewport) -->

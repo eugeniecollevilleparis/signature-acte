@@ -343,8 +343,6 @@ const description =
   <!-- ===== BOOKING DIALOG ===== -->
   <!-- Outside .sigt: that container is fixed with overflow:hidden and would clip it. -->
   <div class="sigb" id="sigBooking" hidden>
-    <div class="sigb__scrim" data-close-booking></div>
-
     <div class="sigb__panel" role="dialog" aria-modal="true" aria-labelledby="sigbTitle">
       <button class="sigb__close" type="button" data-close-booking aria-label="Close">×</button>
 
@@ -1425,31 +1423,32 @@ const description =
     z-index: 9000;
     display: flex;
     align-items: center;
+    /* `safe` keeps the top reachable when the dialog is taller than the screen */
+    align-items: safe center;
     justify-content: center;
     padding: clamp(1rem, 4vh, 2.5rem) clamp(1rem, 4vw, 2rem);
-  }
-  .sigb[hidden] { display: none; }
-  .sigb__scrim {
-    position: absolute;
-    inset: 0;
+    /* The overlay scrolls, not the panel — otherwise the wheel only works while
+       the pointer happens to be over a 30rem-wide box in the middle of the screen. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* The veil is the overlay's own background rather than a child element. A
+       child covering the viewport would sit outside the scroll chain, and the
+       wheel over it would scroll nothing. */
     background: rgba(4, 3, 3, 0.86);
     backdrop-filter: blur(7px);
     animation: sigbFade 0.4s ease both;
   }
+  .sigb[hidden] { display: none; }
   .sigb__panel {
     position: relative;
     width: 100%;
     max-width: 30rem;
-    max-height: 100%;
-    overflow-y: auto;
-    scrollbar-width: none;
     padding: clamp(1.75rem, 4vw, 2.5rem);
     background: #12100e;
     border: 1px solid rgba(240, 233, 221, 0.22);
     color: var(--sig-cream);
     animation: sigbRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .sigb__panel::-webkit-scrollbar { display: none; }
   @keyframes sigbFade { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sigbRise {
     from { opacity: 0; transform: translateY(1.25rem) scale(0.985); }
@@ -1767,7 +1766,7 @@ const description =
 
     /* Booking dialog */
     .sigb { padding: 0; align-items: stretch; }
-    .sigb__panel { max-width: none; min-height: 100%; border: none; padding: 3rem 1.35rem calc(2rem + env(safe-area-inset-bottom, 0px)); }
+    .sigb__panel { max-width: none; border: none; padding: 3rem 1.35rem calc(2rem + env(safe-area-inset-bottom, 0px)); }
     .sigb__row { grid-template-columns: 1fr; }
     .sigb__field > span { font-size: 0.6rem; letter-spacing: 0.22em; }
     .sigb__check { font-size: 0.95rem; }
@@ -2010,6 +2009,11 @@ const description =
   document.querySelectorAll<HTMLElement>("[data-close-booking]").forEach((el) =>
     el.addEventListener("click", closeBooking),
   );
+
+  // Clicking the veil closes — but only the veil itself, never the panel on it.
+  bookingEl?.addEventListener("click", (e) => {
+    if (e.target === bookingEl) closeBooking();
+  });
 
   if (bookingForm && bookingEl) {
     bookingForm.addEventListener("submit", async (e) => {
