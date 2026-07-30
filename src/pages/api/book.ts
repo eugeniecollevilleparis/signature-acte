@@ -7,7 +7,7 @@ export const prerender = false;
 
 const CHECKOUT_URL =
   env("REVOLUT_CHECKOUT_URL") ||
-  "https://checkout.revolut.com/pay/ede332d8-5e0e-43a9-8c2d-0cc13e60114c";
+  "https://checkout.revolut.com/pay/17f7aafa-d660-4d70-a061-4509a5d6298d";
 
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
