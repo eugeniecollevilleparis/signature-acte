@@ -82,6 +82,26 @@ Le jour où un **compte Revolut Merchant API** sera disponible, son webhook
 pourra appeler `/api/ticket` automatiquement à l'encaissement, et l'étape
 manuelle disparaîtra.
 
+### Fichier Excel des réservations
+
+Chaque billet confirmé est enregistré dans un **Vercel Blob privé**, un fichier
+par réservation (`bookings/<référence>.json`). Un fichier par réservation, et
+non une liste unique : deux réservations simultanées se marcheraient dessus.
+
+`GET /api/export?k=<clé>` renvoie un vrai `.xlsx` — date du billet, référence,
+prénom, nom, email, téléphone, montant, horodatage d'acceptation des CGV, et
+mode d'envoi. La dernière ligne totalise les billets et la recette attendue.
+
+La clé est dérivée de `BOOKING_SECRET`, donc rien de plus à configurer, et
+changer le secret révoque les liens déjà partagés. **Le lien donne accès aux
+coordonnées de tous les participants** ; il figure en bas de chaque email de
+réservation.
+
+Mise en route, une fois : Vercel → **Storage** → **Create Database** → **Blob**
+→ **Connect Project**, puis redéployer. Vercel injecte `BLOB_READ_WRITE_TOKEN`
+tout seul. Sans cette étape, l'export répond 503 et l'enregistrement est
+silencieusement ignoré — jamais au prix d'un billet non envoyé.
+
 ### Newsletter
 
 `POST /api/subscribe` prévient `ADMIN_EMAILS` et envoie un email de bienvenue à
@@ -95,10 +115,10 @@ diffusion, filtrer les emails dont l'objet commence par `Newsletter —`.
 
 ## Ce qui n'existe pas encore
 
-- **Aucune base de données.** Les réservations n'existent que sous forme
-  d'emails. Les liens de confirmation sont autoporteurs : ils contiennent la
-  réservation, signée. Rien à sauvegarder, mais aucune liste consultable non
-  plus.
+- **Pas de base de données classique.** Les réservations confirmées sont
+  déposées dans un Vercel Blob privé et relues à l'export ; les liens de
+  confirmation restent autoporteurs. Suffisant pour quelques centaines de
+  billets, pas au-delà : l'export relit chaque fichier un par un.
 - **Aucun contrôle à l'entrée.** Les QR codes sont signés et
   `verifyQrPayload()` (dans `src/lib/booking.ts`) sait vérifier une signature,
   mais il n'existe pas encore d'écran de scan, ni de garde-fou contre un même

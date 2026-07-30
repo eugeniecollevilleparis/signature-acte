@@ -139,6 +139,20 @@ export function qrPayload(booking: Booking): string {
   return `${base}|${sign(base).slice(0, 16)}`;
 }
 
+/**
+ * The key that unlocks the spreadsheet export.
+ *
+ * Derived from BOOKING_SECRET so there is no extra variable to configure, and
+ * so rotating the secret revokes any link that was shared around.
+ */
+export function exportKey(): string {
+  return sign("export-v1").slice(0, 32);
+}
+
+export function verifyExportKey(candidate: string): boolean {
+  return safeEqual(String(candidate || ""), exportKey());
+}
+
 export function verifyQrPayload(scanned: string): { valid: boolean; ref?: string; name?: string } {
   const parts = String(scanned || "").split("|");
   if (parts.length !== 4) return { valid: false };

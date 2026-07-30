@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import QRCode from "qrcode";
-import { fullName, qrPayload, type Booking } from "./booking";
+import { exportKey, fullName, qrPayload, type Booking } from "./booking";
 import { env } from "./env";
 import { TICKET_PRICE, TICKET_PRICE_FR, WINE_PRICE } from "./event";
 
@@ -229,7 +229,11 @@ export async function sendAdminNewBooking(
     <p style="${p}">Vérifiez que le règlement est bien arrivé sur le compte, puis envoyez le billet :</p>
     <p style="margin:22px 0 0;"><a href="${confirmUrl}" style="${btn}">Paiement reçu — envoyer le billet</a></p>
     <p style="margin:16px 0 0;font-family:'Inter',Arial,Helvetica,sans-serif;font-size:11px;line-height:1.6;color:rgba(240,233,221,0.45);">Ne cliquez qu'après avoir vu le paiement. Le lien reste valable 120 jours.</p>`
-    }`);
+    }
+    <p style="margin:26px 0 0;padding-top:16px;border-top:1px solid rgba(240,233,221,0.12);font-family:'Inter',Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:rgba(240,233,221,0.5);">
+      <a href="${siteUrl()}/api/export?k=${exportKey()}" style="color:rgba(240,233,221,0.85);">Télécharger toutes les réservations (Excel)</a><br>
+      Ce lien donne accès aux coordonnées de tous les participants — ne le transférez pas.
+    </p>`);
 
   await transport().sendMail({
     from: from(),
@@ -242,6 +246,7 @@ export async function sendAdminNewBooking(
       `Nom : ${fullName(booking)}\nEmail : ${booking.email}\nTéléphone : ${booking.phone}\n` +
       `Référence : ${booking.ref}\nMontant dû : ${TICKET_PRICE_FR}\n` +
       `CGV acceptées (réservation ferme et non remboursable)\n\n` +
+      `Fichier Excel de toutes les réservations : ${siteUrl()}/api/export?k=${exportKey()}\n\n` +
       (ticketAlreadySent
         ? `Le billet a déjà été envoyé automatiquement. Vérifiez que les ${TICKET_PRICE_FR} sont bien arrivés sur Revolut.\nPour le renvoyer si besoin :\n${confirmUrl}`
         : `Le billet n'a PAS encore été envoyé. Après vérification du paiement Revolut :\n${confirmUrl}`),

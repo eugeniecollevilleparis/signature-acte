@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { encodeToken, parseBooking } from "../../lib/booking";
 import { env } from "../../lib/env";
 import { sendAdminNewBooking, sendBookingReceived, sendTicket, siteUrl } from "../../lib/mailer";
+import { recordBooking } from "../../lib/store";
 
 export const prerender = false;
 
@@ -51,7 +52,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (immediate) {
       await sendTicket(booking, true);
+      // The ticket is out, so the booking counts as confirmed — file it.
+      await recordBooking(booking, "auto");
     } else {
+      // Not yet confirmed: it is filed by /api/ticket, once the payment has
+      // been checked and the ticket actually sent.
       await sendBookingReceived(booking);
     }
 

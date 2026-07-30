@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { decodeToken, fullName } from "../../lib/booking";
 import { sendTicket } from "../../lib/mailer";
+import { recordBooking } from "../../lib/store";
 
 export const prerender = false;
 
@@ -34,6 +35,8 @@ export const GET: APIRoute = async ({ url }) => {
 
   try {
     await sendTicket(booking);
+    // Confirmed: the payment was checked and the ticket has gone out.
+    await recordBooking(booking, "manual");
     return page(
       "Billet envoyé",
       `<h1>Billet envoyé</h1>
