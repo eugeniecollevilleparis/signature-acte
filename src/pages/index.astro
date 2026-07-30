@@ -147,7 +147,7 @@ const description =
           </div>
           <div class="sigt-course sigt-course--signature">
             <p class="c-label">Signature</p>
-            <p class="c-dish">Tartlet of single-origin dark chocolate, Sturia caviar, fleur de sel</p>
+            <p class="c-dish">Tartlet of single-origin dark chocolate, <span class="c-brand">Sturia®</span> caviar, fleur de sel</p>
           </div>
         </div>
 
@@ -885,6 +885,12 @@ const description =
     line-height: 1.45;
     color: var(--sig-cream);
     margin: 0;
+  }
+  /* The maison's name, lifted just enough to catch the eye without shouting. */
+  .sigt-course .c-brand {
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #fff;
   }
   .sigt-course--signature {
     margin-top: 0.7rem;
