@@ -1,5 +1,5 @@
 import ExcelJS from "exceljs";
-import { TICKET_PRICE_EUR } from "./event";
+import { CURRENCY, TICKET_PRICE_AMOUNT } from "./event";
 import type { BookingRecord } from "./store";
 
 function frenchDateTime(unixSeconds: number): string {
@@ -29,7 +29,7 @@ export function buildWorkbook(bookings: BookingRecord[]): ExcelJS.Workbook {
     { header: "Nom", key: "lastName", width: 18 },
     { header: "Email", key: "email", width: 32 },
     { header: "Téléphone", key: "phone", width: 18 },
-    { header: "Montant (€)", key: "amount", width: 12 },
+    { header: `Montant (${CURRENCY})`, key: "amount", width: 12 },
     { header: "CGV acceptées le", key: "createdAt", width: 18 },
     { header: "Envoi", key: "mode", width: 16 },
   ];
@@ -45,7 +45,7 @@ export function buildWorkbook(bookings: BookingRecord[]): ExcelJS.Workbook {
       lastName: b.lastName,
       email: b.email,
       phone: b.phone,
-      amount: TICKET_PRICE_EUR,
+      amount: TICKET_PRICE_AMOUNT,
       createdAt: frenchDateTime(b.createdAt),
       mode: b.mode === "auto" ? "automatique" : "après paiement",
     });
@@ -55,7 +55,7 @@ export function buildWorkbook(bookings: BookingRecord[]): ExcelJS.Workbook {
   if (bookings.length > 0) {
     const total = sheet.addRow({
       ref: `${bookings.length} billet${bookings.length > 1 ? "s" : ""}`,
-      amount: bookings.length * TICKET_PRICE_EUR,
+      amount: bookings.length * TICKET_PRICE_AMOUNT,
     });
     total.font = { bold: true };
   }
