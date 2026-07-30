@@ -20,9 +20,16 @@ export interface BookingRecord extends Booking {
   mode: "auto" | "manual";
 }
 
-/** Vercel injects this when a Blob store is connected to the project. */
+/**
+ * Whether a store is reachable at all.
+ *
+ * A connected project authenticates through OIDC, so BLOB_READ_WRITE_TOKEN is
+ * often absent on Vercel even though the store works perfectly. Requiring the
+ * token would silently drop every booking. Off Vercel — local development —
+ * the token is the only way in, so it is still what we look for there.
+ */
 export function storeConfigured(): boolean {
-  return !!process.env.BLOB_READ_WRITE_TOKEN;
+  return !!process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL === "1";
 }
 
 /**

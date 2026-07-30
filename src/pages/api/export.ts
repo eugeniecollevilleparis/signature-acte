@@ -38,7 +38,20 @@ export const GET: APIRoute = async ({ url }) => {
     );
   }
 
-  const bookings = await listBookings();
+  // The pre-check above only proves a store could exist. Reading is what
+  // proves it is connected and authorised.
+  let bookings;
+  try {
+    bookings = await listBookings();
+  } catch (err) {
+    console.error("[export] store unreachable:", err instanceof Error ? err.message : err);
+    return plain(
+      "Le magasin de réservations est injoignable.\n" +
+        "Vérifiez que le store Blob est bien connecté au projet dans Vercel → Storage → Projects,\n" +
+        "puis redéployez.",
+      503,
+    );
+  }
 
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "SIGNATURE";
