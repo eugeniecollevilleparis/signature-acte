@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 import { fullName, qrPayload, type Booking } from "./booking";
 import { env } from "./env";
+import { TICKET_PRICE, TICKET_PRICE_FR } from "./event";
 
 // Guest-facing copy is English, like the site. Only the emails to Eugénie and
 // Tanguy — and the terms of sale, a French legal document — are in French.
@@ -93,7 +94,7 @@ export async function sendBookingReceived(booking: Booking): Promise<void> {
   const html = shell(`
     <h1 style="${h1}">Welcome, ${esc(booking.firstName)}.</h1>
     <p style="${p}">Your request for a place at <em>${esc(EVENT)}</em> has reached us.</p>
-    <p style="${p}">One step remains: your payment. As soon as it is confirmed, we will send your ticket and its QR code, to be presented at the gates of the château.</p>
+    <p style="${p}">One step remains: your payment of <strong style="color:#f0e9dd;">${esc(TICKET_PRICE)}</strong>. As soon as it is confirmed, we will send your ticket and its QR code, to be presented at the gates of the château.</p>
     <p style="${label}">Your reference</p>
     <p style="margin:0 0 22px;font-family:Georgia,serif;font-size:20px;letter-spacing:2px;color:#f0e9dd;">${esc(booking.ref)}</p>
     <p style="${p}">An allergy, a particular diet, a question about your stay? Simply reply to this email.</p>
@@ -107,7 +108,7 @@ export async function sendBookingReceived(booking: Booking): Promise<void> {
     text:
       `Welcome, ${booking.firstName}.\n\n` +
       `Your request for a place at ${EVENT} has reached us.\n` +
-      `One step remains: your payment. As soon as it is confirmed, we will send your ticket and its QR code.\n\n` +
+      `One step remains: your payment of ${TICKET_PRICE}. As soon as it is confirmed, we will send your ticket and its QR code.\n\n` +
       `Reference: ${booking.ref}\n\n` +
       `${EVENT_VENUE}\n${EVENT_DATES}\n\n` +
       `Terms of sale: ${siteUrl()}/conditions-generales`,
@@ -194,6 +195,7 @@ export async function sendAdminNewBooking(booking: Booking, confirmUrl: string):
       ${row("Email", `<a href="mailto:${esc(booking.email)}" style="color:#f0e9dd;">${esc(booking.email)}</a>`)}
       ${row("Téléphone", `<a href="tel:${esc(booking.phone.replace(/[^0-9+]/g, ""))}" style="color:#f0e9dd;">${esc(booking.phone)}</a>`)}
       ${row("Référence", esc(booking.ref))}
+      ${row("Montant dû", esc(TICKET_PRICE_FR))}
     </table>
     <p style="${p}">Cette personne a été redirigée vers le paiement Revolut. <strong>Elle n'a pas encore reçu son billet.</strong></p>
     <p style="${p}">Vérifiez que le règlement est bien arrivé sur le compte, puis envoyez le billet :</p>
@@ -208,7 +210,8 @@ export async function sendAdminNewBooking(booking: Booking, confirmUrl: string):
     html,
     text:
       `Nouvelle réservation\n\n` +
-      `Nom : ${fullName(booking)}\nEmail : ${booking.email}\nTéléphone : ${booking.phone}\nRéférence : ${booking.ref}\n\n` +
+      `Nom : ${fullName(booking)}\nEmail : ${booking.email}\nTéléphone : ${booking.phone}\n` +
+      `Référence : ${booking.ref}\nMontant dû : ${TICKET_PRICE_FR}\n\n` +
       `Le billet n'a PAS encore été envoyé. Après vérification du paiement Revolut :\n${confirmUrl}`,
   });
 }

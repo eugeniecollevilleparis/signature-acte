@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SigInteractions from "../components/SigInteractions.astro";
+import { TICKET_PRICE } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
 const description =
@@ -72,7 +73,7 @@ const description =
               <button class="sigt-cover__card" type="button" data-open-booking>
                 <p class="cc-eyebrow">Presale · Until 12 August</p>
                 <p class="cc-title">Become Part of Edition No.&nbsp;01</p>
-                <p class="cc-sub">Limited seats available.</p>
+                <p class="cc-sub"><strong class="cc-price">{TICKET_PRICE}</strong>Limited seats available.</p>
                 <span class="cc-cta">Reserve →</span>
               </button>
             </div>
@@ -349,6 +350,11 @@ const description =
         <p class="sigb__lead">
           26 – 27 September 2026 · Château Laffitte Carcasset.<br>
           Tell us who you are, then complete your payment.
+        </p>
+
+        <p class="sigb__price">
+          <span>One place</span>
+          <strong>{TICKET_PRICE}</strong>
         </p>
 
         <form class="sigb__form" id="sigbForm" novalidate>
@@ -670,6 +676,14 @@ const description =
     line-height: 1.4;
     color: rgba(240, 233, 221, 0.72);
     margin: 0 0 0.9rem;
+  }
+  .sigt-cover__card .cc-price {
+    display: block;
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    color: var(--sig-cream);
+    margin-bottom: 0.1rem;
   }
   .sigt-cover__card .cc-cta {
     font-family: var(--font-body);
@@ -1449,6 +1463,30 @@ const description =
     margin: 0 0 1.5rem;
   }
   .sigb__lead strong { color: var(--sig-cream); font-weight: 500; letter-spacing: 0.06em; }
+
+  .sigb__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 1.5rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(240, 233, 221, 0.16);
+    border-bottom: 1px solid rgba(240, 233, 221, 0.16);
+  }
+  .sigb__price span {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+  }
+  .sigb__price strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--sig-cream);
+  }
 
   .sigb__form { display: flex; flex-direction: column; gap: 0.9rem; }
   .sigb__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }

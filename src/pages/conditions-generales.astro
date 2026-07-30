@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { TICKET_PRICE_FR } from "../lib/event";
 
 const title = "Conditions générales de vente · SIGNATURE No. 01";
 const description =
@@ -75,6 +76,10 @@ const updated = "30 juillet 2026";
 
       <section>
         <h2>5. Prix et paiement</h2>
+        <p>
+          Le prix de la place est de <strong>{TICKET_PRICE_FR}</strong>. Il donne accès à
+          l'intégralité de l'Événement tel que décrit à l'article 3, pour une personne.
+        </p>
         <p>
           Le prix applicable est celui affiché au moment de la réservation, exprimé en euros, toutes
           taxes comprises. Le paiement s'effectue en ligne via le prestataire de paiement Revolut.
