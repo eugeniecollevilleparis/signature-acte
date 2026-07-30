@@ -58,7 +58,7 @@ const description =
       <div class="sigt-panel__veil sigt-panel__veil--cover"></div>
       <div class="sigt-panel__inner sigt-panel__inner--cover">
         <div class="sigt-cover__bottom">
-          <p class="sigt-cover__venue" data-reveal>Château Laffitte Carcasset &nbsp;·&nbsp; Saint-Estèphe</p>
+          <p class="sigt-cover__venue" data-reveal><span>Château Laffitte Carcasset</span><span class="sigt-cover__sep">&nbsp;·&nbsp;</span><span>Saint-Estèphe</span></p>
           <p class="sigt-cover__date" data-reveal style="--reveal-delay:0.15s">26&nbsp;–&nbsp;27&nbsp;September&nbsp;2026</p>
 
           <div class="sigt-cover__row" data-noadvance>
@@ -348,6 +348,8 @@ const description =
   .sigt {
     position: fixed;
     inset: 0;
+    /* dvh, so the bottom of a panel is never swallowed by a mobile browser bar */
+    height: 100dvh;
     color: var(--sig-cream);
     font-family: var(--font-body);
     overflow: hidden;
@@ -362,7 +364,9 @@ const description =
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: clamp(1rem, 2.2vh, 1.5rem) clamp(1.25rem, 3.5vw, 3rem);
+    padding: calc(clamp(1rem, 2.2vh, 1.5rem) + env(safe-area-inset-top, 0px))
+             clamp(1.25rem, 3.5vw, 3rem)
+             clamp(1rem, 2.2vh, 1.5rem);
     background: linear-gradient(180deg, rgba(6, 4, 3, 0.75) 0%, rgba(6, 4, 3, 0.35) 70%, transparent 100%);
   }
   .sigt__brand {
@@ -492,7 +496,11 @@ const description =
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: clamp(5rem, 11vh, 7.5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2rem, 5vh, 3.5rem);
+    /* Top padding tracks the real tab-bar height (JS sets --sigt-bar-h), so the
+       bar can wrap to two rows on mobile without ever covering the content. */
+    padding: calc(var(--sigt-bar-h, 5rem) + clamp(0.75rem, 2.5vh, 2rem))
+             clamp(1.5rem, 5vw, 4.5rem)
+             calc(clamp(1.5rem, 4vh, 3rem) + env(safe-area-inset-bottom, 0px));
     max-width: 90rem;
     margin: 0 auto;
     width: 100%;
@@ -507,11 +515,12 @@ const description =
 
   /* ============ COVER TAB ============ */
   .sigt-panel__inner--cover {
-    justify-content: flex-end;
     align-items: center;
     text-align: center;
   }
-  .sigt-cover__bottom { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
+  /* margin-top:auto rather than justify-content:flex-end — it pins the block to the
+     bottom the same way, but collapses instead of clipping when the cover has to scroll. */
+  .sigt-cover__bottom { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
   .sigt-cover__venue {
     font-family: var(--font-display);
     font-weight: 400;
@@ -1291,23 +1300,142 @@ const description =
   }
 
   /* ============ RESPONSIVE ============ */
+
+  /* ---- Tablet and below: layout ---- */
   @media (max-width: 900px) {
-    .sigt__bar { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
-    .sigt__tabs { width: 100%; }
-    .sigt-panel__inner { padding-top: clamp(6.5rem, 15vh, 8rem); }
-    .sigt-panel__inner--split { flex-direction: column; align-items: stretch; gap: 2rem; overflow-y: auto; scrollbar-width: none; }
-    .sigt-panel__inner--split::-webkit-scrollbar { display: none; }
-    .sigt-menu { grid-template-columns: 1fr; gap: 0.5rem; }
-    .sigt-days { grid-template-columns: 1fr; gap: 2rem; }
+    .sigt__bar { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+    .sigt__brand { font-size: 0.72rem; letter-spacing: 0.26em; }
+
+    /* The tab strip bleeds to both screen edges and fades out on the right,
+       so it reads as "there is more to swipe" instead of looking cut off. */
+    .sigt__tabs {
+      width: auto;
+      align-self: stretch;
+      gap: 1.3rem;
+      margin-inline: calc(-1 * clamp(1.25rem, 3.5vw, 3rem));
+      padding-inline: clamp(1.25rem, 3.5vw, 3rem);
+      scroll-snap-type: x proximity;
+      scroll-padding-inline: clamp(1.25rem, 3.5vw, 3rem);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 2.4rem), transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 2.4rem), transparent 100%);
+    }
+    .sigt__tab { scroll-snap-align: center; padding: 0.55rem 0; }
+
+    .sigt-panel__inner--scrollable { overflow-x: hidden; overscroll-behavior: contain; }
+
+    /* The cover can outgrow a short screen once the cards stack — let it scroll. */
+    .sigt-panel__inner--cover { overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+    .sigt-panel__inner--cover::-webkit-scrollbar { display: none; }
+
+    /* Invitation: the two cards were locked to 2 × min 15rem, which overflowed
+       every phone sideways. One column, full width. */
+    .sigt-cover__row { flex-direction: column; align-items: stretch; gap: 0.9rem; margin-top: 1.1rem; }
+    .sigt-cover__cards { grid-template-columns: 1fr; gap: 0.75rem; }
+    .sigt-cover__enter { align-self: stretch; width: 100%; margin-right: 0; text-align: center; }
+
+    .sigt-mani { margin: 0 auto auto; }
     .sigt-creators { grid-template-columns: 1fr; gap: 1rem; }
     .sigt-contact { grid-template-columns: 1fr; gap: 1rem; }
-    .sigt-cover__row { flex-direction: column; align-items: stretch; }
     .sigt-arrow { display: none; }
   }
 
+  /* ---- Phones: legibility ---- */
   @media (max-width: 600px) {
+    /* Uppercase micro-type at 0.56rem with 0.4em tracking is the main thing that
+       reads as broken on a phone. Slightly larger, much tighter. */
+    .sigt__brand { letter-spacing: 0.22em; }
+    .sigt__tab { font-size: 0.62rem; letter-spacing: 0.2em; }
+
+    /* Deeper veils so cream type holds over the video backgrounds */
+    .sigt-panel__veil {
+      background: linear-gradient(180deg,
+        rgba(8, 4, 4, 0.74) 0%, rgba(8, 4, 4, 0.56) 38%,
+        rgba(8, 4, 4, 0.62) 72%, rgba(8, 4, 4, 0.82) 100%);
+    }
+    .sigt-panel__veil--deep {
+      background: linear-gradient(180deg, rgba(8, 4, 4, 0.66) 0%, rgba(8, 4, 4, 0.76) 100%);
+    }
+    .sigt-panel__veil--cover {
+      background: linear-gradient(180deg,
+        rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 30%,
+        rgba(0, 0, 0, 0.45) 62%, rgba(0, 0, 0, 0.85) 100%);
+    }
+
+    .sigt-head { margin-bottom: 1.5rem; }
+    .sigt-head__kicker { font-size: 0.6rem; letter-spacing: 0.26em; margin-bottom: 0.7rem; }
+    .sigt-head__title { font-size: 2.1rem; }
+    .sigt-head__sub { font-size: 1rem; }
+
+    /* Invitation */
+    /* Two clean lines instead of hyphenating "Saint-Estèphe" across a line break */
+    .sigt-cover__venue {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.2rem;
+      line-height: 1.3;
+    }
+    .sigt-cover__sep { display: none; }
+    .sigt-cover__date { font-size: 0.6rem; letter-spacing: 0.28em; padding-left: 0.28em; }
+    .sigt-cover__card { padding: 1.1rem 1.15rem; }
+    .sigt-cover__card .cc-eyebrow { font-size: 0.58rem; letter-spacing: 0.24em; }
+    .sigt-cover__card .cc-title { font-size: 1.15rem; }
+    .sigt-cover__card .cc-sub { font-size: 0.92rem; margin-bottom: 0.75rem; }
+    .sigt-cover__card .cc-cta { font-size: 0.6rem; letter-spacing: 0.24em; }
+    .sigt-cover__enter { padding: 1rem 1.2rem; font-size: 0.64rem; letter-spacing: 0.26em; }
+
+    /* Menu */
+    .sigt-course { padding: 1rem 0; }
+    .sigt-course .c-label { font-size: 0.62rem; letter-spacing: 0.24em; margin-bottom: 0.4rem; }
+    .sigt-course .c-wine { font-size: 0.92rem; }
+    .sigt-course .c-dish { font-size: 1rem; line-height: 1.5; }
+    .sigt-course--signature .c-label { font-size: 0.7rem; letter-spacing: 0.28em; }
+    .sigt-course--signature .c-dish { font-size: 1.15rem; }
+
+    /* Programme */
+    .sigt-actblock { padding: 0.85rem 0; }
+    .sigt-actblock .ab-kicker { font-size: 0.6rem; letter-spacing: 0.26em; }
+    .sigt-actblock .ab-title { font-size: 1.25rem; }
+    .sigt-actblock .ab-line { font-size: 0.98rem; line-height: 1.5; }
+    .sigt-actblock .ab-times { font-size: 0.6rem; letter-spacing: 0.16em; line-height: 1.6; }
+
+    /* Manifesto */
+    .sigt-mani__lead { font-size: 1.65rem; margin-bottom: 1.2rem; }
+    .sigt-mani__body p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.6rem; }
+    .sigt-mani__close { font-size: 1rem; }
+
+    /* Creators — crop the portraits so a whole card fits on screen */
+    .sigt-creator { padding: 1.25rem; }
+    .sigt-creator .cr-photo { margin: -1.25rem -1.25rem 1.1rem; }
+    /* Crop the 4:5 portraits to the face: shorter, so the name and bio stay on
+       screen, and it drops the caption burnt into the bottom of the source file
+       (which otherwise repeats the label printed right underneath it). */
+    .sigt-creator .cr-photo img { aspect-ratio: 8 / 7; object-fit: cover; object-position: center top; }
+    .sigt-creator .cr-label { font-size: 0.58rem; letter-spacing: 0.26em; margin-bottom: 0.6rem; }
+    .sigt-creator .cr-name { font-size: 1.5rem; }
+    .sigt-creator .cr-body { font-size: 0.98rem; line-height: 1.55; }
+
+    /* Logistics */
+    .sigt-tile .tl-eyebrow { font-size: 0.58rem; letter-spacing: 0.26em; }
+    .sigt-tile .tl-title { font-size: 1.25rem; }
+    .sigt-tile .tl-sub { font-size: 0.98rem; line-height: 1.55; margin-bottom: 1rem; }
+    .sigt-tile .tl-cta { font-size: 0.6rem; letter-spacing: 0.24em; }
+    .sigt-insta { font-size: 0.62rem; letter-spacing: 0.22em; padding: 0.9rem 1.2rem; }
+    .sigt-colophon { font-size: 0.62rem; letter-spacing: 0.2em; line-height: 1.9; }
+
+    /* 16px inputs — anything smaller and iOS zooms the whole page on focus,
+       which is what left the layout shifted sideways after tapping a field. */
+    .sigt-news input, .sigt-news button { width: 100%; }
+    .sigt-news input { font-size: 16px; padding: 0.85rem 0.9rem; }
+    .sigt-news button { padding: 0.9rem 1.1rem; font-size: 0.62rem; letter-spacing: 0.24em; }
+
+    /* Gate */
+    .sig-gate__inner { padding: 1.5rem; }
+    .sig-gate__brand { letter-spacing: 0.28em; text-indent: 0.28em; }
+    .sig-gate__sub { font-size: 0.6rem; letter-spacing: 0.28em; margin-bottom: 2rem; }
     .sig-gate__form { flex-direction: column; }
-    .sig-gate__form input { width: 100%; }
+    .sig-gate__form input { width: 100%; font-size: 16px; }
+    .sig-gate__form button { padding: 0.95rem 1.4rem; }
   }
 </style>
 
@@ -1320,9 +1448,23 @@ const description =
   const err = document.getElementById("sigGateErr") as HTMLElement | null;
   const ceremony = document.getElementById("sigCeremony") as HTMLElement | null;
 
+  // ===== Keep panel content clear of the tab bar =====
+  // The bar wraps to two rows on narrow screens, so its height can't be hardcoded.
+  const barEl = document.querySelector<HTMLElement>(".sigt__bar");
+  const syncBarHeight = () => {
+    if (!barEl) return;
+    const h = barEl.offsetHeight;
+    if (h > 0) document.documentElement.style.setProperty("--sigt-bar-h", `${h}px`);
+  };
+  syncBarHeight();
+  window.addEventListener("resize", syncBarHeight, { passive: true });
+  window.addEventListener("orientationchange", syncBarHeight);
+  if (barEl && "ResizeObserver" in window) new ResizeObserver(syncBarHeight).observe(barEl);
+
   const unlock = (withCeremony = true) => {
     if (!gate || !main) return;
     main.hidden = false;
+    requestAnimationFrame(syncBarHeight);
     gate.setAttribute("aria-hidden", "true");
     setTimeout(() => gate.remove(), 700);
     try { sessionStorage.setItem("sigUnlocked", "1"); } catch {}
@@ -1375,6 +1517,8 @@ const description =
       const on = t.dataset.tab === name;
       t.classList.toggle("is-active", on);
       t.setAttribute("aria-selected", on ? "true" : "false");
+      // On mobile the strip scrolls — bring the active tab into view
+      if (on) t.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
     });
     panels.forEach((p) => {
       const on = p.dataset.panel === name;
@@ -1448,12 +1592,15 @@ const description =
   });
 
   // Horizontal swipe (mobile)
-  let touchX = 0, touchY = 0;
+  let touchX = 0, touchY = 0, touchInTabs = false;
   window.addEventListener("touchstart", (e) => {
     touchX = e.touches[0].clientX;
     touchY = e.touches[0].clientY;
+    // Scrolling the tab strip sideways must not also flip the panel
+    touchInTabs = !!(e.target as HTMLElement).closest?.(".sigt__tabs");
   }, { passive: true });
   window.addEventListener("touchend", (e) => {
+    if (touchInTabs) return;
     const dx = e.changedTouches[0].clientX - touchX;
     const dy = e.changedTouches[0].clientY - touchY;
     if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
