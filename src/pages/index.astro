@@ -217,13 +217,13 @@ const description =
         <div class="sigt-creators sigt-creators--two">
           <article class="sigt-creator" data-reveal style="--reveal-delay:0.15s">
             <div class="cr-photo"><img src="/images/signature/tanguy-portrait.webp" alt="Tanguy Accard" loading="lazy"></div>
-            <p class="cr-label">Creative Direction</p>
+            <p class="cr-label">Event Designer</p>
             <p class="cr-name"><em>Tanguy Accard</em></p>
             <p class="cr-body">A vision shaped by years of experience in corporate, electronic music, hospitality and creative direction. Every detail is considered to create an atmosphere that feels natural, timeless and deeply human.</p>
           </article>
           <article class="sigt-creator" data-reveal style="--reveal-delay:0.3s">
             <div class="cr-photo"><img src="/images/signature/eugenie-portrait.webp" alt="Eugénie Colleville" loading="lazy"></div>
-            <p class="cr-label">The Chef</p>
+            <p class="cr-label">Chef</p>
             <p class="cr-name"><em>Eugénie Colleville</em></p>
             <p class="cr-body">French chef, whose cuisine combines French culinary heritage with a contemporary, ingredient-led approach. The dinner is composed course by course, wine by wine. A table written for one evening.</p>
           </article>
@@ -1082,7 +1082,11 @@ const description =
   .sigt-creator .cr-photo img {
     display: block;
     width: 100%;
-    height: auto;
+    /* Crops to the face, which also removes the caption burnt into the bottom
+       of the source files — it repeated the label printed just below it. */
+    aspect-ratio: 8 / 7;
+    object-fit: cover;
+    object-position: center top;
   }
   .sigt-creator .cr-label {
     font-family: var(--font-body);
@@ -1749,10 +1753,6 @@ const description =
     /* Creators — crop the portraits so a whole card fits on screen */
     .sigt-creator { padding: 1.25rem; }
     .sigt-creator .cr-photo { margin: -1.25rem -1.25rem 1.1rem; }
-    /* Crop the 4:5 portraits to the face: shorter, so the name and bio stay on
-       screen, and it drops the caption burnt into the bottom of the source file
-       (which otherwise repeats the label printed right underneath it). */
-    .sigt-creator .cr-photo img { aspect-ratio: 8 / 7; object-fit: cover; object-position: center top; }
     .sigt-creator .cr-label { font-size: 0.58rem; letter-spacing: 0.26em; margin-bottom: 0.6rem; }
     .sigt-creator .cr-name { font-size: 1.5rem; }
     .sigt-creator .cr-body { font-size: 0.98rem; line-height: 1.55; }
