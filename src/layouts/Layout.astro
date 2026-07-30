@@ -8,10 +8,15 @@ export interface Props {
 }
 
 const {
-  title = "Eugénie Colleville — Private Chef · Paris · London",
-  description = "Bespoke private chef experiences. Trained by Alain Ducasse. Serving private clients, UHNWI families and brands in London, Paris, the French Riviera and internationally.",
+  title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset",
+  description = "Signature No. 01, 26-27 September 2026 at Château Laffitte Carcasset, Saint-Estèphe. An evening where architecture, light, sound, gastronomy, conversation and performance are conceived as one.",
   lang = "en",
 } = Astro.props;
+
+// WhatsApp, iMessage and LinkedIn all refuse relative image paths in a link
+// preview, so these are resolved against `site` in astro.config.mjs.
+const ogImage = new URL("/og-signature.jpg", Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -32,17 +37,23 @@ const {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Eugénie Colleville" />
+    <meta property="og:site_name" content="SIGNATURE" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Château Laffitte Carcasset at dusk — SIGNATURE No. 01" />
     <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_GB"} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Hreflang -->
     <link rel="alternate" hreflang="en" href="/" />
