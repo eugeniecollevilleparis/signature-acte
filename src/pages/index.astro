@@ -1113,16 +1113,16 @@ const description =
   }
   .sigt-creator .cr-photo {
     margin: clamp(-2.25rem, -2.5vw, -1.5rem) clamp(-2.25rem, -2.5vw, -1.5rem) 1.25rem;
+    background: rgba(8, 5, 4, 0.55);
   }
   .sigt-creator .cr-photo img {
     display: block;
     width: 100%;
-    /* Portrait frame: tall enough to keep the headroom added to the sources
-       and the whole face, short enough to cut the caption burnt into the
-       bottom of the files — it repeated the label printed just below it. */
-    aspect-ratio: 0.94;
-    object-fit: cover;
-    object-position: center top;
+    /* `contain`, not `cover`: the sources are already a very tight close-up,
+       so cropping them further read as zoomed-in and cut off. The whole frame
+       is shown, smaller, on its own dark ground. */
+    aspect-ratio: 1.2;
+    object-fit: contain;
   }
   .sigt-creator .cr-label {
     font-family: var(--font-body);
