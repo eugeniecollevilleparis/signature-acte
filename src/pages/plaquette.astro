@@ -1,13 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
+import { TICKET_PRICE_FR, WINE_PRICE_FR } from "../lib/event";
 
-const title = "SIGNATURE, No. 01 — the evening in one page";
+const title = "SIGNATURE, No. 01 — la soirée en une page";
 const description =
-  "26-27 September 2026, Château Laffitte Carcasset, Saint-Estèphe. One evening, one table, from six in the evening to three the next afternoon.";
+  "26-27 septembre 2026, Château Laffitte Carcasset, Saint-Estèphe. Une soirée, une table, de dix-huit heures au lendemain quinze heures.";
+
+const SITE = "https://signatureacte.com";
+const MAIL = "signatureacte@gmail.com";
+const INSTA = "https://www.instagram.com/signature.acte/";
 ---
 
-<Layout lang="en" title={title} description={description}>
+<Layout lang="fr" title={title} description={description}>
   <main class="pk">
     <div class="pk__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
     <div class="pk__veil"></div>
@@ -17,62 +21,64 @@ const description =
       <header class="pk__head">
         <p class="pk__brand">SIGNATURE</p>
         <p class="pk__no"><em>No. 01</em></p>
-        <p class="pk__when">26 – 27 September 2026 &nbsp;·&nbsp; Château Laffitte Carcasset</p>
+        <p class="pk__when">26 – 27 septembre 2026 &nbsp;·&nbsp; Château Laffitte Carcasset</p>
         <p class="pk__where">Saint-Estèphe · Médoc · Bordeaux</p>
       </header>
 
       <p class="pk__lead">
-        One evening where architecture, light, sound, gastronomy, conversation and
-        performance are conceived as one. One table, a château to ourselves, and
-        a night that runs from six in the evening to three the next afternoon.
+        Une soirée où l'architecture, la lumière, le son, la gastronomie, la
+        conversation et la performance sont pensés comme un seul geste. Une
+        table, un château pour nous seuls, et une nuit qui va de dix-huit heures
+        au lendemain quinze heures.
       </p>
 
       <section class="pk__grid">
         <div class="pk__col">
-          <p class="pk__label">The evening</p>
+          <p class="pk__label">La soirée</p>
           <ul class="pk__list">
-            <li><span>18:00</span> Gates open, welcome drink</li>
-            <li><span>19:00</span> Canapés as the light goes</li>
-            <li><span>20:30</span> Dinner, course by course</li>
-            <li><span>22:00</span> The night — DJ sets until late</li>
-            <li><span>12:00</span> Sunday brunch, poolside</li>
-            <li><span>15:00</span> Curtain close</li>
+            <li><span>18:00</span> Ouverture des grilles, verre d'accueil</li>
+            <li><span>19:00</span> Canapés, à la tombée du jour</li>
+            <li><span>20:30</span> Dîner, plat après plat</li>
+            <li><span>22:00</span> La nuit — DJ sets jusqu'au bout</li>
+            <li><span>12:00</span> Dimanche, brunch au bord de la piscine</li>
+            <li><span>15:00</span> Rideau</li>
           </ul>
         </div>
 
         <div class="pk__col">
-          <p class="pk__label">Your ticket covers</p>
+          <p class="pk__label">Le billet comprend</p>
           <ul class="pk__list pk__list--plain">
-            <li>Admission for one guest</li>
-            <li>The seasonal tasting menu</li>
-            <li>The DJ set and the performances</li>
-            <li>Welcome drink on arrival</li>
+            <li>L'entrée, pour une personne</li>
+            <li>Le menu dégustation de saison</li>
+            <li>Les DJ sets et les performances</li>
+            <li>Le verre d'accueil</li>
           </ul>
-          <p class="pk__label pk__label--sep">Ticketed separately</p>
+          <p class="pk__label pk__label--sep">En supplément</p>
           <ul class="pk__list pk__list--plain">
-            <li>Estate wine pairing — {WINE_PRICE}</li>
-            <li>Sunday brunch</li>
-            <li>Rooms at the château — five, on request</li>
+            <li>Les vins du domaine, en accord — {WINE_PRICE_FR}</li>
+            <li>Le brunch du dimanche</li>
+            <li>Les chambres du château — cinq, sur demande</li>
           </ul>
         </div>
 
         <div class="pk__col">
-          <p class="pk__label">Good to know</p>
+          <p class="pk__label">Bon à savoir</p>
           <ul class="pk__list pk__list--plain">
-            <li>Saint-Estèphe is within easy reach of Bordeaux — drivers and shuttles are listed on the site.</li>
-            <li>Harvest week in the Médoc — houses nearby for a group, Friday to Monday.</li>
-            <li>Dress: come as you would for a long dinner that turns into a night.</li>
-            <li>Tickets are personal and non-refundable; they may be passed on.</li>
+            <li>Saint-Estèphe est à portée de Bordeaux — chauffeurs et navettes sont <a href={SITE}>listés sur le site</a>.</li>
+            <li>C'est la semaine des vendanges dans le Médoc — maisons à louer à côté, du vendredi au lundi.</li>
+            <li>Tenue : celle d'un long dîner qui se transforme en nuit.</li>
+            <li>Le billet est nominatif et non remboursable ; il peut être cédé. <a href={`${SITE}/conditions-generales`}>Conditions de vente</a>.</li>
           </ul>
         </div>
       </section>
 
       <footer class="pk__foot">
-        <p class="pk__price"><span>Presale until 12 August</span><strong>{TICKET_PRICE}</strong></p>
-        <a class="pk__cta" href="/">Reserve your place →</a>
+        <p class="pk__price"><span>Prévente jusqu'au 12 août</span><strong>{TICKET_PRICE_FR}</strong></p>
+        <a class="pk__cta" href={SITE}>Réserver ma place →</a>
         <p class="pk__fine">
-          signatureacte.com &nbsp;·&nbsp; access code <em>carcasset26</em> &nbsp;·&nbsp;
-          signatureacte@gmail.com &nbsp;·&nbsp; @signature.acte
+          <a href={SITE}>signatureacte.com</a> &nbsp;·&nbsp; code d'accès <em>carcasset26</em><br>
+          <a href={`mailto:${MAIL}?subject=SIGNATURE%20No.%2001`}>{MAIL}</a>
+          &nbsp;·&nbsp; <a href={INSTA} target="_blank" rel="noopener">@signature.acte</a>
         </p>
       </footer>
 
@@ -236,6 +242,13 @@ const description =
     line-height: 2;
   }
   .pk__fine em { font-style: normal; color: rgba(240, 233, 221, 0.8); }
+  .pk a:not(.pk__cta) {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240, 233, 221, 0.35);
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .pk a:not(.pk__cta):hover { color: var(--sig-cream, #f0e9dd); border-bottom-color: rgba(240, 233, 221, 0.9); }
 
   @media (max-width: 860px) {
     .pk__grid { grid-template-columns: 1fr; gap: 1.4rem; }
@@ -258,5 +271,6 @@ const description =
     .pk__where, .pk__label, .pk__fine, .pk__price span, .pk__list span { color: #6b5c53; }
     .pk__grid, .pk__foot { border-color: #cfc4bb; }
     .pk__cta { background: none; color: #14100e; border: 1px solid #14100e; padding: 0.5rem 1.2rem; }
+    .pk a:not(.pk__cta) { border-bottom-color: #b3a89f; }
   }
 </style>
