@@ -16,16 +16,16 @@ const INSTA = "https://www.instagram.com/signature.acte/";
 
 const FR = {
   vision: "Une soirée où l'architecture, la lumière, le son et la table ne font qu'un.",
-  when: "26 – 27 septembre 2026",
+  when: "26 et 27 septembre 2026",
   where: "Château Laffitte Carcasset · Saint-Estèphe · Médoc",
   presale: "Prévente jusqu'au 12 août",
   price: TICKET_PRICE_FR,
   cta: "Réserver ma place →",
-  credits: ["Menu de la cheffe ", "Eugénie Colleville", " · musique par ", "Accard Production"],
+  credits: ["Menu de la cheffe ", "Eugénie Colleville", " · Musique par ", "Accard Production"],
   labels: {
     idea: "L'idée",
     who: "Par qui",
-    welcome: "L'accueil",
+    welcome: "Le lieu",
     run: "Le déroulé",
     menu: "Le menu",
     included: "Compris",
@@ -33,7 +33,7 @@ const FR = {
     know: "Bon à savoir",
     code: "code d'accès",
   },
-  idea: "Réunir en un seul lieu ce qui existe d'habitude séparément : une table, une architecture, une lumière, une musique. Pas un dîner suivi d'une fête — une soirée écrite d'un bout à l'autre.",
+  idea: "Réunir en un seul lieu ce qui existe d'habitude séparément : une table, une architecture, une lumière, une musique. Pas un dîner suivi d'une fête, mais une soirée écrite d'un bout à l'autre.",
   welcome: "Vous êtes reçus au Château Laffitte Carcasset, l'une des plus anciennes propriétés de Saint-Estèphe, pour vous seuls ce soir-là. Dîner servi à table, la nuit jusqu'au bout, et le lendemain au bord de la piscine.",
   included: "L'entrée, le menu dégustation, les DJ sets et les performances.",
   extra: `Les vins du domaine à volonté, de l'arrivée au dîner (${WINE_PRICE_FR}), le brunch du dimanche, et les cinq chambres du château, sur demande.`,
@@ -41,8 +41,8 @@ const FR = {
     ["Acte I · 18:00", "Accueil", "Les grilles du château s'ouvrent, la soirée commence."],
     ["Acte II · 19:00", "Golden Hour", "Les canapés, tandis que la lumière descend sur le domaine."],
     ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
-    ["Acte IV · 22:00", "La nuit", "La musique prend la suite, et la nuit trouve son rythme."],
-    ["Acte V · le lendemain", "Ni hâte, ni horaire", "Brunch à midi, piscine, et l'on se quitte à quinze heures."],
+    ["Acte IV · 22:00", "La Nuit", "La musique prend la suite, et la nuit trouve son rythme."],
+    ["Acte V · le lendemain", "Ni Hâte, Ni Horaire", "Brunch à midi, piscine, et l'on se quitte à quinze heures."],
   ],
   menu: [
     ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Crémant du château"],
@@ -60,16 +60,16 @@ const FR = {
 
 const EN = {
   vision: "An evening where architecture, light, sound and the table are one.",
-  when: "26 – 27 September 2026",
+  when: "26 and 27 September 2026",
   where: "Château Laffitte Carcasset · Saint-Estèphe · Médoc",
   presale: "Presale until 12 August",
   price: TICKET_PRICE,
   cta: "Reserve my place →",
-  credits: ["Menu by chef ", "Eugénie Colleville", " · music by ", "Accard Production"],
+  credits: ["Menu by chef ", "Eugénie Colleville", " · Music by ", "Accard Production"],
   labels: {
     idea: "The idea",
     who: "By whom",
-    welcome: "The welcome",
+    welcome: "The place",
     run: "The evening",
     menu: "The menu",
     included: "Included",
@@ -77,7 +77,7 @@ const EN = {
     know: "Good to know",
     code: "access code",
   },
-  idea: "To bring together in one place what usually exists apart: a table, an architecture, a light, a music. Not a dinner followed by a party — one evening, written from end to end.",
+  idea: "To bring together in one place what usually exists apart: a table, an architecture, a light, a music. Not a dinner followed by a party, but one evening, written from end to end.",
   welcome: "You are received at Château Laffitte Carcasset, one of the oldest estates in Saint-Estèphe, yours alone that night. Dinner served at the table, the night for as long as it lasts, and the next day by the pool.",
   included: "Admission, the tasting menu, the DJ sets and the performances.",
   extra: `The estate wines, unlimited from arrival to dinner (${WINE_PRICE}), Sunday brunch, and the five rooms at the château, on request.`,
@@ -85,8 +85,8 @@ const EN = {
     ["Act I · 18:00", "Welcome", "The château gates open, and the evening begins."],
     ["Act II · 19:00", "Golden hour", "Canapés, as the light goes down over the estate."],
     ["Act III · 20:30", "Dinner", "Course by course, wine by wine, chosen by Pierre Maussire."],
-    ["Act IV · 22:00", "The night", "The music takes over, and the night finds its own rhythm."],
-    ["Act V · the next day", "No rush, no schedule", "Brunch at noon, poolside, and we part at three."],
+    ["Act IV · 22:00", "The Night", "The music takes over, and the night finds its own rhythm."],
+    ["Act V · the next day", "No Rush, No Schedule", "Brunch at noon, poolside, and we part at three."],
   ],
   menu: [
     ["Apéritif", "Bayonne ham croquettes, Ossau-Iraty béchamel", "the château's Crémant"],
@@ -177,7 +177,8 @@ const t = lang === "en" ? EN : FR;
         {t.menu.map(([course, dish, wine]) => (
           <div class="pk__course">
             <p class="pk__c-label">{course}</p>
-            <p class="pk__c-dish">{dish}{wine && <em> — {wine}</em>}</p>
+            <p class="pk__c-dish">{dish}</p>
+            {wine && <p class="pk__c-wine"><em>{wine}</em></p>}
           </div>
         ))}
       </div>
@@ -198,13 +199,13 @@ const t = lang === "en" ? EN : FR;
         <p class="pk__label">{t.labels.know}</p>
         {lang === "en" ? (
           <p class="pk__plain">
-            Bordeaux is within reach — <a href={SITE}>drivers and houses to rent</a> are
+            Bordeaux is within reach: <a href={SITE}>drivers and houses to rent</a> are
             listed on the site. Tickets are personal and non-refundable; they may be
             passed on (<a href={`${SITE}/conditions-generales`}>terms of sale</a>).
           </p>
         ) : (
           <p class="pk__plain">
-            Bordeaux est à portée — <a href={SITE}>chauffeurs et maisons à louer</a> sont
+            Bordeaux est à portée : <a href={SITE}>chauffeurs et maisons à louer</a> sont
             listés sur le site. Billet nominatif, non remboursable, cessible
             (<a href={`${SITE}/conditions-generales`}>conditions de vente</a>).
           </p>
@@ -462,9 +463,13 @@ const t = lang === "en" ? EN : FR;
     color: rgba(240, 233, 221, 0.9);
     margin: 0;
   }
-  .pk__c-dish em {
+  .pk__c-wine {
+    font-family: var(--font-display);
     font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.4;
     color: rgba(240, 233, 221, 0.6);
+    margin: 0.15rem 0 0;
   }
 
   /* Colophon, as at the foot of the site */
@@ -511,7 +516,8 @@ const t = lang === "en" ? EN : FR;
     .pk__no, .pk__when, .pk__place, .pk__label, .pk__a-kicker, .pk__c-label,
     .pk__c-eyebrow, .pk__fine, .pk__credits { color: #6d5e53; }
     .pk__plain, .pk__a-line, .pk__c-dish { color: #3a2f28; }
-    .pk__c-dish em, .pk__credits em, .pk__plain em, .pk__fine strong { color: #17120f; }
+    .pk__c-wine { color: #6d5e53; }
+    .pk__credits em, .pk__plain em, .pk__fine strong { color: #17120f; }
     .pk__plate { aspect-ratio: 16 / 6; border-color: #d9cfc0; break-inside: avoid; }
     .pk__block, .pk__card {
       background: none;
