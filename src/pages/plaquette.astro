@@ -9,6 +9,27 @@ const description =
 const SITE = "https://signatureacte.com";
 const MAIL = "signatureacte@gmail.com";
 const INSTA = "https://www.instagram.com/signature.acte/";
+
+const ACTS = [
+  ["Acte I · 18:00", "Arrivée", "Les grilles s'ouvrent, un verre à la main."],
+  ["Acte II · 19:00", "L'heure dorée", "Les canapés, tandis que la lumière descend sur le domaine."],
+  ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
+  ["Acte IV · 22:00", "La nuit", "Ambiance, rave à 23:00, after glow à 03:00."],
+  ["Acte V · le lendemain", "Ni hâte, ni horaire", "Brunch à midi, piscine, rideau à 15:00."],
+];
+
+const MENU = [
+  ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Crémant"],
+  ["Canapé I", "Canelé salé au confit de canard, compotée de prunes d'Ente", "Crémant"],
+  ["Canapé II", "Huître d'Arcachon, mignonnette au vin du domaine, espuma de Graves", ""],
+  ["Canapé III · au chai", "Granité de moût du domaine, lait ribot, gelée de Sauternes, noix du Périgord", ""],
+  ["À table", "Pains du Sud-Ouest, beurre aux algues baratté maison, huile d'olive", ""],
+  ["Entrée", "Maigre de la Gironde en gravlax, verveine et fenouil sauvage, beurre blanc tiède", "Pessac-Léognan blanc"],
+  ["Plat", "Joue de bœuf de Bazas braisée six heures au vin de la maison, cèpes du Médoc", "Laffitte Carcasset"],
+  ["Dessert", "Yaourt de brebis au miel du domaine et romarin, figue noire, sarrasin caramélisé", "Sauternes"],
+  ["Mignardises", "Pâte de fruit au vin de la maison", ""],
+  ["Signature", "Tartelette de chocolat pure origine, caviar Sturia®, fleur de sel", ""],
+];
 ---
 
 <Layout lang="fr" title={title} description={description}>
@@ -16,65 +37,120 @@ const INSTA = "https://www.instagram.com/signature.acte/";
     <div class="pk__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
     <div class="pk__veil"></div>
 
-    <article class="pk__sheet">
+    <!-- ===== Les trente secondes ===== -->
+    <section class="pk__hero">
+      <p class="pk__brand">SIGNATURE</p>
+      <p class="pk__no"><em>No. 01</em></p>
 
-      <header class="pk__head">
-        <p class="pk__brand">SIGNATURE</p>
-        <p class="pk__no"><em>No. 01</em></p>
-        <p class="pk__when">26 – 27 septembre 2026 &nbsp;·&nbsp; Château Laffitte Carcasset</p>
-        <p class="pk__where">Saint-Estèphe · Médoc · Bordeaux</p>
-      </header>
-
-      <p class="pk__lead">
-        Une soirée où l'architecture, la lumière, le son, la gastronomie, la
-        conversation et la performance sont pensés comme un seul geste. Une
-        table, un château pour nous seuls, et une nuit qui va de dix-huit heures
-        au lendemain quinze heures.
+      <p class="pk__vision">
+        Une soirée où l'architecture, la lumière, le son et la table
+        ne font qu'un.
       </p>
 
-      <section class="pk__grid">
-        <div class="pk__col">
-          <p class="pk__label">La soirée</p>
-          <ul class="pk__list">
-            <li><span>18:00</span> Ouverture des grilles, verre d'accueil</li>
-            <li><span>19:00</span> Canapés, à la tombée du jour</li>
-            <li><span>20:30</span> Dîner, plat après plat</li>
-            <li><span>22:00</span> La nuit — DJ sets jusqu'au bout</li>
-            <li><span>12:00</span> Dimanche, brunch au bord de la piscine</li>
-            <li><span>15:00</span> Rideau</li>
-          </ul>
-        </div>
+      <p class="pk__when">26 – 27 septembre 2026</p>
+      <p class="pk__where">Château Laffitte Carcasset &nbsp;·&nbsp; Saint-Estèphe &nbsp;·&nbsp; Médoc</p>
 
-        <div class="pk__col">
-          <p class="pk__label">Le billet comprend</p>
-          <ul class="pk__list pk__list--plain">
-            <li>L'entrée, pour une personne</li>
-            <li>Le menu dégustation de saison</li>
-            <li>Les DJ sets et les performances</li>
-            <li>Le verre d'accueil</li>
-          </ul>
-          <p class="pk__label pk__label--sep">En supplément</p>
-          <ul class="pk__list pk__list--plain">
-            <li>Les vins du domaine, en accord — {WINE_PRICE_FR}</li>
-            <li>Le brunch du dimanche</li>
-            <li>Les chambres du château — cinq, sur demande</li>
-          </ul>
-        </div>
+      <ul class="pk__count">
+        <li><strong>21</strong><span>heures</span></li>
+        <li><strong>10</strong><span>services</span></li>
+        <li><strong>1</strong><span>château, pour nous seuls</span></li>
+      </ul>
 
-        <div class="pk__col">
+      <p class="pk__price">
+        <span>Première édition · places limitées · prévente jusqu'au 12 août</span>
+        <strong>{TICKET_PRICE_FR}</strong>
+      </p>
+      <a class="pk__cta" href={SITE}>Réserver ma place →</a>
+
+      <p class="pk__credits">
+        Menu de la cheffe <em>Eugénie Colleville</em> &nbsp;·&nbsp;
+        musique par <em>Accard Production</em>
+      </p>
+
+      <a class="pk__more" href="#detail">Le détail ↓</a>
+    </section>
+
+    <!-- ===== Le détail, pour qui veut ===== -->
+    <section class="pk__detail" id="detail">
+
+      <div class="pk__block pk__block--split pk__block--first">
+        <div>
+          <p class="pk__label">L'idée</p>
+          <p class="pk__plain">
+            Réunir en un seul lieu ce qui existe d'habitude séparément : une table,
+            une architecture, une lumière, une musique. Pas un dîner suivi d'une
+            fête — une soirée écrite d'un bout à l'autre.
+          </p>
+        </div>
+        <div>
+          <p class="pk__label">Par qui</p>
+          <p class="pk__plain">
+            <em>Eugénie Colleville</em>, cheffe, signe le menu.
+            <em>Tanguy Accard</em>, direction créative, signe l'atmosphère et la
+            musique avec Accard Production. Les vins sont choisis par
+            <em>Pierre Maussire</em>.
+          </p>
+        </div>
+        <div>
+          <p class="pk__label">L'accueil</p>
+          <p class="pk__plain">
+            Vous êtes reçus au Château Laffitte Carcasset, propriété viticole de
+            Saint-Estèphe, pour vous seuls ce soir-là. Verre à l'arrivée, dîner
+            servi à table, la nuit jusqu'au bout, et le lendemain au bord de la
+            piscine.
+          </p>
+        </div>
+      </div>
+
+      <div class="pk__block">
+        <p class="pk__label">Le déroulé</p>
+        <div class="pk__acts">
+          {ACTS.map(([kicker, name, line]) => (
+            <div class="pk__act">
+              <p class="pk__a-kicker">{kicker}</p>
+              <p class="pk__a-title">{name}</p>
+              <p class="pk__a-line"><em>{line}</em></p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pk__block">
+        <p class="pk__label">Le menu</p>
+        <div class="pk__courses">
+          {MENU.map(([course, dish, wine]) => (
+            <div class="pk__course">
+              <p class="pk__c-label">{course}</p>
+              <p class="pk__c-dish">{dish}{wine && <em> — {wine}</em>}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="pk__block pk__block--split">
+        <div>
+          <p class="pk__label">Compris</p>
+          <p class="pk__plain">L'entrée, le menu dégustation, le verre d'accueil, les DJ sets et les performances.</p>
+        </div>
+        <div>
+          <p class="pk__label">En supplément</p>
+          <p class="pk__plain">
+            Les vins du domaine en accord ({WINE_PRICE_FR}), le brunch du dimanche,
+            et les cinq chambres du château, sur demande.
+          </p>
+        </div>
+        <div>
           <p class="pk__label">Bon à savoir</p>
-          <ul class="pk__list pk__list--plain">
-            <li>Saint-Estèphe est à portée de Bordeaux — chauffeurs et navettes sont <a href={SITE}>listés sur le site</a>.</li>
-            <li>C'est la semaine des vendanges dans le Médoc — maisons à louer à côté, du vendredi au lundi.</li>
-            <li>Tenue : celle d'un long dîner qui se transforme en nuit.</li>
-            <li>Le billet est nominatif et non remboursable ; il peut être cédé. <a href={`${SITE}/conditions-generales`}>Conditions de vente</a>.</li>
-          </ul>
+          <p class="pk__plain">
+            Bordeaux est à portée — <a href={SITE}>chauffeurs et maisons à louer</a> sont
+            listés sur le site. Billet nominatif, non remboursable, cessible
+            (<a href={`${SITE}/conditions-generales`}>conditions</a>).
+          </p>
         </div>
-      </section>
+      </div>
 
       <footer class="pk__foot">
-        <p class="pk__price"><span>Prévente jusqu'au 12 août</span><strong>{TICKET_PRICE_FR}</strong></p>
-        <a class="pk__cta" href={SITE}>Réserver ma place →</a>
+        <a class="pk__cta pk__cta--ghost" href={SITE}>Réserver ma place →</a>
         <p class="pk__fine">
           <a href={SITE}>signatureacte.com</a> &nbsp;·&nbsp; code d'accès <em>carcasset26</em><br>
           <a href={`mailto:${MAIL}?subject=SIGNATURE%20No.%2001`}>{MAIL}</a>
@@ -82,47 +158,44 @@ const INSTA = "https://www.instagram.com/signature.acte/";
         </p>
       </footer>
 
-    </article>
+    </section>
   </main>
 </Layout>
 
 <style>
   .pk {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(1.25rem, 4vw, 3rem);
     background: var(--sig-ink, #0a0707);
+    color: var(--sig-cream, #f0e9dd);
   }
   .pk__bg {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background-size: cover;
     background-position: center 22%;
   }
   .pk__veil {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(8, 4, 4, 0.62) 0%, rgba(8, 4, 4, 0.86) 100%);
-  }
-  .pk__sheet {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 62rem;
-    padding: clamp(1.5rem, 3.5vw, 3rem);
-    border: 1px solid rgba(240, 233, 221, 0.16);
-    background: rgba(6, 4, 3, 0.55);
-    backdrop-filter: blur(2px);
-    color: var(--sig-cream, #f0e9dd);
+    background: linear-gradient(180deg, rgba(8, 4, 4, 0.6) 0%, rgba(8, 4, 4, 0.88) 100%);
   }
 
-  .pk__head { text-align: center; }
+  /* ---- The thirty seconds ---- */
+  .pk__hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: clamp(2rem, 6vh, 4rem) clamp(1.25rem, 5vw, 3rem);
+  }
   .pk__brand {
     font-family: var(--font-display);
-    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    font-size: clamp(2rem, 6vw, 3.6rem);
     letter-spacing: 0.34em;
     text-indent: 0.34em;
     margin: 0;
@@ -130,98 +203,78 @@ const INSTA = "https://www.instagram.com/signature.acte/";
   }
   .pk__no {
     font-family: var(--font-display);
-    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
     color: rgba(240, 233, 221, 0.8);
-    margin: 0.45rem 0 1.1rem;
+    margin: 0.5rem 0 0;
+  }
+  .pk__vision {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+    line-height: 1.45;
+    max-width: 30rem;
+    margin: clamp(1.6rem, 4vh, 2.6rem) auto clamp(1.4rem, 3.5vh, 2.2rem);
   }
   .pk__when {
     font-family: var(--font-body);
-    font-size: 0.62rem;
-    letter-spacing: 0.3em;
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.4rem;
   }
   .pk__where {
     font-family: var(--font-body);
-    font-size: 0.58rem;
-    letter-spacing: 0.28em;
+    font-size: 0.56rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: rgba(240, 233, 221, 0.6);
     margin: 0;
   }
 
-  .pk__lead {
+  .pk__count {
+    list-style: none;
+    padding: 0;
+    margin: clamp(1.6rem, 4vh, 2.6rem) 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(1.75rem, 6vw, 4.5rem);
+  }
+  .pk__count strong {
+    display: block;
     font-family: var(--font-display);
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    line-height: 1.6;
-    text-align: center;
-    max-width: 40rem;
-    margin: clamp(1.4rem, 3vh, 2.2rem) auto;
-    color: rgba(240, 233, 221, 0.9);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1;
   }
-
-  .pk__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.25rem, 2.5vw, 2.5rem);
-    border-top: 1px solid rgba(240, 233, 221, 0.16);
-    padding-top: clamp(1.25rem, 3vh, 2rem);
-  }
-  .pk__label {
+  .pk__count span {
+    display: block;
+    margin-top: 0.4rem;
     font-family: var(--font-body);
-    font-size: 0.55rem;
-    letter-spacing: 0.36em;
+    font-size: 0.5rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: rgba(240, 233, 221, 0.55);
-    margin: 0 0 0.9rem;
   }
-  .pk__label--sep { margin-top: 1.4rem; }
-  .pk__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-display);
-    font-size: 0.92rem;
-    line-height: 1.5;
-    color: rgba(240, 233, 221, 0.85);
-  }
-  .pk__list li { margin: 0 0 0.55rem; }
-  .pk__list span {
-    display: inline-block;
-    min-width: 3.4em;
-    font-family: var(--font-body);
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-    color: rgba(240, 233, 221, 0.55);
-  }
-  .pk__list--plain li { padding-left: 0.9em; text-indent: -0.9em; }
-  .pk__list--plain li::before { content: "— "; color: rgba(240, 233, 221, 0.4); }
 
-  .pk__foot {
-    margin-top: clamp(1.4rem, 3vh, 2.2rem);
-    padding-top: clamp(1.1rem, 2.5vh, 1.6rem);
-    border-top: 1px solid rgba(240, 233, 221, 0.16);
-    text-align: center;
-  }
-  .pk__price { margin: 0 0 1rem; }
+  .pk__price { margin: 0 0 1.1rem; }
   .pk__price span {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.55rem;
-    letter-spacing: 0.34em;
+    font-size: 0.52rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: rgba(240, 233, 221, 0.55);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
   }
   .pk__price strong {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
     letter-spacing: 0.04em;
   }
   .pk__cta {
     display: inline-block;
-    padding: 0.85rem 2.2rem;
+    padding: 0.9rem 2.4rem;
     background: var(--sig-cream, #f0e9dd);
     color: var(--sig-ink, #0a0707);
     text-decoration: none;
@@ -232,45 +285,153 @@ const INSTA = "https://www.instagram.com/signature.acte/";
     transition: letter-spacing 0.5s ease, opacity 0.3s ease;
   }
   .pk__cta:hover { letter-spacing: 0.4em; opacity: 0.9; }
+  .pk__cta--ghost {
+    background: none;
+    color: var(--sig-cream, #f0e9dd);
+    border: 1px solid rgba(240, 233, 221, 0.45);
+  }
+  .pk__credits {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: rgba(240, 233, 221, 0.65);
+    margin: 1.4rem 0 0;
+  }
+  .pk__credits em { font-style: italic; color: rgba(240, 233, 221, 0.9); }
+  .pk__more {
+    margin-top: clamp(1.6rem, 5vh, 3rem);
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
+    text-decoration: none;
+  }
+  .pk__more:hover { color: var(--sig-cream, #f0e9dd); }
+
+  /* ---- The detail ---- */
+  .pk__detail {
+    position: relative;
+    z-index: 1;
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 8vh, 5rem);
+  }
+  .pk__block {
+    padding-top: clamp(1.5rem, 4vh, 2.5rem);
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    border-top: 1px solid rgba(240, 233, 221, 0.16);
+  }
+  .pk__label {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 1.1rem;
+  }
+
+  .pk__acts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: clamp(1rem, 2vw, 1.75rem);
+  }
+  .pk__a-kicker {
+    font-family: var(--font-body);
+    font-size: 0.48rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
+    margin: 0 0 0.3rem;
+  }
+  .pk__a-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.15;
+    margin: 0 0 0.3rem;
+  }
+  .pk__a-line {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: rgba(240, 233, 221, 0.75);
+    margin: 0;
+  }
+
+  .pk__courses { columns: 2; column-gap: clamp(1.5rem, 3vw, 3rem); }
+  .pk__course { break-inside: avoid; margin: 0 0 0.85rem; }
+  .pk__c-label {
+    font-family: var(--font-body);
+    font-size: 0.48rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
+    margin: 0 0 0.15rem;
+  }
+  .pk__c-dish {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: rgba(240, 233, 221, 0.86);
+    margin: 0;
+  }
+  .pk__c-dish em { font-style: italic; color: rgba(240, 233, 221, 0.5); }
+
+  .pk__block--split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .pk__block--first { border-top: none; padding-top: clamp(1.5rem, 4vh, 2.5rem); margin-top: 0; }
+  .pk__plain em { font-style: italic; color: var(--sig-cream, #f0e9dd); }
+  .pk__plain {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0;
+  }
+
+  .pk__foot {
+    text-align: center;
+    padding-top: clamp(1.5rem, 4vh, 2.5rem);
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    border-top: 1px solid rgba(240, 233, 221, 0.16);
+  }
   .pk__fine {
-    margin: 1.1rem 0 0;
+    margin: 1.2rem 0 0;
     font-family: var(--font-body);
     font-size: 0.55rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(240, 233, 221, 0.5);
-    line-height: 2;
+    line-height: 2.2;
   }
   .pk__fine em { font-style: normal; color: rgba(240, 233, 221, 0.8); }
-  .pk a:not(.pk__cta) {
+
+  .pk a:not(.pk__cta):not(.pk__more) {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid rgba(240, 233, 221, 0.35);
-    transition: border-color 0.3s ease, color 0.3s ease;
   }
-  .pk a:not(.pk__cta):hover { color: var(--sig-cream, #f0e9dd); border-bottom-color: rgba(240, 233, 221, 0.9); }
+  .pk a:not(.pk__cta):not(.pk__more):hover { border-bottom-color: rgba(240, 233, 221, 0.9); }
 
-  @media (max-width: 860px) {
-    .pk__grid { grid-template-columns: 1fr; gap: 1.4rem; }
-    .pk__list { font-size: 0.98rem; }
+  @media (max-width: 640px) {
+    .pk__courses { columns: 1; }
+    .pk__count { gap: 1.5rem 2.5rem; }
   }
 
-  /* One sheet of A4, ink-friendly. */
+  /* Prints to two clean sheets: the offer, then the detail. */
   @media print {
-    .pk { min-height: 0; padding: 0; background: #fff; }
-    .pk__bg, .pk__veil { display: none; }
-    .pk__sheet {
-      max-width: none;
-      border: none;
-      background: none;
-      color: #14100e;
-      padding: 0;
-      backdrop-filter: none;
-    }
-    .pk__lead, .pk__list { color: #2a221e; }
-    .pk__where, .pk__label, .pk__fine, .pk__price span, .pk__list span { color: #6b5c53; }
-    .pk__grid, .pk__foot { border-color: #cfc4bb; }
+    .pk__bg, .pk__veil, .pk__more { display: none; }
+    .pk { background: #fff; color: #14100e; }
+    .pk__hero { min-height: 0; padding: 0 0 1.5rem; break-after: page; }
+    .pk__detail { padding: 0; }
+    .pk__vision, .pk__a-line, .pk__c-dish, .pk__plain { color: #2a221e; }
+    .pk__where, .pk__label, .pk__fine, .pk__price span, .pk__count span,
+    .pk__a-kicker, .pk__c-label, .pk__c-dish em { color: #6b5c53; }
+    .pk__block, .pk__foot { border-color: #cfc4bb; }
     .pk__cta { background: none; color: #14100e; border: 1px solid #14100e; padding: 0.5rem 1.2rem; }
-    .pk a:not(.pk__cta) { border-bottom-color: #b3a89f; }
+    .pk a { border-bottom-color: #b3a89f !important; }
   }
 </style>
