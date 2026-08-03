@@ -34,11 +34,11 @@ const MENU = [
 
 <Layout lang="fr" title={title} description={description}>
   <main class="pk">
-    <div class="pk__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
-    <div class="pk__veil"></div>
 
     <!-- ===== Les trente secondes ===== -->
     <section class="pk__hero">
+      <div class="pk__band" style="background-image: url('/images/signature/act1.jpg');"></div>
+
       <p class="pk__brand">SIGNATURE</p>
       <p class="pk__no"><em>No. 01</em></p>
 
@@ -50,14 +50,8 @@ const MENU = [
       <p class="pk__when">26 – 27 septembre 2026</p>
       <p class="pk__where">Château Laffitte Carcasset &nbsp;·&nbsp; Saint-Estèphe &nbsp;·&nbsp; Médoc</p>
 
-      <ul class="pk__count">
-        <li><strong>21</strong><span>heures</span></li>
-        <li><strong>10</strong><span>services</span></li>
-        <li><strong>1</strong><span>château, pour nous seuls</span></li>
-      </ul>
-
       <p class="pk__price">
-        <span>Première édition · places limitées · prévente jusqu'au 12 août</span>
+        <span>Prévente jusqu'au 12 août</span>
         <strong>{TICKET_PRICE_FR}</strong>
       </p>
       <a class="pk__cta" href={SITE}>Réserver ma place →</a>
@@ -66,11 +60,9 @@ const MENU = [
         Menu de la cheffe <em>Eugénie Colleville</em> &nbsp;·&nbsp;
         musique par <em>Accard Production</em>
       </p>
-
-      <a class="pk__more" href="#detail">Le détail ↓</a>
     </section>
 
-    <!-- ===== Le détail, pour qui veut ===== -->
+    <!-- ===== Le détail ===== -->
     <section class="pk__detail" id="detail">
 
       <div class="pk__block pk__block--split pk__block--first">
@@ -109,7 +101,7 @@ const MENU = [
             <div class="pk__act">
               <p class="pk__a-kicker">{kicker}</p>
               <p class="pk__a-title">{name}</p>
-              <p class="pk__a-line"><em>{line}</em></p>
+              <p class="pk__a-line">{line}</p>
             </div>
           ))}
         </div>
@@ -150,9 +142,9 @@ const MENU = [
       </div>
 
       <footer class="pk__foot">
-        <a class="pk__cta pk__cta--ghost" href={SITE}>Réserver ma place →</a>
+        <a class="pk__cta" href={SITE}>Réserver ma place →</a>
         <p class="pk__fine">
-          <a href={SITE}>signatureacte.com</a> &nbsp;·&nbsp; code d'accès <em>carcasset26</em><br>
+          <a href={SITE}>signatureacte.com</a> &nbsp;·&nbsp; code d'accès <strong>carcasset26</strong><br>
           <a href={`mailto:${MAIL}?subject=SIGNATURE%20No.%2001`}>{MAIL}</a>
           &nbsp;·&nbsp; <a href={INSTA} target="_blank" rel="noopener">@signature.acte</a>
         </p>
@@ -163,275 +155,230 @@ const MENU = [
 </Layout>
 
 <style>
+  /* A printed brochure, not a night-time website: ink on paper, so that it
+     survives a phone screen in daylight and a laser printer. */
   .pk {
-    position: relative;
-    background: var(--sig-ink, #0a0707);
-    color: var(--sig-cream, #f0e9dd);
-  }
-  .pk__bg {
-    position: fixed;
-    inset: 0;
-    background-size: cover;
-    background-position: center 22%;
-  }
-  .pk__veil {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(8, 4, 4, 0.6) 0%, rgba(8, 4, 4, 0.88) 100%);
+    --paper: #f3ede2;
+    --ink: #17120f;
+    --muted: #6d5e53;
+    --line: #d9cfc0;
+    --accent: #6e1f14;
+
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
   }
 
-  /* ---- The thirty seconds ---- */
   .pk__hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 6vh, 4rem);
     text-align: center;
-    padding: clamp(2rem, 6vh, 4rem) clamp(1.25rem, 5vw, 3rem);
   }
+  .pk__band {
+    height: clamp(150px, 26vh, 280px);
+    margin: 0 calc(-1 * clamp(1.25rem, 5vw, 3rem)) clamp(1.75rem, 4vh, 2.75rem);
+    background-size: cover;
+    background-position: center 30%;
+  }
+
   .pk__brand {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 3.6rem);
-    letter-spacing: 0.34em;
-    text-indent: 0.34em;
+    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
     margin: 0;
     line-height: 1;
   }
   .pk__no {
     font-family: var(--font-display);
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    color: rgba(240, 233, 221, 0.8);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--muted);
     margin: 0.5rem 0 0;
   }
   .pk__vision {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.4vw, 1.8rem);
-    line-height: 1.45;
-    max-width: 30rem;
-    margin: clamp(1.6rem, 4vh, 2.6rem) auto clamp(1.4rem, 3.5vh, 2.2rem);
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.4;
+    max-width: 26em;
+    margin: clamp(1.5rem, 3.5vh, 2.4rem) auto clamp(1.4rem, 3vh, 2rem);
   }
   .pk__when {
     font-family: var(--font-body);
-    font-size: 0.66rem;
-    letter-spacing: 0.32em;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.5rem;
   }
   .pk__where {
     font-family: var(--font-body);
-    font-size: 0.56rem;
-    letter-spacing: 0.26em;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.6);
+    color: var(--muted);
     margin: 0;
   }
 
-  .pk__count {
-    list-style: none;
-    padding: 0;
-    margin: clamp(1.6rem, 4vh, 2.6rem) 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: clamp(1.75rem, 6vw, 4.5rem);
+  .pk__price {
+    margin: clamp(1.5rem, 3.5vh, 2.4rem) 0 1.4rem;
+    padding-top: clamp(1.4rem, 3vh, 2rem);
+    border-top: 1px solid var(--line);
   }
-  .pk__count strong {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-    line-height: 1;
-  }
-  .pk__count span {
-    display: block;
-    margin-top: 0.4rem;
-    font-family: var(--font-body);
-    font-size: 0.5rem;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.55);
-  }
-
-  .pk__price { margin: 0 0 1.1rem; }
   .pk__price span {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.52rem;
-    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.55);
-    margin-bottom: 0.5rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
   }
   .pk__price strong {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2.6vw, 2rem);
-    letter-spacing: 0.04em;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
   }
+
   .pk__cta {
     display: inline-block;
-    padding: 0.9rem 2.4rem;
-    background: var(--sig-cream, #f0e9dd);
-    color: var(--sig-ink, #0a0707);
+    padding: 1rem 2.6rem;
+    background: var(--accent);
+    color: var(--paper);
     text-decoration: none;
     font-family: var(--font-body);
-    font-size: 0.6rem;
-    letter-spacing: 0.32em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    transition: letter-spacing 0.5s ease, opacity 0.3s ease;
+    transition: opacity 0.3s ease;
   }
-  .pk__cta:hover { letter-spacing: 0.4em; opacity: 0.9; }
-  .pk__cta--ghost {
-    background: none;
-    color: var(--sig-cream, #f0e9dd);
-    border: 1px solid rgba(240, 233, 221, 0.45);
-  }
+  .pk__cta:hover { opacity: 0.88; }
+
   .pk__credits {
     font-family: var(--font-display);
-    font-size: 0.9rem;
-    color: rgba(240, 233, 221, 0.65);
-    margin: 1.4rem 0 0;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin: 1.5rem 0 0;
   }
-  .pk__credits em { font-style: italic; color: rgba(240, 233, 221, 0.9); }
-  .pk__more {
-    margin-top: clamp(1.6rem, 5vh, 3rem);
-    font-family: var(--font-body);
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.5);
-    text-decoration: none;
-  }
-  .pk__more:hover { color: var(--sig-cream, #f0e9dd); }
+  .pk__credits em { font-style: italic; color: var(--ink); }
 
-  /* ---- The detail ---- */
+  /* ---- Le détail ---- */
   .pk__detail {
-    position: relative;
-    z-index: 1;
-    max-width: 62rem;
+    max-width: 60rem;
     margin: 0 auto;
     padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 8vh, 5rem);
   }
   .pk__block {
-    padding-top: clamp(1.5rem, 4vh, 2.5rem);
-    margin-top: clamp(1.5rem, 4vh, 2.5rem);
-    border-top: 1px solid rgba(240, 233, 221, 0.16);
+    padding-top: clamp(1.75rem, 4vh, 2.75rem);
+    margin-top: clamp(1.75rem, 4vh, 2.75rem);
+    border-top: 1px solid var(--line);
   }
+  .pk__block--first { border-top: none; margin-top: 0; }
   .pk__label {
     font-family: var(--font-body);
-    font-size: 0.55rem;
-    letter-spacing: 0.36em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.55);
-    margin: 0 0 1.1rem;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
   }
 
   .pk__acts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    gap: clamp(1rem, 2vw, 1.75rem);
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2rem);
   }
   .pk__a-kicker {
     font-family: var(--font-body);
-    font-size: 0.48rem;
-    letter-spacing: 0.26em;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.5);
+    color: var(--muted);
     margin: 0 0 0.3rem;
   }
   .pk__a-title {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     line-height: 1.15;
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.35rem;
   }
   .pk__a-line {
     font-family: var(--font-display);
-    font-size: 0.85rem;
-    line-height: 1.4;
-    color: rgba(240, 233, 221, 0.75);
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #3a2f28;
     margin: 0;
   }
 
   .pk__courses { columns: 2; column-gap: clamp(1.5rem, 3vw, 3rem); }
-  .pk__course { break-inside: avoid; margin: 0 0 0.85rem; }
+  .pk__course { break-inside: avoid; margin: 0 0 1rem; }
   .pk__c-label {
     font-family: var(--font-body);
-    font-size: 0.48rem;
-    letter-spacing: 0.26em;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.5);
-    margin: 0 0 0.15rem;
+    color: var(--muted);
+    margin: 0 0 0.2rem;
   }
   .pk__c-dish {
     font-family: var(--font-display);
-    font-size: 0.88rem;
+    font-size: 1.02rem;
     line-height: 1.4;
-    color: rgba(240, 233, 221, 0.86);
     margin: 0;
   }
-  .pk__c-dish em { font-style: italic; color: rgba(240, 233, 221, 0.5); }
+  .pk__c-dish em { font-style: italic; color: var(--accent); }
 
   .pk__block--split {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
-  .pk__block--first { border-top: none; padding-top: clamp(1.5rem, 4vh, 2.5rem); margin-top: 0; }
-  .pk__plain em { font-style: italic; color: var(--sig-cream, #f0e9dd); }
   .pk__plain {
     font-family: var(--font-display);
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: rgba(240, 233, 221, 0.8);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: #3a2f28;
     margin: 0;
   }
+  .pk__plain em { font-style: italic; color: var(--ink); font-weight: 500; }
 
   .pk__foot {
     text-align: center;
-    padding-top: clamp(1.5rem, 4vh, 2.5rem);
-    margin-top: clamp(1.5rem, 4vh, 2.5rem);
-    border-top: 1px solid rgba(240, 233, 221, 0.16);
+    padding-top: clamp(1.75rem, 4vh, 2.75rem);
+    margin-top: clamp(1.75rem, 4vh, 2.75rem);
+    border-top: 1px solid var(--line);
   }
   .pk__fine {
-    margin: 1.2rem 0 0;
+    margin: 1.4rem 0 0;
     font-family: var(--font-body);
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(240, 233, 221, 0.5);
-    line-height: 2.2;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    line-height: 2;
   }
-  .pk__fine em { font-style: normal; color: rgba(240, 233, 221, 0.8); }
+  .pk__fine strong { color: var(--ink); letter-spacing: 0.14em; }
 
-  .pk a:not(.pk__cta):not(.pk__more) {
-    color: inherit;
+  .pk a:not(.pk__cta) {
+    color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px solid rgba(240, 233, 221, 0.35);
+    border-bottom: 1px solid rgba(110, 31, 20, 0.4);
   }
-  .pk a:not(.pk__cta):not(.pk__more):hover { border-bottom-color: rgba(240, 233, 221, 0.9); }
+  .pk a:not(.pk__cta):hover { border-bottom-color: var(--accent); }
 
   @media (max-width: 640px) {
+    .pk { font-size: 16px; }
     .pk__courses { columns: 1; }
     .pk__count { gap: 1.5rem 2.5rem; }
   }
 
-  /* Prints to two clean sheets: the offer, then the detail. */
   @media print {
-    .pk__bg, .pk__veil, .pk__more { display: none; }
-    .pk { background: #fff; color: #14100e; }
-    .pk__hero { min-height: 0; padding: 0 0 1.5rem; break-after: page; }
-    .pk__detail { padding: 0; }
-    .pk__vision, .pk__a-line, .pk__c-dish, .pk__plain { color: #2a221e; }
-    .pk__where, .pk__label, .pk__fine, .pk__price span, .pk__count span,
-    .pk__a-kicker, .pk__c-label, .pk__c-dish em { color: #6b5c53; }
-    .pk__block, .pk__foot { border-color: #cfc4bb; }
-    .pk__cta { background: none; color: #14100e; border: 1px solid #14100e; padding: 0.5rem 1.2rem; }
-    .pk a { border-bottom-color: #b3a89f !important; }
+    .pk { font-size: 11pt; }
+    .pk__hero { break-after: page; padding-bottom: 0; }
+    .pk__band { height: 45mm; }
+    .pk__cta { background: none; color: var(--ink); border: 1px solid var(--ink); }
   }
 </style>
