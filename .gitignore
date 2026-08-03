@@ -6,3 +6,4 @@ dist/
 .env.production
 .env.local
 .vercel
+dist-pdf/

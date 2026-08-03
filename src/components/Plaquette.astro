@@ -1,0 +1,475 @@
+---
+/**
+ * The one-page brief, in either language. Same layout, same styles; only the
+ * copy changes, so the two pages can never drift apart.
+ */
+import { TICKET_PRICE, TICKET_PRICE_FR, WINE_PRICE, WINE_PRICE_FR } from "../lib/event";
+
+export interface Props {
+  lang?: "fr" | "en";
+}
+const { lang = "fr" } = Astro.props;
+
+const SITE = "https://signatureacte.com";
+const MAIL = "signatureacte@gmail.com";
+const INSTA = "https://www.instagram.com/signature.acte/";
+
+const FR = {
+  vision: "Une soirée où l'architecture, la lumière, le son et la table ne font qu'un.",
+  when: "26 – 27 septembre 2026",
+  where: "Château Laffitte Carcasset · Saint-Estèphe · Médoc",
+  presale: "Prévente jusqu'au 12 août",
+  price: TICKET_PRICE_FR,
+  cta: "Réserver ma place →",
+  credits: ["Menu de la cheffe ", "Eugénie Colleville", " · musique par ", "Accard Production"],
+  labels: {
+    idea: "L'idée",
+    who: "Par qui",
+    welcome: "L'accueil",
+    run: "Le déroulé",
+    menu: "Le menu",
+    included: "Compris",
+    extra: "En supplément",
+    know: "Bon à savoir",
+    code: "code d'accès",
+  },
+  idea: "Réunir en un seul lieu ce qui existe d'habitude séparément : une table, une architecture, une lumière, une musique. Pas un dîner suivi d'une fête — une soirée écrite d'un bout à l'autre.",
+  welcome: "Vous êtes reçus au Château Laffitte Carcasset, propriété viticole de Saint-Estèphe, pour vous seuls ce soir-là. Dîner servi à table, la nuit jusqu'au bout, et le lendemain au bord de la piscine.",
+  included: "L'entrée, le menu dégustation, les DJ sets et les performances.",
+  extra: `Les vins du domaine à volonté, de l'arrivée au dîner (${WINE_PRICE_FR}), le brunch du dimanche, et les cinq chambres du château, sur demande.`,
+  acts: [
+    ["Acte I · 18:00", "Arrivée", "Les grilles s'ouvrent, la soirée commence."],
+    ["Acte II · 19:00", "L'heure dorée", "Les canapés, tandis que la lumière descend sur le domaine."],
+    ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
+    ["Acte IV · 22:00", "La nuit", "Ambiance, rave à 23:00, after glow à 03:00."],
+    ["Acte V · le lendemain", "Ni hâte, ni horaire", "Brunch à midi, piscine, rideau à 15:00."],
+  ],
+  menu: [
+    ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Crémant"],
+    ["Canapé I", "Canelé salé au confit de canard, compotée de prunes d'Ente", "Crémant"],
+    ["Canapé II", "Huître d'Arcachon, mignonnette au vin du domaine, espuma de Graves", ""],
+    ["Canapé III · au chai", "Granité de moût du domaine, lait ribot, gelée de Sauternes, noix du Périgord", ""],
+    ["À table", "Pains du Sud-Ouest, beurre aux algues baratté maison, huile d'olive", ""],
+    ["Entrée", "Maigre de la Gironde en gravlax, verveine et fenouil sauvage, beurre blanc tiède", "Pessac-Léognan blanc"],
+    ["Plat", "Joue de bœuf de Bazas braisée six heures au vin de la maison, cèpes du Médoc", "Laffitte Carcasset"],
+    ["Dessert", "Yaourt de brebis au miel du domaine et romarin, figue noire, sarrasin caramélisé", "Sauternes"],
+    ["Mignardises", "Pâte de fruit au vin de la maison", ""],
+    ["Signature", "Tartelette de chocolat pure origine, caviar Sturia®, fleur de sel", ""],
+  ],
+};
+
+const EN = {
+  vision: "An evening where architecture, light, sound and the table are one.",
+  when: "26 – 27 September 2026",
+  where: "Château Laffitte Carcasset · Saint-Estèphe · Médoc",
+  presale: "Presale until 12 August",
+  price: TICKET_PRICE,
+  cta: "Reserve my place →",
+  credits: ["Menu by chef ", "Eugénie Colleville", " · music by ", "Accard Production"],
+  labels: {
+    idea: "The idea",
+    who: "By whom",
+    welcome: "The welcome",
+    run: "The evening",
+    menu: "The menu",
+    included: "Included",
+    extra: "Ticketed separately",
+    know: "Good to know",
+    code: "access code",
+  },
+  idea: "To bring together in one place what usually exists apart: a table, an architecture, a light, a music. Not a dinner followed by a party — one evening, written from end to end.",
+  welcome: "You are received at Château Laffitte Carcasset, a wine estate in Saint-Estèphe, yours alone that night. Dinner served at the table, the night for as long as it lasts, and the next day by the pool.",
+  included: "Admission, the tasting menu, the DJ sets and the performances.",
+  extra: `The estate wines, unlimited from arrival to dinner (${WINE_PRICE}), Sunday brunch, and the five rooms at the château, on request.`,
+  acts: [
+    ["Act I · 18:00", "Arrival", "The gates open, and the evening begins."],
+    ["Act II · 19:00", "Golden hour", "Canapés, as the light goes down over the estate."],
+    ["Act III · 20:30", "Dinner", "Course by course, wine by wine, chosen by Pierre Maussire."],
+    ["Act IV · 22:00", "The night", "Ambience, rave at 23:00, after glow at 03:00."],
+    ["Act V · the next day", "No rush, no schedule", "Brunch at noon, poolside, curtain close at 15:00."],
+  ],
+  menu: [
+    ["Apéritif", "Bayonne ham croquettes, Ossau-Iraty béchamel", "Crémant"],
+    ["Canapé I", "Savoury canelé with confit duck, Ente plum compote", "Crémant"],
+    ["Canapé II", "Arcachon oyster, mignonette of the estate's red, Graves espuma", ""],
+    ["Canapé III · in the chai", "Granita of the estate's grape must, ribot milk, Sauternes jelly, Périgord walnuts", ""],
+    ["At the table", "South-West breads, house-churned seaweed butter, olive oil", ""],
+    ["Starter", "Gironde meagre gravlax, lemon verbena and wild fennel, warm beurre blanc", "Pessac-Léognan blanc"],
+    ["Main", "Bazas beef cheek braised six hours in the house wine, Médoc cèpes", "Laffitte Carcasset"],
+    ["Dessert", "Sheep's yoghurt with estate honey and rosemary, black fig, caramelised buckwheat", "Sauternes"],
+    ["Mignardises", "Pâte de fruit of the house wine", ""],
+    ["Signature", "Single-origin dark chocolate tartlet, Sturia® caviar, fleur de sel", ""],
+  ],
+};
+
+const t = lang === "en" ? EN : FR;
+---
+
+<main class="pk">
+
+  <section class="pk__hero">
+    <div class="pk__band" style="background-image: url('/images/signature/act1.jpg');"></div>
+
+    <p class="pk__brand">SIGNATURE</p>
+    <p class="pk__no"><em>No. 01</em></p>
+
+    <p class="pk__vision">{t.vision}</p>
+
+    <p class="pk__when">{t.when}</p>
+    <p class="pk__where">{t.where}</p>
+
+    <p class="pk__price">
+      <span>{t.presale}</span>
+      <strong>{t.price}</strong>
+    </p>
+    <a class="pk__cta" href={SITE}>{t.cta}</a>
+
+    <p class="pk__credits">
+      {t.credits[0]}<em>{t.credits[1]}</em>{t.credits[2]}<em>{t.credits[3]}</em>
+    </p>
+  </section>
+
+  <section class="pk__detail" id="detail">
+
+    <div class="pk__block pk__block--split pk__block--first">
+      <div>
+        <p class="pk__label">{t.labels.idea}</p>
+        <p class="pk__plain">{t.idea}</p>
+      </div>
+      <div>
+        <p class="pk__label">{t.labels.who}</p>
+        <p class="pk__plain">
+          <em>Eugénie Colleville</em>{lang === "en" ? ", chef, writes the menu. " : ", cheffe, signe le menu. "}
+          <em>Tanguy Accard</em>{lang === "en"
+            ? ", creative direction, shapes the atmosphere and the music with Accard Production. The wines are chosen by "
+            : ", direction créative, signe l'atmosphère et la musique avec Accard Production. Les vins sont choisis par "}
+          <em>Pierre Maussire</em>.
+        </p>
+      </div>
+      <div>
+        <p class="pk__label">{t.labels.welcome}</p>
+        <p class="pk__plain">{t.welcome}</p>
+      </div>
+    </div>
+
+    <div class="pk__block">
+      <p class="pk__label">{t.labels.run}</p>
+      <div class="pk__acts">
+        {t.acts.map(([kicker, name, line]) => (
+          <div class="pk__act">
+            <p class="pk__a-kicker">{kicker}</p>
+            <p class="pk__a-title">{name}</p>
+            <p class="pk__a-line">{line}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="pk__block">
+      <p class="pk__label">{t.labels.menu}</p>
+      <div class="pk__courses">
+        {t.menu.map(([course, dish, wine]) => (
+          <div class="pk__course">
+            <p class="pk__c-label">{course}</p>
+            <p class="pk__c-dish">{dish}{wine && <em> — {wine}</em>}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="pk__block pk__block--split">
+      <div>
+        <p class="pk__label">{t.labels.included}</p>
+        <p class="pk__plain">{t.included}</p>
+      </div>
+      <div>
+        <p class="pk__label">{t.labels.extra}</p>
+        <p class="pk__plain">{t.extra}</p>
+      </div>
+      <div>
+        <p class="pk__label">{t.labels.know}</p>
+        {lang === "en" ? (
+          <p class="pk__plain">
+            Bordeaux is within reach — <a href={SITE}>drivers and houses to rent</a> are
+            listed on the site. Tickets are personal and non-refundable; they may be
+            passed on (<a href={`${SITE}/conditions-generales`}>terms of sale</a>).
+          </p>
+        ) : (
+          <p class="pk__plain">
+            Bordeaux est à portée — <a href={SITE}>chauffeurs et maisons à louer</a> sont
+            listés sur le site. Billet nominatif, non remboursable, cessible
+            (<a href={`${SITE}/conditions-generales`}>conditions de vente</a>).
+          </p>
+        )}
+      </div>
+    </div>
+
+    <footer class="pk__foot">
+      <a class="pk__cta" href={SITE}>{t.cta}</a>
+      <p class="pk__fine">
+        <a href={SITE}>signatureacte.com</a> &nbsp;·&nbsp; {t.labels.code} <strong>carcasset26</strong><br>
+        <a href={`mailto:${MAIL}?subject=SIGNATURE%20No.%2001`}>{MAIL}</a>
+        &nbsp;·&nbsp; <a href={INSTA} target="_blank" rel="noopener">@signature.acte</a>
+      </p>
+    </footer>
+
+  </section>
+</main>
+
+<style>
+  /* The site's own palette, but pulled up until it is actually readable on a
+     phone: cream at full strength, nothing under 0.72 opacity, type a size up
+     and far more air between the blocks. */
+  .pk {
+    --pk-paper: #0d0908;
+    --pk-ink: #f4eee4;
+    --pk-muted: #bcac9c;
+    --pk-line: rgba(244, 238, 228, 0.2);
+    --pk-accent: #e0a06b;
+
+    background: var(--pk-paper);
+    color: var(--pk-ink);
+    font-size: 18px;
+  }
+
+  .pk__hero {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 6vh, 4rem);
+    text-align: center;
+  }
+  .pk__band {
+    height: clamp(150px, 26vh, 280px);
+    margin: 0 calc(-1 * clamp(1.25rem, 5vw, 3rem)) clamp(1.75rem, 4vh, 2.75rem);
+    background-size: cover;
+    background-position: center 30%;
+  }
+
+  .pk__brand {
+    color: var(--pk-ink);
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    margin: 0;
+    line-height: 1;
+  }
+  .pk__no {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--pk-muted);
+    margin: 0.5rem 0 0;
+  }
+  .pk__vision {
+    color: var(--pk-ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.4;
+    max-width: 26em;
+    margin: clamp(1.5rem, 3.5vh, 2.4rem) auto clamp(1.4rem, 3vh, 2rem);
+  }
+  .pk__when {
+    color: var(--pk-ink);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+  .pk__where {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
+    margin: 0;
+  }
+
+  .pk__price {
+    margin: clamp(1.5rem, 3.5vh, 2.4rem) 0 1.4rem;
+    padding-top: clamp(1.4rem, 3vh, 2rem);
+    border-top: 1px solid var(--pk-line);
+  }
+  .pk__price span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
+    margin-bottom: 0.6rem;
+  }
+  .pk__price strong {
+    color: var(--pk-ink);
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  }
+  .pk__price em {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
+  }
+
+  .pk__cta {
+    display: inline-block;
+    padding: 1rem 2.6rem;
+    background: var(--pk-ink);
+    color: var(--pk-paper);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+  }
+  .pk__cta:hover { opacity: 0.88; }
+
+  .pk__credits {
+    color: var(--pk-muted);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--pk-muted);
+    margin: 1.5rem 0 0;
+  }
+  .pk__credits em { font-style: italic; color: var(--pk-ink); }
+
+  /* ---- Le détail ---- */
+  .pk__detail {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 8vh, 5rem);
+  }
+  .pk__block {
+    padding-top: clamp(2.25rem, 6vh, 4rem);
+    margin-top: clamp(2.25rem, 6vh, 4rem);
+    border-top: 1px solid var(--pk-line);
+  }
+  .pk__block--first { border-top: none; margin-top: 0; }
+  .pk__label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pk-accent);
+    margin: 0 0 0.9rem;
+  }
+
+  .pk__acts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  .pk__a-kicker {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
+    margin: 0 0 0.3rem;
+  }
+  .pk__a-title {
+    color: var(--pk-ink);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.15;
+    margin: 0 0 0.35rem;
+  }
+  .pk__a-line {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: rgba(244, 238, 228, 0.78);
+    margin: 0;
+  }
+
+  .pk__courses { columns: 2; column-gap: clamp(1.5rem, 3vw, 3rem); }
+  .pk__course { break-inside: avoid; margin: 0 0 1rem; }
+  .pk__c-label {
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
+    margin: 0 0 0.2rem;
+  }
+  .pk__c-dish {
+    color: var(--pk-ink);
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .pk__c-dish em { font-style: italic; color: var(--pk-accent); }
+
+  .pk__block--split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .pk__plain {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: rgba(244, 238, 228, 0.82);
+    margin: 0;
+  }
+  .pk__plain em { font-style: italic; color: var(--pk-ink); font-weight: 500; }
+
+  .pk__foot {
+    text-align: center;
+    padding-top: clamp(2.25rem, 6vh, 4rem);
+    margin-top: clamp(2.25rem, 6vh, 4rem);
+    border-top: 1px solid var(--pk-line);
+  }
+  .pk__fine {
+    color: var(--pk-muted);
+    margin: 1.4rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--pk-muted);
+    line-height: 2;
+  }
+  .pk__fine strong { color: var(--pk-ink); letter-spacing: 0.14em; }
+
+  .pk a:not(.pk__cta) {
+    color: var(--pk-accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(224, 160, 107, 0.45);
+  }
+  .pk a:not(.pk__cta):hover { border-bottom-color: var(--pk-accent); }
+
+  @media (max-width: 640px) {
+    .pk { font-size: 16px; }
+    .pk__courses { columns: 1; }
+    .pk__count { gap: 1.5rem 2.5rem; }
+  }
+
+  @media print {
+    .pk {
+      font-size: 11pt;
+      --pk-paper: #fff;
+      --pk-ink: #17120f;
+      --pk-muted: #6d5e53;
+      --pk-line: #d9cfc0;
+      --pk-accent: #6e1f14;
+    }
+    .pk__a-line, .pk__plain { color: #3a2f28; }
+    .pk__cta { background: none; color: #17120f; border: 1px solid #17120f; }
+    .pk__hero { padding-bottom: clamp(1.5rem, 4vh, 2.5rem); }
+    .pk__band { height: 45mm; }
+    .pk__cta { background: none; color: var(--pk-ink); border: 1px solid var(--pk-ink); }
+  }
+</style>
