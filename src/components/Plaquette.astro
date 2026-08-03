@@ -107,22 +107,23 @@ const t = lang === "en" ? EN : FR;
 
 <main class="pk">
 
-  <section class="pk__hero">
-    <div class="pk__band" style="background-image: url('/images/signature/act1.jpg');"></div>
+  <div class="pk__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
+  <div class="pk__veil"></div>
 
+  <section class="pk__hero">
     <p class="pk__brand">SIGNATURE</p>
     <p class="pk__no"><em>No. 01</em></p>
 
     <p class="pk__vision">{t.vision}</p>
 
+    <p class="pk__venue">{t.where.split(" · ")[0]}</p>
     <p class="pk__when">{t.when}</p>
-    <p class="pk__where">{t.where}</p>
 
-    <p class="pk__price">
-      <span>{t.presale}</span>
-      <strong>{t.price}</strong>
-    </p>
-    <a class="pk__cta" href={SITE}>{t.cta}</a>
+    <div class="pk__card">
+      <p class="pk__c-eyebrow">{t.presale}</p>
+      <p class="pk__c-price">{t.price}</p>
+      <a class="pk__cta" href={SITE}>{t.cta}</a>
+    </div>
 
     <p class="pk__credits">
       {t.credits[0]}<em>{t.credits[1]}</em>{t.credits[2]}<em>{t.credits[3]}</em>
@@ -217,259 +218,280 @@ const t = lang === "en" ? EN : FR;
 </main>
 
 <style>
-  /* The site's own palette, but pulled up until it is actually readable on a
-     phone: cream at full strength, nothing under 0.72 opacity, type a size up
-     and far more air between the blocks. */
+  /* Built from the site's own tokens — same veil over the same photograph, the
+     same cream on the same ink, the same framed tiles, the same wide-tracked
+     micro-caps. Sizes sit at the top of the site's scale: this page is read
+     once, on a phone, often in daylight. */
   .pk {
-    --pk-paper: #0d0908;
-    --pk-ink: #f4eee4;
-    --pk-muted: #bcac9c;
-    --pk-line: rgba(244, 238, 228, 0.2);
-    --pk-accent: #e0a06b;
+    --sig-ink: #0a0707;
+    --sig-cream: #f0e9dd;
 
-    background: var(--pk-paper);
-    color: var(--pk-ink);
-    font-size: 18px;
+    position: relative;
+    min-height: 100vh;
+    background: var(--sig-ink);
+    color: var(--sig-cream);
+    padding: clamp(2rem, 7vh, 4.5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 8vh, 5rem);
   }
+  .pk__bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center 24%;
+    filter: saturate(1.05) contrast(1.04);
+    z-index: 0;
+  }
+  .pk__veil {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg,
+      rgba(8, 4, 4, 0.7) 0%, rgba(8, 4, 4, 0.5) 32%,
+      rgba(8, 4, 4, 0.68) 66%, rgba(8, 4, 4, 0.88) 100%);
+  }
+  .pk__hero, .pk__detail { position: relative; z-index: 1; }
 
+  /* ---- Cover ---- */
   .pk__hero {
     max-width: 46rem;
     margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 6vh, 4rem);
     text-align: center;
   }
-  .pk__band {
-    height: clamp(150px, 26vh, 280px);
-    margin: 0 calc(-1 * clamp(1.25rem, 5vw, 3rem)) clamp(1.75rem, 4vh, 2.75rem);
-    background-size: cover;
-    background-position: center 30%;
-  }
-
   .pk__brand {
-    color: var(--pk-ink);
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-indent: 0.3em;
-    margin: 0;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 5.5vw, 3.4rem);
     line-height: 1;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    color: var(--sig-cream);
+    margin: 0;
   }
   .pk__no {
     font-family: var(--font-display);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--pk-muted);
-    margin: 0.5rem 0 0;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0.55rem 0 0;
   }
+  .pk__no em { font-style: italic; }
   .pk__vision {
-    color: var(--pk-ink);
     font-family: var(--font-display);
-    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
     line-height: 1.4;
-    max-width: 26em;
-    margin: clamp(1.5rem, 3.5vh, 2.4rem) auto clamp(1.4rem, 3vh, 2rem);
+    color: var(--sig-cream);
+    max-width: 24em;
+    margin: clamp(1.6rem, 4vh, 2.6rem) auto clamp(1.5rem, 3.5vh, 2.2rem);
   }
-  .pk__when {
-    color: var(--pk-ink);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+  .pk__venue {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    letter-spacing: 0.05em;
+    color: var(--sig-cream);
     margin: 0 0 0.5rem;
   }
-  .pk__where {
+  .pk__when {
     font-family: var(--font-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.16em;
+    font-size: 0.64rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--pk-muted);
+    color: rgba(240, 233, 221, 0.75);
     margin: 0;
+    padding-left: 0.3em;
   }
 
-  .pk__price {
-    margin: clamp(1.5rem, 3.5vh, 2.4rem) 0 1.4rem;
-    padding-top: clamp(1.4rem, 3vh, 2rem);
-    border-top: 1px solid var(--pk-line);
+  /* The invitation card, verbatim from the cover of the site */
+  .pk__card {
+    display: inline-block;
+    margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
+    padding: 1.5rem 2rem;
+    background: rgba(6, 4, 3, 0.45);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(240, 233, 221, 0.22);
   }
-  .pk__price span {
-    display: block;
+  .pk__c-eyebrow {
     font-family: var(--font-body);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--pk-muted);
-    margin-bottom: 0.6rem;
+    color: rgba(240, 233, 221, 0.65);
+    margin: 0 0 0.7rem;
   }
-  .pk__price strong {
-    color: var(--pk-ink);
-    display: block;
+  .pk__c-price {
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    color: var(--sig-cream);
+    margin: 0 0 1.2rem;
   }
-  .pk__price em {
-    display: block;
-    margin-top: 0.5rem;
-    font-family: var(--font-body);
-    font-style: normal;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--pk-muted);
-  }
-
   .pk__cta {
     display: inline-block;
-    padding: 1rem 2.6rem;
-    background: var(--pk-ink);
-    color: var(--pk-paper);
+    background: none;
+    border: 1px solid rgba(240, 233, 221, 0.4);
+    color: var(--sig-cream);
+    padding: 0.95rem 1.9rem;
     text-decoration: none;
     font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+    font-size: 0.64rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    transition: opacity 0.3s ease;
+    transition: border-color 0.35s ease, background 0.35s ease, letter-spacing 0.5s ease;
   }
-  .pk__cta:hover { opacity: 0.88; }
-
+  .pk__cta:hover {
+    border-color: rgba(240, 233, 221, 0.9);
+    background: rgba(240, 233, 221, 0.08);
+    letter-spacing: 0.38em;
+  }
   .pk__credits {
-    color: var(--pk-muted);
     font-family: var(--font-display);
-    font-size: 1.05rem;
-    color: var(--pk-muted);
-    margin: 1.5rem 0 0;
+    font-size: 1rem;
+    color: rgba(240, 233, 221, 0.75);
+    margin: clamp(1.5rem, 3.5vh, 2.2rem) 0 0;
   }
-  .pk__credits em { font-style: italic; color: var(--pk-ink); }
+  .pk__credits em { font-style: italic; color: var(--sig-cream); }
 
-  /* ---- Le détail ---- */
+  /* ---- The detail, as the site's tiles ---- */
   .pk__detail {
-    max-width: 60rem;
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 8vh, 5rem);
+    max-width: 74rem;
+    margin: clamp(2.5rem, 7vh, 4.5rem) auto 0;
+    display: grid;
+    gap: clamp(1rem, 1.6vw, 1.5rem);
   }
   .pk__block {
-    padding-top: clamp(2.25rem, 6vh, 4rem);
-    margin-top: clamp(2.25rem, 6vh, 4rem);
-    border-top: 1px solid var(--pk-line);
+    padding: clamp(1.4rem, 2.2vw, 2rem);
+    background: rgba(6, 4, 3, 0.4);
+    border: 1px solid rgba(240, 233, 221, 0.14);
   }
-  .pk__block--first { border-top: none; margin-top: 0; }
+  .pk__block--split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: clamp(1.4rem, 2.5vw, 2.5rem);
+  }
   .pk__label {
     font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--pk-accent);
+    color: rgba(240, 233, 221, 0.6);
     margin: 0 0 0.9rem;
+    padding-left: 0.4em;
   }
+  .pk__plain {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: rgba(240, 233, 221, 0.85);
+    margin: 0;
+  }
+  .pk__plain em { font-style: italic; color: var(--sig-cream); }
 
+  /* Acts — the Programme blocks */
   .pk__acts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: clamp(1.25rem, 2.5vw, 2rem);
+    gap: clamp(1.1rem, 2vw, 1.75rem);
   }
   .pk__a-kicker {
     font-family: var(--font-body);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--pk-muted);
-    margin: 0 0 0.3rem;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0 0 0.4rem;
   }
   .pk__a-title {
-    color: var(--pk-ink);
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 1.3rem;
     line-height: 1.15;
+    color: var(--sig-cream);
     margin: 0 0 0.35rem;
   }
   .pk__a-line {
     font-family: var(--font-display);
-    font-size: 1.02rem;
+    font-style: italic;
+    font-size: 1rem;
     line-height: 1.5;
-    color: rgba(244, 238, 228, 0.78);
+    color: rgba(240, 233, 221, 0.8);
     margin: 0;
   }
 
-  .pk__courses { columns: 2; column-gap: clamp(1.5rem, 3vw, 3rem); }
-  .pk__course { break-inside: avoid; margin: 0 0 1rem; }
+  /* Menu — the Menu courses */
+  .pk__courses { columns: 2; column-gap: clamp(1.75rem, 3vw, 3rem); }
+  .pk__course {
+    break-inside: avoid;
+    margin: 0 0 1.1rem;
+  }
   .pk__c-label {
     font-family: var(--font-body);
-    font-size: 0.66rem;
-    letter-spacing: 0.16em;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--pk-muted);
-    margin: 0 0 0.2rem;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 0.3rem;
   }
   .pk__c-dish {
-    color: var(--pk-ink);
     font-family: var(--font-display);
     font-size: 1.02rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.9);
     margin: 0;
   }
-  .pk__c-dish em { font-style: italic; color: var(--pk-accent); }
-
-  .pk__block--split {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+  .pk__c-dish em {
+    font-style: italic;
+    color: rgba(240, 233, 221, 0.6);
   }
-  .pk__plain {
-    font-family: var(--font-display);
-    font-size: 1.08rem;
-    line-height: 1.6;
-    color: rgba(244, 238, 228, 0.82);
-    margin: 0;
-  }
-  .pk__plain em { font-style: italic; color: var(--pk-ink); font-weight: 500; }
 
+  /* Colophon, as at the foot of the site */
   .pk__foot {
     text-align: center;
-    padding-top: clamp(2.25rem, 6vh, 4rem);
-    margin-top: clamp(2.25rem, 6vh, 4rem);
-    border-top: 1px solid var(--pk-line);
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
   }
   .pk__fine {
-    color: var(--pk-muted);
     margin: 1.4rem 0 0;
     font-family: var(--font-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--pk-muted);
-    line-height: 2;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    line-height: 2.1;
   }
-  .pk__fine strong { color: var(--pk-ink); letter-spacing: 0.14em; }
+  .pk__fine strong { color: var(--sig-cream); font-weight: 400; }
 
   .pk a:not(.pk__cta) {
-    color: var(--pk-accent);
+    color: var(--sig-cream);
     text-decoration: none;
-    border-bottom: 1px solid rgba(224, 160, 107, 0.45);
+    border-bottom: 1px solid rgba(240, 233, 221, 0.35);
+    transition: border-color 0.3s ease;
   }
-  .pk a:not(.pk__cta):hover { border-bottom-color: var(--pk-accent); }
+  .pk a:not(.pk__cta):hover { border-bottom-color: rgba(240, 233, 221, 0.9); }
 
-  @media (max-width: 640px) {
-    .pk { font-size: 16px; }
+  @media (max-width: 700px) {
     .pk__courses { columns: 1; }
-    .pk__count { gap: 1.5rem 2.5rem; }
+    .pk__card { display: block; padding: 1.35rem 1.25rem; }
+    .pk__cta { display: block; text-align: center; letter-spacing: 0.26em; }
   }
 
+  /* Printed: the same layout, on paper. */
   @media print {
     .pk {
-      font-size: 11pt;
-      --pk-paper: #fff;
-      --pk-ink: #17120f;
-      --pk-muted: #6d5e53;
-      --pk-line: #d9cfc0;
-      --pk-accent: #6e1f14;
+      background: #fff;
+      color: #17120f;
+      padding: 0;
+      min-height: 0;
     }
-    .pk__a-line, .pk__plain { color: #3a2f28; }
-    .pk__cta { background: none; color: #17120f; border: 1px solid #17120f; }
-    .pk__hero { padding-bottom: clamp(1.5rem, 4vh, 2.5rem); }
-    .pk__band { height: 45mm; }
-    .pk__cta { background: none; color: var(--pk-ink); border: 1px solid var(--pk-ink); }
+    .pk__bg, .pk__veil { display: none; }
+    .pk__brand, .pk__vision, .pk__venue, .pk__c-price, .pk__a-title { color: #17120f; }
+    .pk__no, .pk__when, .pk__label, .pk__a-kicker, .pk__c-label,
+    .pk__c-eyebrow, .pk__fine, .pk__credits { color: #6d5e53; }
+    .pk__plain, .pk__a-line, .pk__c-dish { color: #3a2f28; }
+    .pk__c-dish em, .pk__credits em, .pk__plain em, .pk__fine strong { color: #17120f; }
+    .pk__block, .pk__card {
+      background: none;
+      border-color: #d9cfc0;
+      backdrop-filter: none;
+    }
+    .pk__cta { border-color: #17120f; color: #17120f; }
+    .pk a:not(.pk__cta) { color: #17120f; border-bottom-color: #b3a89f; }
   }
 </style>
