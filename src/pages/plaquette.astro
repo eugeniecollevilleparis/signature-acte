@@ -1,0 +1,262 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
+
+const title = "SIGNATURE, No. 01 — the evening in one page";
+const description =
+  "26-27 September 2026, Château Laffitte Carcasset, Saint-Estèphe. One evening, one table, from six in the evening to three the next afternoon.";
+---
+
+<Layout lang="en" title={title} description={description}>
+  <main class="pk">
+    <div class="pk__bg" style="background-image: url('/images/signature/act1.jpg');"></div>
+    <div class="pk__veil"></div>
+
+    <article class="pk__sheet">
+
+      <header class="pk__head">
+        <p class="pk__brand">SIGNATURE</p>
+        <p class="pk__no"><em>No. 01</em></p>
+        <p class="pk__when">26 – 27 September 2026 &nbsp;·&nbsp; Château Laffitte Carcasset</p>
+        <p class="pk__where">Saint-Estèphe · Médoc · Bordeaux</p>
+      </header>
+
+      <p class="pk__lead">
+        One evening where architecture, light, sound, gastronomy, conversation and
+        performance are conceived as one. One table, a château to ourselves, and
+        a night that runs from six in the evening to three the next afternoon.
+      </p>
+
+      <section class="pk__grid">
+        <div class="pk__col">
+          <p class="pk__label">The evening</p>
+          <ul class="pk__list">
+            <li><span>18:00</span> Gates open, welcome drink</li>
+            <li><span>19:00</span> Canapés as the light goes</li>
+            <li><span>20:30</span> Dinner, course by course</li>
+            <li><span>22:00</span> The night — DJ sets until late</li>
+            <li><span>12:00</span> Sunday brunch, poolside</li>
+            <li><span>15:00</span> Curtain close</li>
+          </ul>
+        </div>
+
+        <div class="pk__col">
+          <p class="pk__label">Your ticket covers</p>
+          <ul class="pk__list pk__list--plain">
+            <li>Admission for one guest</li>
+            <li>The seasonal tasting menu</li>
+            <li>The DJ set and the performances</li>
+            <li>Welcome drink on arrival</li>
+          </ul>
+          <p class="pk__label pk__label--sep">Ticketed separately</p>
+          <ul class="pk__list pk__list--plain">
+            <li>Estate wine pairing — {WINE_PRICE}</li>
+            <li>Sunday brunch</li>
+            <li>Rooms at the château — five, on request</li>
+          </ul>
+        </div>
+
+        <div class="pk__col">
+          <p class="pk__label">Good to know</p>
+          <ul class="pk__list pk__list--plain">
+            <li>Saint-Estèphe is within easy reach of Bordeaux — drivers and shuttles are listed on the site.</li>
+            <li>Harvest week in the Médoc — houses nearby for a group, Friday to Monday.</li>
+            <li>Dress: come as you would for a long dinner that turns into a night.</li>
+            <li>Tickets are personal and non-refundable; they may be passed on.</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="pk__foot">
+        <p class="pk__price"><span>Presale until 12 August</span><strong>{TICKET_PRICE}</strong></p>
+        <a class="pk__cta" href="/">Reserve your place →</a>
+        <p class="pk__fine">
+          signatureacte.com &nbsp;·&nbsp; access code <em>carcasset26</em> &nbsp;·&nbsp;
+          signatureacte@gmail.com &nbsp;·&nbsp; @signature.acte
+        </p>
+      </footer>
+
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .pk {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    background: var(--sig-ink, #0a0707);
+  }
+  .pk__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 22%;
+  }
+  .pk__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 4, 4, 0.62) 0%, rgba(8, 4, 4, 0.86) 100%);
+  }
+  .pk__sheet {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 62rem;
+    padding: clamp(1.5rem, 3.5vw, 3rem);
+    border: 1px solid rgba(240, 233, 221, 0.16);
+    background: rgba(6, 4, 3, 0.55);
+    backdrop-filter: blur(2px);
+    color: var(--sig-cream, #f0e9dd);
+  }
+
+  .pk__head { text-align: center; }
+  .pk__brand {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+    margin: 0;
+    line-height: 1;
+  }
+  .pk__no {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    color: rgba(240, 233, 221, 0.8);
+    margin: 0.45rem 0 1.1rem;
+  }
+  .pk__when {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 0.35rem;
+  }
+  .pk__where {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.6);
+    margin: 0;
+  }
+
+  .pk__lead {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    text-align: center;
+    max-width: 40rem;
+    margin: clamp(1.4rem, 3vh, 2.2rem) auto;
+    color: rgba(240, 233, 221, 0.9);
+  }
+
+  .pk__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    border-top: 1px solid rgba(240, 233, 221, 0.16);
+    padding-top: clamp(1.25rem, 3vh, 2rem);
+  }
+  .pk__label {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin: 0 0 0.9rem;
+  }
+  .pk__label--sep { margin-top: 1.4rem; }
+  .pk__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: rgba(240, 233, 221, 0.85);
+  }
+  .pk__list li { margin: 0 0 0.55rem; }
+  .pk__list span {
+    display: inline-block;
+    min-width: 3.4em;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    color: rgba(240, 233, 221, 0.55);
+  }
+  .pk__list--plain li { padding-left: 0.9em; text-indent: -0.9em; }
+  .pk__list--plain li::before { content: "— "; color: rgba(240, 233, 221, 0.4); }
+
+  .pk__foot {
+    margin-top: clamp(1.4rem, 3vh, 2.2rem);
+    padding-top: clamp(1.1rem, 2.5vh, 1.6rem);
+    border-top: 1px solid rgba(240, 233, 221, 0.16);
+    text-align: center;
+  }
+  .pk__price { margin: 0 0 1rem; }
+  .pk__price span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.55);
+    margin-bottom: 0.35rem;
+  }
+  .pk__price strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    letter-spacing: 0.04em;
+  }
+  .pk__cta {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--sig-cream, #f0e9dd);
+    color: var(--sig-ink, #0a0707);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    transition: letter-spacing 0.5s ease, opacity 0.3s ease;
+  }
+  .pk__cta:hover { letter-spacing: 0.4em; opacity: 0.9; }
+  .pk__fine {
+    margin: 1.1rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
+    line-height: 2;
+  }
+  .pk__fine em { font-style: normal; color: rgba(240, 233, 221, 0.8); }
+
+  @media (max-width: 860px) {
+    .pk__grid { grid-template-columns: 1fr; gap: 1.4rem; }
+    .pk__list { font-size: 0.98rem; }
+  }
+
+  /* One sheet of A4, ink-friendly. */
+  @media print {
+    .pk { min-height: 0; padding: 0; background: #fff; }
+    .pk__bg, .pk__veil { display: none; }
+    .pk__sheet {
+      max-width: none;
+      border: none;
+      background: none;
+      color: #14100e;
+      padding: 0;
+      backdrop-filter: none;
+    }
+    .pk__lead, .pk__list { color: #2a221e; }
+    .pk__where, .pk__label, .pk__fine, .pk__price span, .pk__list span { color: #6b5c53; }
+    .pk__grid, .pk__foot { border-color: #cfc4bb; }
+    .pk__cta { background: none; color: #14100e; border: 1px solid #14100e; padding: 0.5rem 1.2rem; }
+  }
+</style>
