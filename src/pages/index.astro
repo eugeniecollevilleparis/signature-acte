@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SigInteractions from "../components/SigInteractions.astro";
 import SigLogistics from "../components/SigLogistics.astro";
-import { TICKET_PRICE, TICKET_CHARGED, WINE_PRICE } from "../lib/event";
+import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
 const description =
@@ -372,7 +372,6 @@ const description =
         <p class="sigb__price">
           <span>One Place</span>
           <strong>{TICKET_PRICE}</strong>
-          <em>Charged by Revolut in pounds — {TICKET_CHARGED}</em>
         </p>
 
         <dl class="sigb__incl">

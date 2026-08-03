@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TICKET_PRICE_FR, TICKET_CHARGED, WINE_PRICE_FR } from "../lib/event";
+import { TICKET_PRICE_FR, WINE_PRICE_FR } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 — la soirée en une page";
 const description =
@@ -53,7 +53,6 @@ const MENU = [
       <p class="pk__price">
         <span>Prévente jusqu'au 12 août</span>
         <strong>{TICKET_PRICE_FR}</strong>
-        <em>Réglé en livres par Revolut — {TICKET_CHARGED}</em>
       </p>
       <a class="pk__cta" href={SITE}>Réserver ma place →</a>
 
