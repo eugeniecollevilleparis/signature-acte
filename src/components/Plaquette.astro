@@ -133,6 +133,8 @@ const t = lang === "en" ? EN : FR;
 
   <section class="pk__detail" id="detail">
 
+    <img class="pk__plate" src="/images/signature/act3.jpg" alt="" style="object-position: center 62%;" />
+
     <div class="pk__block pk__block--split pk__block--first">
       <div>
         <p class="pk__label">{t.labels.idea}</p>
@@ -167,6 +169,8 @@ const t = lang === "en" ? EN : FR;
       </div>
     </div>
 
+    <img class="pk__plate" src="/images/signature/act2.jpg" alt="" style="object-position: center 58%;" />
+
     <div class="pk__block">
       <p class="pk__label">{t.labels.menu}</p>
       <div class="pk__courses">
@@ -178,6 +182,8 @@ const t = lang === "en" ? EN : FR;
         ))}
       </div>
     </div>
+
+    <img class="pk__plate" src="/images/signature/act5.jpg" alt="" style="object-position: center 78%;" />
 
     <div class="pk__block pk__block--split">
       <div>
@@ -367,6 +373,15 @@ const t = lang === "en" ? EN : FR;
     display: grid;
     gap: clamp(1rem, 1.6vw, 1.5rem);
   }
+  /* Photographs, in the site's own grade — the page should look like the
+     evening, not like a specification. */
+  .pk__plate {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    border: 1px solid rgba(240, 233, 221, 0.14);
+  }
   .pk__block {
     padding: clamp(1.4rem, 2.2vw, 2rem);
     background: rgba(6, 4, 3, 0.4);
@@ -478,6 +493,7 @@ const t = lang === "en" ? EN : FR;
 
   @media (max-width: 700px) {
     .pk__courses { columns: 1; }
+    .pk__plate { aspect-ratio: 4 / 3; }
     .pk__card { display: block; padding: 1.35rem 1.25rem; }
     .pk__cta { display: block; text-align: center; letter-spacing: 0.26em; }
   }
@@ -496,6 +512,7 @@ const t = lang === "en" ? EN : FR;
     .pk__c-eyebrow, .pk__fine, .pk__credits { color: #6d5e53; }
     .pk__plain, .pk__a-line, .pk__c-dish { color: #3a2f28; }
     .pk__c-dish em, .pk__credits em, .pk__plain em, .pk__fine strong { color: #17120f; }
+    .pk__plate { aspect-ratio: 16 / 6; border-color: #d9cfc0; break-inside: avoid; }
     .pk__block, .pk__card {
       background: none;
       border-color: #d9cfc0;
