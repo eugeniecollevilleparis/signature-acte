@@ -146,10 +146,11 @@ diffusion, filtrer les emails dont l'objet commence par `Newsletter —`.
 
 Par ordre d'urgence.
 
-1. **Confirmer qu'un paiement atterrit bien sur le compte Business.** Le lien
-   en service est celui d'un compte Revolut pro, à **£174**, et le site affiche
-   le même montant. Il reste à vérifier qu'un paiement réel apparaît sur le
-   solde — pas seulement « accepté ». Ne pas ouvrir la vente avant ça.
+1. **Le site affiche 200 €, le lien Revolut débite £174.** Les deux figurent
+   côte à côte (`TICKET_CHARGED` dans `src/lib/event.ts`), mais l'idéal reste
+   un lien de paiement en euros, pour que le montant annoncé soit exactement
+   le montant débité. Et il reste à vérifier qu'un paiement réel apparaît sur
+   le solde Business — pas seulement « accepté ».
 2. **Récupérer les 200 € du premier lien.** Ils sont partis vers un lien
    *personnel* (`revolut.me/gerardcollevilleparis`,
    `gerardcolleville.paris@gmail.com`), pas vers le compte pro. À réclamer au
@@ -163,9 +164,9 @@ Par ordre d'urgence.
 5. **Basculer `TICKET_ON_BOOKING` sur `true`** si l'envoi automatique du billet
    est bien ce qui est voulu (décidé, pas encore appliqué au moment de
    l'écriture).
-6. **Billet vins à £45.** Le montant £45 a été converti depuis 50 €
-   sans confirmation ; à valider en créant son lien de paiement, puis à
-   brancher.
+6. **Billet vins à 50 €.** Les vins du domaine sont servis à volonté de
+   l'arrivée à la fin du dîner. Reste à créer son lien de paiement, puis à
+   le brancher.
 7. **Webhook Revolut Merchant API.** Seule façon d'envoyer le billet uniquement
    après encaissement réel. Le compte Business existe désormais, donc c'est
    accessible : demander une clé API et brancher le webhook.

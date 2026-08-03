@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TICKET_PRICE_FR, WINE_PRICE_FR } from "../lib/event";
+import { TICKET_PRICE_FR, TICKET_CHARGED, WINE_PRICE_FR } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 — la soirée en une page";
 const description =
@@ -11,7 +11,7 @@ const MAIL = "signatureacte@gmail.com";
 const INSTA = "https://www.instagram.com/signature.acte/";
 
 const ACTS = [
-  ["Acte I · 18:00", "Arrivée", "Les grilles s'ouvrent, un verre à la main."],
+  ["Acte I · 18:00", "Arrivée", "Les grilles s'ouvrent, la soirée commence."],
   ["Acte II · 19:00", "L'heure dorée", "Les canapés, tandis que la lumière descend sur le domaine."],
   ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
   ["Acte IV · 22:00", "La nuit", "Ambiance, rave à 23:00, after glow à 03:00."],
@@ -53,6 +53,7 @@ const MENU = [
       <p class="pk__price">
         <span>Prévente jusqu'au 12 août</span>
         <strong>{TICKET_PRICE_FR}</strong>
+        <em>Réglé en livres par Revolut — {TICKET_CHARGED}</em>
       </p>
       <a class="pk__cta" href={SITE}>Réserver ma place →</a>
 
@@ -87,9 +88,8 @@ const MENU = [
           <p class="pk__label">L'accueil</p>
           <p class="pk__plain">
             Vous êtes reçus au Château Laffitte Carcasset, propriété viticole de
-            Saint-Estèphe, pour vous seuls ce soir-là. Verre à l'arrivée, dîner
-            servi à table, la nuit jusqu'au bout, et le lendemain au bord de la
-            piscine.
+            Saint-Estèphe, pour vous seuls ce soir-là. Dîner servi à table, la
+            nuit jusqu'au bout, et le lendemain au bord de la piscine.
           </p>
         </div>
       </div>
@@ -122,13 +122,13 @@ const MENU = [
       <div class="pk__block pk__block--split">
         <div>
           <p class="pk__label">Compris</p>
-          <p class="pk__plain">L'entrée, le menu dégustation, le verre d'accueil, les DJ sets et les performances.</p>
+          <p class="pk__plain">L'entrée, le menu dégustation, les DJ sets et les performances.</p>
         </div>
         <div>
           <p class="pk__label">En supplément</p>
           <p class="pk__plain">
-            Les vins du domaine en accord ({WINE_PRICE_FR}), le brunch du dimanche,
-            et les cinq chambres du château, sur demande.
+            Les vins du domaine <em>à volonté, de l'arrivée au dîner</em> ({WINE_PRICE_FR}),
+            le brunch du dimanche, et les cinq chambres du château, sur demande.
           </p>
         </div>
         <div>
@@ -155,18 +155,19 @@ const MENU = [
 </Layout>
 
 <style>
-  /* A printed brochure, not a night-time website: ink on paper, so that it
-     survives a phone screen in daylight and a laser printer. */
+  /* The site's own palette, but pulled up until it is actually readable on a
+     phone: cream at full strength, nothing under 0.72 opacity, type a size up
+     and far more air between the blocks. */
   .pk {
-    --paper: #f3ede2;
-    --ink: #17120f;
-    --muted: #6d5e53;
-    --line: #d9cfc0;
-    --accent: #6e1f14;
+    --pk-paper: #0d0908;
+    --pk-ink: #f4eee4;
+    --pk-muted: #bcac9c;
+    --pk-line: rgba(244, 238, 228, 0.2);
+    --pk-accent: #e0a06b;
 
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 17px;
+    background: var(--pk-paper);
+    color: var(--pk-ink);
+    font-size: 18px;
   }
 
   .pk__hero {
@@ -183,6 +184,7 @@ const MENU = [
   }
 
   .pk__brand {
+    color: var(--pk-ink);
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 6.5vw, 3.8rem);
     font-weight: 500;
@@ -194,10 +196,11 @@ const MENU = [
   .pk__no {
     font-family: var(--font-display);
     font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--muted);
+    color: var(--pk-muted);
     margin: 0.5rem 0 0;
   }
   .pk__vision {
+    color: var(--pk-ink);
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 3vw, 2.1rem);
     line-height: 1.4;
@@ -205,6 +208,7 @@ const MENU = [
     margin: clamp(1.5rem, 3.5vh, 2.4rem) auto clamp(1.4rem, 3vh, 2rem);
   }
   .pk__when {
+    color: var(--pk-ink);
     font-family: var(--font-body);
     font-size: 0.9rem;
     font-weight: 500;
@@ -217,14 +221,14 @@ const MENU = [
     font-size: 0.78rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--pk-muted);
     margin: 0;
   }
 
   .pk__price {
     margin: clamp(1.5rem, 3.5vh, 2.4rem) 0 1.4rem;
     padding-top: clamp(1.4rem, 3vh, 2rem);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--pk-line);
   }
   .pk__price span {
     display: block;
@@ -232,20 +236,32 @@ const MENU = [
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--pk-muted);
     margin-bottom: 0.6rem;
   }
   .pk__price strong {
+    color: var(--pk-ink);
+    display: block;
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  }
+  .pk__price em {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pk-muted);
   }
 
   .pk__cta {
     display: inline-block;
     padding: 1rem 2.6rem;
-    background: var(--accent);
-    color: var(--paper);
+    background: var(--pk-ink);
+    color: var(--pk-paper);
     text-decoration: none;
     font-family: var(--font-body);
     font-size: 0.8rem;
@@ -257,12 +273,13 @@ const MENU = [
   .pk__cta:hover { opacity: 0.88; }
 
   .pk__credits {
+    color: var(--pk-muted);
     font-family: var(--font-display);
     font-size: 1.05rem;
-    color: var(--muted);
+    color: var(--pk-muted);
     margin: 1.5rem 0 0;
   }
-  .pk__credits em { font-style: italic; color: var(--ink); }
+  .pk__credits em { font-style: italic; color: var(--pk-ink); }
 
   /* ---- Le détail ---- */
   .pk__detail {
@@ -271,9 +288,9 @@ const MENU = [
     padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 8vh, 5rem);
   }
   .pk__block {
-    padding-top: clamp(1.75rem, 4vh, 2.75rem);
-    margin-top: clamp(1.75rem, 4vh, 2.75rem);
-    border-top: 1px solid var(--line);
+    padding-top: clamp(2.25rem, 6vh, 4rem);
+    margin-top: clamp(2.25rem, 6vh, 4rem);
+    border-top: 1px solid var(--pk-line);
   }
   .pk__block--first { border-top: none; margin-top: 0; }
   .pk__label {
@@ -282,7 +299,7 @@ const MENU = [
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--pk-accent);
     margin: 0 0 0.9rem;
   }
 
@@ -296,10 +313,11 @@ const MENU = [
     font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--pk-muted);
     margin: 0 0 0.3rem;
   }
   .pk__a-title {
+    color: var(--pk-ink);
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 1.3rem;
@@ -308,9 +326,9 @@ const MENU = [
   }
   .pk__a-line {
     font-family: var(--font-display);
-    font-size: 1rem;
-    line-height: 1.45;
-    color: #3a2f28;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: rgba(244, 238, 228, 0.78);
     margin: 0;
   }
 
@@ -321,16 +339,17 @@ const MENU = [
     font-size: 0.66rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--pk-muted);
     margin: 0 0 0.2rem;
   }
   .pk__c-dish {
+    color: var(--pk-ink);
     font-family: var(--font-display);
     font-size: 1.02rem;
     line-height: 1.4;
     margin: 0;
   }
-  .pk__c-dish em { font-style: italic; color: var(--accent); }
+  .pk__c-dish em { font-style: italic; color: var(--pk-accent); }
 
   .pk__block--split {
     display: grid;
@@ -339,35 +358,36 @@ const MENU = [
   }
   .pk__plain {
     font-family: var(--font-display);
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: #3a2f28;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: rgba(244, 238, 228, 0.82);
     margin: 0;
   }
-  .pk__plain em { font-style: italic; color: var(--ink); font-weight: 500; }
+  .pk__plain em { font-style: italic; color: var(--pk-ink); font-weight: 500; }
 
   .pk__foot {
     text-align: center;
-    padding-top: clamp(1.75rem, 4vh, 2.75rem);
-    margin-top: clamp(1.75rem, 4vh, 2.75rem);
-    border-top: 1px solid var(--line);
+    padding-top: clamp(2.25rem, 6vh, 4rem);
+    margin-top: clamp(2.25rem, 6vh, 4rem);
+    border-top: 1px solid var(--pk-line);
   }
   .pk__fine {
+    color: var(--pk-muted);
     margin: 1.4rem 0 0;
     font-family: var(--font-body);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
-    color: var(--muted);
+    color: var(--pk-muted);
     line-height: 2;
   }
-  .pk__fine strong { color: var(--ink); letter-spacing: 0.14em; }
+  .pk__fine strong { color: var(--pk-ink); letter-spacing: 0.14em; }
 
   .pk a:not(.pk__cta) {
-    color: var(--accent);
+    color: var(--pk-accent);
     text-decoration: none;
-    border-bottom: 1px solid rgba(110, 31, 20, 0.4);
+    border-bottom: 1px solid rgba(224, 160, 107, 0.45);
   }
-  .pk a:not(.pk__cta):hover { border-bottom-color: var(--accent); }
+  .pk a:not(.pk__cta):hover { border-bottom-color: var(--pk-accent); }
 
   @media (max-width: 640px) {
     .pk { font-size: 16px; }
@@ -376,9 +396,18 @@ const MENU = [
   }
 
   @media print {
-    .pk { font-size: 11pt; }
+    .pk {
+      font-size: 11pt;
+      --pk-paper: #fff;
+      --pk-ink: #17120f;
+      --pk-muted: #6d5e53;
+      --pk-line: #d9cfc0;
+      --pk-accent: #6e1f14;
+    }
+    .pk__a-line, .pk__plain { color: #3a2f28; }
+    .pk__cta { background: none; color: #17120f; border: 1px solid #17120f; }
     .pk__hero { break-after: page; padding-bottom: 0; }
     .pk__band { height: 45mm; }
-    .pk__cta { background: none; color: var(--ink); border: 1px solid var(--ink); }
+    .pk__cta { background: none; color: var(--pk-ink); border: 1px solid var(--pk-ink); }
   }
 </style>

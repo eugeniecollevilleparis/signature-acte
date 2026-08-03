@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SigInteractions from "../components/SigInteractions.astro";
 import SigLogistics from "../components/SigLogistics.astro";
-import { TICKET_PRICE, WINE_PRICE } from "../lib/event";
+import { TICKET_PRICE, TICKET_CHARGED, WINE_PRICE } from "../lib/event";
 
 const title = "SIGNATURE, No. 01 · 26-27 September 2026 · Château Laffitte Carcasset";
 const description =
@@ -101,7 +101,7 @@ const description =
           <p class="sigt-head__kicker">An evening · By invitation</p>
           <h2 class="sigt-head__title">The&nbsp;Menu</h2>
           <p class="sigt-head__sub"><em>A Médoc Composition</em></p>
-          <p class="sigt-head__note">The pairings below are a separate ticket — {WINE_PRICE}, offered by newsletter.</p>
+          <p class="sigt-head__note">The estate wines are a separate ticket — unlimited from arrival to dinner, {WINE_PRICE}, offered by newsletter.</p>
         </header>
 
         <div class="sigt-menu" data-reveal style="--reveal-delay:0.15s">
@@ -171,7 +171,7 @@ const description =
           <div class="sigt-actblock">
             <p class="ab-kicker">Act I &nbsp;·&nbsp; 18:00</p>
             <p class="ab-title">Arrival</p>
-            <p class="ab-line"><em>The gates open, and the evening begins, welcome drink in hand.</em></p>
+            <p class="ab-line"><em>The gates open, and the evening begins.</em></p>
           </div>
           <div class="sigt-actblock">
             <p class="ab-kicker">Act II &nbsp;·&nbsp; 19:00</p>
@@ -182,7 +182,7 @@ const description =
             <p class="ab-kicker">Act III &nbsp;·&nbsp; 20:30</p>
             <p class="ab-title">Dinner</p>
             <p class="ab-line"><em>A seasonal gathering, course by course, wine by wine, chosen by Pierre Maussire.</em></p>
-            <p class="ab-note">The wine pairing is a separate ticket — {WINE_PRICE}, offered by newsletter.</p>
+            <p class="ab-note">The estate wines are a separate ticket — unlimited from arrival to dinner, {WINE_PRICE}, offered by newsletter.</p>
           </div>
           <div class="sigt-actblock">
             <p class="ab-kicker">Act IV &nbsp;·&nbsp; From 22:00</p>
@@ -372,6 +372,7 @@ const description =
         <p class="sigb__price">
           <span>One Place</span>
           <strong>{TICKET_PRICE}</strong>
+          <em>Charged by Revolut in pounds — {TICKET_CHARGED}</em>
         </p>
 
         <dl class="sigb__incl">
@@ -379,9 +380,9 @@ const description =
           <dd>Admission, the tasting menu, the DJ set and the performances.</dd>
           <dt>Not included</dt>
           <dd>
-            The estate wine pairing, a separate ticket at {WINE_PRICE}. The brunch is also ticketed
-            separately. Both are offered by newsletter. Drinks at the bar after dinner are not
-            included.
+            The estate wines — unlimited from arrival to dinner — a separate ticket at
+            {WINE_PRICE}. The brunch is also ticketed separately. Both are offered by
+            newsletter. Drinks at the bar after dinner are not included.
           </dd>
         </dl>
 
@@ -1549,6 +1550,16 @@ const description =
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: rgba(240, 233, 221, 0.55);
+  }
+  .sigb__price em {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.5);
   }
   .sigb__price strong {
     font-family: var(--font-display);
