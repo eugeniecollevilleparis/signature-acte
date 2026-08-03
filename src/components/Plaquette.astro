@@ -38,17 +38,17 @@ const FR = {
   included: "L'entrée, le menu dégustation, les DJ sets et les performances.",
   extra: `Les vins du domaine à volonté, de l'arrivée au dîner (${WINE_PRICE_FR}), le brunch du dimanche, et les cinq chambres du château, sur demande.`,
   acts: [
-    ["Acte I · 18:00", "Arrivée", "Les grilles s'ouvrent, la soirée commence."],
+    ["Acte I · 18:00", "Accueil", "Les grilles du château s'ouvrent, la soirée commence."],
     ["Acte II · 19:00", "L'heure dorée", "Les canapés, tandis que la lumière descend sur le domaine."],
     ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
-    ["Acte IV · 22:00", "La nuit", "Ambiance, rave à 23:00, after glow à 03:00."],
-    ["Acte V · le lendemain", "Ni hâte, ni horaire", "Brunch à midi, piscine, rideau à 15:00."],
+    ["Acte IV · 22:00", "La nuit", "La musique prend la suite, et la nuit trouve son rythme."],
+    ["Acte V · le lendemain", "Ni hâte, ni horaire", "Brunch à midi, piscine, et l'on se quitte à quinze heures."],
   ],
   menu: [
-    ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Crémant"],
-    ["Canapé I", "Canelé salé au confit de canard, compotée de prunes d'Ente", "Crémant"],
-    ["Canapé II", "Huître d'Arcachon, mignonnette au vin du domaine, espuma de Graves", ""],
-    ["Canapé III · au chai", "Granité de moût du domaine, lait ribot, gelée de Sauternes, noix du Périgord", ""],
+    ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Crémant du château"],
+    ["Canapé I", "Canelé salé au confit de canard, compotée de prunes d'Ente", "Crémant du château"],
+    ["Canapé II", "Huître d'Arcachon, mignonnette au vin du domaine, espuma de Graves", "Crémant du château"],
+    ["Canapé III · au chai", "Granité de moût du domaine, lait ribot, gelée de Sauternes, noix du Périgord", "Crémant du château"],
     ["À table", "Pains du Sud-Ouest, beurre aux algues baratté maison, huile d'olive", ""],
     ["Entrée", "Maigre de la Gironde en gravlax, verveine et fenouil sauvage, beurre blanc tiède", "Pessac-Léognan blanc"],
     ["Plat", "Joue de bœuf de Bazas braisée six heures au vin de la maison, cèpes du Médoc", "Laffitte Carcasset"],
@@ -82,17 +82,17 @@ const EN = {
   included: "Admission, the tasting menu, the DJ sets and the performances.",
   extra: `The estate wines, unlimited from arrival to dinner (${WINE_PRICE}), Sunday brunch, and the five rooms at the château, on request.`,
   acts: [
-    ["Act I · 18:00", "Arrival", "The gates open, and the evening begins."],
+    ["Act I · 18:00", "Welcome", "The château gates open, and the evening begins."],
     ["Act II · 19:00", "Golden hour", "Canapés, as the light goes down over the estate."],
     ["Act III · 20:30", "Dinner", "Course by course, wine by wine, chosen by Pierre Maussire."],
-    ["Act IV · 22:00", "The night", "Ambience, rave at 23:00, after glow at 03:00."],
-    ["Act V · the next day", "No rush, no schedule", "Brunch at noon, poolside, curtain close at 15:00."],
+    ["Act IV · 22:00", "The night", "The music takes over, and the night finds its own rhythm."],
+    ["Act V · the next day", "No rush, no schedule", "Brunch at noon, poolside, and we part at three."],
   ],
   menu: [
-    ["Apéritif", "Bayonne ham croquettes, Ossau-Iraty béchamel", "Crémant"],
-    ["Canapé I", "Savoury canelé with confit duck, Ente plum compote", "Crémant"],
-    ["Canapé II", "Arcachon oyster, mignonette of the estate's red, Graves espuma", ""],
-    ["Canapé III · in the chai", "Granita of the estate's grape must, ribot milk, Sauternes jelly, Périgord walnuts", ""],
+    ["Apéritif", "Bayonne ham croquettes, Ossau-Iraty béchamel", "the château's Crémant"],
+    ["Canapé I", "Savoury canelé with confit duck, Ente plum compote", "the château's Crémant"],
+    ["Canapé II", "Arcachon oyster, mignonette of the estate's red, Graves espuma", "the château's Crémant"],
+    ["Canapé III · in the chai", "Granita of the estate's grape must, ribot milk, Sauternes jelly, Périgord walnuts", "the château's Crémant"],
     ["At the table", "South-West breads, house-churned seaweed butter, olive oil", ""],
     ["Starter", "Gironde meagre gravlax, lemon verbena and wild fennel, warm beurre blanc", "Pessac-Léognan blanc"],
     ["Main", "Bazas beef cheek braised six hours in the house wine, Médoc cèpes", "Laffitte Carcasset"],
@@ -117,6 +117,7 @@ const t = lang === "en" ? EN : FR;
     <p class="pk__vision">{t.vision}</p>
 
     <p class="pk__venue">{t.where.split(" · ")[0]}</p>
+    <p class="pk__place">{t.where.split(" · ").slice(1).join(" · ")}</p>
     <p class="pk__when">{t.when}</p>
 
     <div class="pk__card">
@@ -289,6 +290,15 @@ const t = lang === "en" ? EN : FR;
     letter-spacing: 0.05em;
     color: var(--sig-cream);
     margin: 0 0 0.5rem;
+  }
+  .pk__place {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(240, 233, 221, 0.65);
+    margin: 0 0 0.6rem;
+    padding-left: 0.26em;
   }
   .pk__when {
     font-family: var(--font-body);
@@ -482,7 +492,7 @@ const t = lang === "en" ? EN : FR;
     }
     .pk__bg, .pk__veil { display: none; }
     .pk__brand, .pk__vision, .pk__venue, .pk__c-price, .pk__a-title { color: #17120f; }
-    .pk__no, .pk__when, .pk__label, .pk__a-kicker, .pk__c-label,
+    .pk__no, .pk__when, .pk__place, .pk__label, .pk__a-kicker, .pk__c-label,
     .pk__c-eyebrow, .pk__fine, .pk__credits { color: #6d5e53; }
     .pk__plain, .pk__a-line, .pk__c-dish { color: #3a2f28; }
     .pk__c-dish em, .pk__credits em, .pk__plain em, .pk__fine strong { color: #17120f; }
