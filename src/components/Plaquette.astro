@@ -15,37 +15,37 @@ const MAIL = "signatureacte@gmail.com";
 const INSTA = "https://www.instagram.com/signature.acte/";
 
 const FR = {
-  vision: "Une soirée où l'architecture, la lumière, le son et la table ne font qu'un.",
-  when: "26 et 27 septembre 2026",
+  vision: "SIGNATURE est un lieu où l'architecture, la gastronomie, la musique et la performance dialoguent en parfaite harmonie.",
   where: "Château Laffitte Carcasset · 33180 Saint-Estèphe · Médoc, Bordeaux",
+  when: "26 et 27 septembre 2026",
   presale: "Prévente jusqu'au 12 août",
   price: TICKET_PRICE_FR,
   cta: "Réserver ma place →",
-  credits: ["Menu de la Chef ", "Eugénie Colleville", " · Musique par ", "Accard Production"],
+  credits: ["Menu signé par la Cheffe ", "Eugénie Colleville", " · Direction artistique par ", "Accard Production"],
   labels: {
-    idea: "L'idée",
-    who: "Par qui",
+    idea: "L'intention",
+    who: "Les créateurs",
     welcome: "Le lieu",
     run: "Le déroulé",
     menu: "Le menu",
-    included: "Compris",
-    extra: "En supplément",
-    know: "Bon à savoir",
+    included: "Ce qui vous attend le 26",
+    extra: "En complément",
+    know: "Informations pratiques",
     code: "code d'accès",
   },
-  idea: "Réunir en un seul lieu ce qui existe d'habitude séparément : une table, une architecture, une lumière, une musique. Pas un dîner suivi d'une fête, mais une soirée écrite d'un bout à l'autre.",
-  welcome: "Vous êtes reçus au Château Laffitte Carcasset, l'une des plus anciennes propriétés de Saint-Estèphe, pour vous seuls ce soir-là. Dîner servi à table, la nuit jusqu'au bout, et le lendemain au bord de la piscine.",
-  included: "L'entrée, le menu dégustation, les DJ sets et les performances.",
-  extra: `Les vins du domaine à volonté, de l'arrivée au dîner (${WINE_PRICE_FR}), le brunch du dimanche, et les cinq chambres du château, sur demande.`,
+  idea: "SIGNATURE est née d'une idée simple : créer un lieu où se retrouvent celles et ceux qui partagent le goût de la gastronomie, des grands vins, du spectacle vivant, de la musique électronique et des rencontres sincères.",
+  welcome: "Pour cette première édition, SIGNATURE prend vie au Château Laffitte Carcasset, au cœur de Saint-Estèphe. Une soirée qui se prolonge jusqu'au lendemain, entre gastronomie, musique, architecture et moments partagés, dans un lieu entièrement dédié à cette première rencontre.",
+  included: "L'accès à SIGNATURE No. 01, le menu dégustation imaginé par Eugénie Colleville, les artistes DJ, et les performances artistiques.",
+  extra: `Une sélection des vins du Château Laffitte Carcasset, à volonté de l'arrivée jusqu'au dîner (${WINE_PRICE_FR}). Brunch du dimanche et hébergement au château, disponibles sur réservation.`,
   acts: [
-    ["Acte I · 18:00", "Accueil", "Les grilles du château s'ouvrent, la soirée commence."],
-    ["Acte II · 19:00", "Golden Hour", "Les canapés, tandis que la lumière descend sur le domaine."],
-    ["Acte III · 20:30", "Dîner", "Plat après plat, vin après vin, choisis par Pierre Maussire."],
-    ["Acte IV · 22:00", "La Nuit", "La musique prend la suite. À 23 h, Accard Production entre dans l'acte : le show commence, et se prolonge tard."],
-    ["Acte V · le lendemain", "Ni Hâte, Ni Horaire", "Brunch à midi, piscine, et l'on se quitte à quinze heures."],
+    ["Acte I · 18:00", "L'arrivée", "Les portes s'ouvrent. Les premiers échanges commencent. Le château révèle son atmosphère."],
+    ["Acte II · 19:00", "Golden Hour", "Le soleil se couche sur le domaine. Les canapés font leur entrée. La soirée prend son rythme."],
+    ["Acte III · 20:30", "Dîner", "Une création culinaire signée Eugénie Colleville, accompagnée d'une sélection de vins imaginée par Pierre Maussire."],
+    ["Acte IV · 22:00", "La Nuit", "La table laisse place aux performances qui se dévoilent. L'atmosphère surprend et change, naturellement."],
+    ["Acte V · le lendemain", "Sans précipitation", "Le temps d'un brunch, d'un plongeon, de la relaxation."],
   ],
   menu: [
-    ["Apéro · accueil debout", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Bulles du Château Laffitte Carcasset", ""],
+    ["Apéritif", "Croquettes de jambon de Bayonne, béchamel à l'Ossau-Iraty", "Bulles du Château Laffitte Carcasset", ""],
     ["Canapé I", "Canelé salé au canard confit du Sud-Ouest, compotée de prunes d'Ente", "Bulles du Château Laffitte Carcasset", ""],
     ["Canapé II", "Huître du Bassin d'Arcachon, mignonette au vin rouge du domaine et échalote rose, espuma au vin blanc des Graves", "Bulles du Château Laffitte Carcasset", "Au choix avec le canapé III."],
     ["Canapé III · dans le chai", "Granité de moût de raisin partiellement fermenté du domaine, lait ribot, gelée de Sauternes botrytisé, noix fraîches du Périgord", "Bulles du Château Laffitte Carcasset", "Servi en cuillère porcelaine au cœur des fûts, hommage aux fermentations en cours. Au choix avec le canapé II."],
@@ -89,7 +89,7 @@ const EN = {
     ["Act V · the next day", "No Rush, No Schedule", "Brunch at noon, poolside, and we part at three."],
   ],
   menu: [
-    ["Apéro · standing welcome", "Bayonne ham croquettes, Ossau-Iraty béchamel", "Bulles du Château Laffitte Carcasset", ""],
+    ["Apéritif", "Bayonne ham croquettes, Ossau-Iraty béchamel", "Bulles du Château Laffitte Carcasset", ""],
     ["Canapé I", "Savoury canelé with South-West confit duck, Ente plum compote", "Bulles du Château Laffitte Carcasset", ""],
     ["Canapé II", "Arcachon Bay oyster, mignonette of the estate's red wine and pink shallot, espuma of Graves white wine", "Bulles du Château Laffitte Carcasset", "One or the other, with canapé III."],
     ["Canapé III · in the chai", "Granita of the estate's partially-fermented grape must, ribot milk, botrytised Sauternes jelly, fresh Périgord walnuts", "Bulles du Château Laffitte Carcasset", "Served on a porcelain spoon among the barrels, a nod to the fermentations under way. One or the other, with canapé II."],
@@ -142,13 +142,23 @@ const t = lang === "en" ? EN : FR;
       </div>
       <div>
         <p class="pk__label">{t.labels.who}</p>
-        <p class="pk__plain">
-          <em>Eugénie Colleville</em>{lang === "en" ? ", Chef, writes the menu. " : ", Chef, signe le menu. "}
-          <em>Tanguy Accard</em>{lang === "en"
-            ? ", creative direction, shapes the atmosphere and the music with Accard Production. The wines are chosen by "
-            : ", direction créative, signe l'atmosphère et la musique avec Accard Production. Les vins sont choisis par "}
-          <em>Pierre Maussire</em>.
-        </p>
+        {lang === "en" ? (
+          <p class="pk__plain">
+            SIGNATURE is imagined by <em>Eugénie Colleville</em> and <em>Tanguy Accard</em>.
+            Trained under Alain Ducasse in Paris and London, Eugénie writes the food.
+            French-British, Tanguy shapes the art direction, the music and the world of
+            each edition through ACCARD Production. The wines are selected by
+            <em>Pierre Maussire</em>.
+          </p>
+        ) : (
+          <p class="pk__plain">
+            SIGNATURE est imaginée par <em>Eugénie Colleville</em> et <em>Tanguy Accard</em>.
+            Formée auprès d'Alain Ducasse à Paris et à Londres, Eugénie signe la création
+            culinaire. Franco-britannique, Tanguy imagine la direction artistique, la musique
+            et l'univers de chaque édition à travers ACCARD Production. Les vins sont
+            sélectionnés par <em>Pierre Maussire</em>.
+          </p>
+        )}
       </div>
       <div>
         <p class="pk__label">{t.labels.welcome}</p>
@@ -206,9 +216,11 @@ const t = lang === "en" ? EN : FR;
           </p>
         ) : (
           <p class="pk__plain">
-            Bordeaux est à portée : <a href={SITE}>chauffeurs et maisons à louer</a> sont
-            listés sur le site. Billet nominatif, non remboursable, cessible
-            (<a href={`${SITE}/conditions-generales`}>conditions de vente</a>).
+            Bordeaux se situe à moins d'une heure du domaine. Une sélection de chauffeurs,
+            d'hébergements et d'informations utiles est disponible <a href={SITE}>sur notre
+            site</a>. Chaque invitation est nominative. Les
+            <a href={`${SITE}/conditions-generales`}>conditions de réservation</a> sont
+            disponibles sur notre site.
           </p>
         )}
       </div>
@@ -515,12 +527,44 @@ const t = lang === "en" ? EN : FR;
   /* The PDF is the page: same ink, same cream, same photographs. The fixed
      backdrop cannot follow across paged media, so the ground becomes solid
      and the plates carry the image. */
+  /* Two sheets of A4, and the same page: same ink, same cream, same
+     photographs. The fixed backdrop cannot follow across paged media, so the
+     ground becomes solid and the plates carry the image. */
   @media print {
-    .pk { background: #0d0908; padding: 0; min-height: 0; }
+    .pk {
+      background: #0d0908;
+      padding: 0;
+      min-height: 0;
+      font-size: 11.5px;
+    }
     .pk__bg, .pk__veil { display: none; }
-    .pk__hero { padding: 0 0 clamp(1.5rem, 4vh, 2.5rem); }
-    .pk__detail { padding: 0; }
-    .pk__plate { break-inside: avoid; }
-    .pk__block, .pk__card { break-inside: avoid; }
+    .pk__hero { padding: 0 0 1rem; max-width: none; }
+    .pk__brand { font-size: 2.1rem; }
+    .pk__no { font-size: 0.95rem; margin-top: 0.3rem; }
+    .pk__vision { font-size: 1.15rem; margin: 0.9rem auto 0.8rem; max-width: 34em; }
+    .pk__card { margin-top: 0.9rem; padding: 0.9rem 1.5rem; }
+    .pk__c-price { font-size: 1.3rem; margin-bottom: 0.7rem; }
+    .pk__cta { padding: 0.5rem 1.3rem; }
+    .pk__credits { font-size: 0.85rem; margin-top: 0.9rem; }
+
+    .pk__detail { max-width: none; margin-top: 1rem; padding: 0; gap: 0.7rem; }
+    /* One photograph on paper: three would push the type below legibility
+       once the sheet count is fixed at two. */
+    .pk__plate { aspect-ratio: 16 / 5; break-inside: avoid; }
+    .pk__detail .pk__plate:nth-of-type(n + 2) { display: none; }
+    .pk__block { padding: 0.85rem 1rem; break-inside: avoid; }
+    /* Three to a row on paper: at A4 width the auto-fit grid dropped the
+       third column onto its own line and left half a page empty. */
+    .pk__block--split { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .pk__label { margin-bottom: 0.5rem; }
+    .pk__plain { font-size: 0.95rem; line-height: 1.45; }
+    .pk__acts { gap: 0.8rem; }
+    .pk__a-title { font-size: 1.05rem; }
+    .pk__a-line { font-size: 0.9rem; line-height: 1.35; }
+    .pk__course { margin-bottom: 0.45rem; }
+    .pk__c-dish { font-size: 0.9rem; line-height: 1.3; }
+    .pk__c-wine, .pk__c-note { font-size: 0.82rem; }
+    .pk__foot { margin-top: 0.8rem; }
+    .pk__fine { margin-top: 0.8rem; line-height: 1.8; }
   }
 </style>
