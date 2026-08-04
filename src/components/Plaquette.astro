@@ -531,9 +531,12 @@ const t = lang === "en" ? EN : FR;
      photographs. The fixed backdrop cannot follow across paged media, so the
      ground becomes solid and the plates carry the image. */
   @media print {
+    /* Full bleed: the sheet is exported without margins, so the page carries
+       its own padding and the ink runs to the edge. */
+    :global(html), :global(body) { background: #0d0908; }
     .pk {
       background: #0d0908;
-      padding: 0;
+      padding: 12mm;
       min-height: 0;
       font-size: 11.5px;
     }
